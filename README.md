@@ -31,7 +31,7 @@ Plataforma mobile de fácil uso que integra os principais agentes envolvidos no 
 ## Instalação ⬇️
 
 ```bash
-xxxxxx
+- npm install
 ```
 
   
