@@ -27,10 +27,13 @@ Plataforma mobile de fácil uso que integra os principais agentes envolvidos no 
 ## Tecnologias ⚙️
 
 - [React Native](https://reactnative.dev/docs/getting-started)
-- 
+- [Styled Components](https://styled-components.com/)
+- [React Navigation](https://reactnavigation.org/docs/getting-started/)
+  
 ## Instalação ⬇️
 
 ```bash
+- git clone https://github.com/GustavoHLMA/Recria-Client.git
 - npm install
 ```
 
@@ -43,8 +46,7 @@ Plataforma mobile de fácil uso que integra os principais agentes envolvidos no 
   
 
 ```bash
-xxxxxx
-
+- npx expo start
 ```
 
   
