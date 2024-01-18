@@ -65,7 +65,7 @@ Exemplo: feature/navbar-mobile
 
 ### Commits
 Commits devem ser estruturados da seguinte form <tipo>(<nome-da-branch>): <descrição do commit>\
-Examplo: feature(navbar-mobile): adicionando navegação
+Exemplo: feature(navbar-mobile): adicionando navegação
 
 ### Branch padrão
 - develop - Most recently developed
