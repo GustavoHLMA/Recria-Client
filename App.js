@@ -12,10 +12,22 @@ import EspacoRecria from './src/screens/espaco-recria';
 
 const Tab = createBottomTabNavigator();
 
-const App = () => {
-  const { colors } = useTheme();
+export default function App() {
+  let [fontsLoaded] = useFonts({	
+    Inter_400Regular,
+  });
 
+  if (!fontsLoaded) {
+    return null;
+}
+  
   return (
+    <View style={styles.container}>
+      <Text>Open up App.js to start working on your app!</Text>
+      <StatusBar style="auto" />
+    </View>>
+  
+
     <NavigationContainer>
       <Tab.Navigator
         initialRouteName="Home"
@@ -92,6 +104,14 @@ const App = () => {
       </Tab.Navigator>
     </NavigationContainer>
   );
-};
+}
 
-export default App;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontFamily: 'Inter_400Regular',
+  },
+});
