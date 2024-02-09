@@ -6,18 +6,31 @@ import { PrevArrowPng } from '../../src/assets';
 import { NextArrowSvg } from '../../src/assets';
 import { Link } from 'expo-router'
 
-
 export default function App() {
   let [fontsLoaded] = useFonts({
     Inter_600SemiBold, Inter_500Medium, Inter_900Black
   });
 
   const [activeButtonIndex, setActiveButtonIndex] = useState(null);
+  const [nextPage, setNextPage] = useState(null);
 
   const handleButtonPress = (index) => {
-    setActiveButtonIndex(index === activeButtonIndex ? null : index);
+    setActiveButtonIndex(index);
+    switch (index) {
+      case 0:
+        setNextPage('/HomeMaker');
+        break;
+      case 1:
+        setNextPage('/Vender');
+        break;
+      case 2:
+        setNextPage('/Descartar');
+        break;
+      default:
+        setNextPage(null);
+        break;
+    }
   };
-
 
   return (
     <Container>
@@ -36,7 +49,6 @@ export default function App() {
       }}>
         Como podemos te ajudar?
       </Text>
-    
 
       <TouchableOpacity
         style={{
@@ -55,7 +67,7 @@ export default function App() {
         <Text style={{ 
           color: activeButtonIndex === 0 ? '#fff' : '#4D4D4D',
           fontFamily: 'Inter_500Medium',
-      }}>Quero comprar resíduos sólidos</Text>
+        }}>Quero comprar resíduos sólidos</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -75,8 +87,7 @@ export default function App() {
         <Text style={{ 
           color: activeButtonIndex === 1 ? '#fff' : '#4D4D4D',
           fontFamily: 'Inter_500Medium',
-          }}>
-          Quero vender resíduos sólidos </Text>
+        }}>Quero vender resíduos sólidos </Text>
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -96,45 +107,42 @@ export default function App() {
         <Text style={{ 
           color: activeButtonIndex === 2 ? '#fff' : '#4D4D4D',
           fontFamily: 'Inter_500Medium',
-           }}>
-          Quero descartar resíduos sólidos  </Text>
+        }}>Quero descartar resíduos sólidos  </Text>
       </TouchableOpacity>
 
-      <Link href="/HomeMaker" asChild>
-        
-        <TouchableOpacity style={{
-          alignSelf: 'flex-end',
-          marginRight: 20,
-        }}
-        
-        >
-          <NextButton
-            colors={['#58C044', '#7bc3d4']}
-            start={[0, 0]}
-            end={[1, 1]}
-            style={{
-              borderRadius: 60,
-              width: 124,
-              height: 40,
-              flexDirection: 'row',
-              alignItems: 'center',    
-            }}
-          >
-            <NextButtonText style={{
-              fontFamily: 'Inter_600SemiBold',
-              fontSize: 14,
-              marginLeft: 20,
-            }}>
-              Próximo
-            </NextButtonText>
-            <NextArrowSvg style={{
-              marginRight: 18,
-              marginLeft: 6,
-            }} />
-          </NextButton>
-      </TouchableOpacity>
-    </Link>
-
+      {nextPage && (
+        <Link href={nextPage} asChild>
+          <TouchableOpacity style={{
+            alignSelf: 'flex-end',
+            marginRight: 20,
+          }}>
+            <NextButton
+              colors={['#58C044', '#7bc3d4']}
+              start={[0, 0]}
+              end={[1, 1]}
+              style={{
+                borderRadius: 60,
+                width: 124,
+                height: 40,
+                flexDirection: 'row',
+                alignItems: 'center',    
+              }}
+            >
+              <NextButtonText style={{
+                fontFamily: 'Inter_600SemiBold',
+                fontSize: 14,
+                marginLeft: 20,
+              }}>
+                Próximo
+              </NextButtonText>
+              <NextArrowSvg style={{
+                marginRight: 18,
+                marginLeft: 6,
+              }} />
+            </NextButton>
+          </TouchableOpacity>
+        </Link>
+      )}
     </Container>
   );
 }
