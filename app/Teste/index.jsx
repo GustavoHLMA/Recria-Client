@@ -5,6 +5,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Feather from 'react-native-vector-icons/Feather';
 import Separator from '../../src/components/Separator';
+import { TouchableOpacity } from 'react-native';
+import { Image } from 'react-native';
+
 
 const PageTest = () => {
   let [fontsLoaded] = useFonts({	
@@ -17,56 +20,31 @@ const PageTest = () => {
   
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
       <StatusBar
         barStyle="light-content"
-        backgroundColor={'#0A8791'}
+        backgroundColor={'#b8ffd4'}
         translucent
       />
       <Separator height={StatusBar.currentHeight} />
-      <View style={styles.backgroundCurvedContainer} />
-      <View style={styles.headerContainer}>
-        <View style={styles.locationContainer}>
-          <Ionicons
-            name="location-outline"
-            size={15}
-            color={'#FFFFFF'}
+      <View style={styles.backgroundCurvedContainer}/>
+
+      <View style={styles.centeredContent}>
+         <Image
+          source={require('../../assets/logotipo.png')} // Altere o caminho conforme necessário
+          style={styles.logo}
+          resizeMode="contain" // Ajuste o modo de redimensionamento conforme necessário
           />
-         
-          <Text style={styles.selectedLocationText}>HOMaaE</Text>
-          <MaterialIcons
-            name="keyboard-arrow-down"
-            size={16}
-            color={'#0A8791'}
-          />
-          <Feather
-            name="bell"
-            size={24}
-            color={'#FFFFFF'}
-            style={{position: 'absolute', right: 0}}
-          />
-          <View style={styles.alertBadge}>
-            <Text style={styles.alertBadgeText}>12</Text>
-          </View>
-      
-        </View>
-        <View style={styles.searchContainer}>
-          <View style={styles.searchSection}>
-            <Ionicons
-              name="search-outline"
-              size={25}
-              color={'#0A8791'}
-            />
-            <Text style={styles.searchText}>Search..</Text>
-          </View>
-          <Feather
-            name="sliders"
-            size={20}
-            color={'#FBA83C'}
-            style={{marginRight: 10}}
-          />
-        </View>
+          <Text style={styles.centeredText}>
+            Bem-vindo ao nosso espaço de{'\n'}descarte de resíduos sólidos.
+          </Text>
+          <Text style={styles.boldText}>
+          <Text style={styles.bold}>Deseja solicitar uma coleta?</Text>
+          </Text>
+          <TouchableOpacity style={styles.button} onPress={() => {}}>
+            <Text style={styles.buttonText}>Solicitar</Text>
+          </TouchableOpacity>
       </View>
+      
     </View>
   );
 }
@@ -78,10 +56,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     fontFamily: 'Inter_400Regular',
+    
   },
   backgroundCurvedContainer: {
-    backgroundColor: '#0A8791',
-    height: 2000,
+    backgroundColor: '#b8ffd4',
+    height: 2050,
     position: 'absolute',
     top: -1 * (2000 - 230),
     width: 2000,
@@ -90,67 +69,51 @@ const styles = StyleSheet.create({
     zIndex: -1,
   },
 
-  headerContainer: {
-    justifyContent: 'space-evenly',
-  },
-  locationContainer: {
-    flexDirection: 'row',
+  centeredContent: {
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 10,
-    marginHorizontal: 20,
+    marginBottom: 550,
+    marginLeft: 10,
+    
   },
-  locationText: {
-    color: '#FFFFFF',
-    marginLeft: 5,
-    fontSize: 13,
+  
+  centeredText: {
+    fontSize: 16,
+    lineHeight: 13 * 1.4,
+    fontWeight: 'bold',
+    marginTop: 60,
+    color: '#109946'
+   
+  },
+   boldText: {
+    fontSize: 16,
     lineHeight: 13 * 1.4,
     
   },
-  selectedLocationText: {
-    color: '#FBA83C',
-    marginLeft: 5,
+
+  bold: {
+    fontWeight: 'bold',
+    color: '#097534'
+  },
+
+  buttonText: {
+    color: '#ffffff',
+    marginTop: 10,
     fontSize: 14,
-    lineHeight: 14 * 1.4,
-    
   },
-  alertBadge: {
-    borderRadius: 32,
-    backgroundColor: '#FBA83C',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 16,
-    width: 16,
-    position: 'absolute',
-    right: -2,
-    top: -10,
+  button: {
+    backgroundColor: '#58C044', // Cor de fundo do botão
+    paddingVertical: 6,
+    paddingHorizontal: 20,
+    paddingBottom:4,
+    paddingTop:0,
+    borderRadius: 5,
+    marginTop: 10,
   },
-  alertBadgeText: {
-    color: '#FFFFFF',
-    fontSize: 10,
-    lineHeight: 10 * 1.4,
-    
-  },
-  searchContainer: {
-    backgroundColor: '#FFFFFF',
-    height: 45,
-    borderRadius: 8,
-    marginHorizontal: 20,
-    marginTop: 20,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  searchSection: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginLeft: 10,
-  },
-  searchText: {
-    color: '#C2C2CB',
-    fontSize: 16,
-    lineHeight: 16 * 1.4,
-   
-    marginLeft: 10,
-  },
+  logo: {
+    marginBottom: 20, // Adiciona a margem superior de 20 unidades
+    // Outras propriedades de estilo da imagem, se necessário
+  }
 });
 export default PageTest;
