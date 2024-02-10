@@ -30,9 +30,9 @@ const PageTest = () => {
 
       <View style={styles.centeredContent}>
          <Image
-          source={require('../../assets/logotipo.png')} // Altere o caminho conforme necessário
+          source={require('../../assets/logotipo.png')} 
           style={styles.logo}
-          resizeMode="contain" // Ajuste o modo de redimensionamento conforme necessário
+          resizeMode="contain" 
           />
           <Text style={styles.centeredText}>
             Bem-vindo ao nosso espaço de{'\n'}descarte de resíduos sólidos.
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   button: {
-    backgroundColor: '#58C044', // Cor de fundo do botão
+    backgroundColor: '#58C044', 
     paddingVertical: 6,
     paddingHorizontal: 20,
     paddingBottom:4,
@@ -112,8 +112,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   logo: {
-    marginBottom: 20, // Adiciona a margem superior de 20 unidades
-    // Outras propriedades de estilo da imagem, se necessário
+    marginBottom: 20,
   }
 });
 export default PageTest;
