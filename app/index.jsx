@@ -1,73 +1,119 @@
 import React, { useState } from 'react';
-import {SafeAreaView, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, ScrollView} from 'react-native';
-import { LocalizaIcon } from '../src/assets';
-import { ProfilePic } from '../src/assets';
-import { SearchIcon } from '../src/assets';
-import { product1 } from '../src/assets';
-import { chatIcon } from '../src/assets';
+import {
+  SafeAreaView,
+  StyleSheet,
+  View,
+  Image,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+} from 'react-native';
 
+import { LocalizaIcon, ProfilePic, SearchIcon, chatIcon } from '../src/assets';
+import { product1, product2, product3, product4 } from '../src/assets';
 
 const ProfileHeader = () => {
   const [searchText, setSearchText] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedLocation, setSelectedLocation] = useState('proximos'); // adicionado estado para controlar a localização
 
-  const ProductCard = () => {
-    const handleChatPress = () => {
-      // Implemente a lógica para abrir o chat com o vendedor aqui
-      console.log('Abrir chat com o vendedor');
-    };
-
-    return (
-      <ScrollView>
-        <SafeAreaView style={{
-          display: 'flex',
-          flexDirection: 'row'
-        }}>
-          <View style={styles.card}>
-            <Image source={product1} style={styles.cardImage} />
-            <View style={styles.cardInfo}>
-              <Text style={styles.cardSeller}>João Silva</Text>
-              <Text style={styles.cardText}>Garrafas de Vidro</Text>
-              <Text style={styles.cardText}>11 unidades</Text>
-              <Text style={styles.cardText}>3,3kg</Text>
-              <Text style={styles.cardText}>Recife, PE</Text>
-              <Text style={styles.cardText}>Ótimo estado</Text>
-            </View>
-            <TouchableOpacity style={styles.chatButton} onPress={handleChatPress}>
-              <Image source={chatIcon} style={styles.chatIcon} />
-              <Text style={styles.chatButtonText}>Chat</Text>
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.card}>
-            <Image source={product1} style={styles.cardImage} />
-            <View style={styles.cardInfo}>
-              <Text style={styles.cardSeller}>João Silva</Text>
-              <Text style={styles.cardText}>Garrafas de Vidro</Text>
-              <Text style={styles.cardText}>11 unidades</Text>
-              <Text style={styles.cardText}>3,3kg</Text>
-              <Text style={styles.cardText}>Recife, PE</Text>
-              <Text style={styles.cardText}>Ótimo estado</Text>
-            </View>
-            <TouchableOpacity style={styles.chatButton} onPress={handleChatPress}>
-              <Image source={chatIcon} style={styles.chatIcon} />
-              <Text style={styles.chatButtonText}>Chat</Text>
-            </TouchableOpacity>
-          </View>
-        
-        </SafeAreaView>
-      </ScrollView>
-      
-    );
+  const handleChatPress = () => {
+    // Implemente a lógica para abrir o chat com o vendedor aqui
+    console.log('Abrir chat com o vendedor');
   };
 
   const handleCategoryPress = (category) => {
     setSelectedCategory(category);
   };
 
+  const handleLocationPress = (location) => {
+    setSelectedLocation(location);
+  };
+
+  const LocationText = ({ location, isSelected, onPress }) => (
+    <TouchableOpacity
+      style={[
+        styles.locationTextContainer,
+        isSelected && styles.selectedLocationText,
+      ]}
+      onPress={() => onPress(location)}
+    >
+      <Text style={[styles.locationText, isSelected && styles.selectedText]}>
+        {location}
+      </Text>
+    </TouchableOpacity>
+  );
+
+  const renderItem = ({ item }) => {
+    return (
+      <View style={{ margin: 10, paddingRight: 0 }}>
+        <View style={styles.card}>
+          <Image source={item.image} style={styles.cardImage} />
+          <View style={styles.cardInfo}>
+            <Text style={styles.cardSeller}>{item.seller}</Text>
+            <Text style={styles.cardText}>{item.type}</Text>
+            <Text style={styles.cardText}>{item.quantity}</Text>
+            <Text style={styles.cardText}>{item.weight}</Text>
+            <Text style={styles.cardText}>{item.location}</Text>
+            <Text style={styles.cardText}>{item.quality}</Text>
+          </View>
+          <TouchableOpacity style={styles.chatButton} onPress={handleChatPress}>
+            <Image source={chatIcon} style={styles.chatIcon} />
+            <Text style={styles.chatButtonText}>Chat</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  };
+
+  const keyExtractor = (item) => item.id.toString();
+
+  const products = [
+    {
+      id: 1,
+      seller: 'João Silva',
+      type: 'Garrafas de Vidro',
+      quantity: '11 unidades',
+      weight: '3,3kg',
+      location: 'Recife, PE',
+      quality: 'Ótimo estado',
+      image: product1,
+    },
+    {
+      id: 2,
+      seller: 'Maria do Carmo',
+      type: 'Garrafas de Vidro',
+      quantity: '50 unidades',
+      weight: '20kg',
+      location: 'Paulista, PE',
+      quality: 'Bom estado',
+      image: product2,
+    },
+    {
+      id: 3,
+      seller: 'Carlos Lima',
+      type: 'Resíduos de vidro',
+      quantity: '100 unidades',
+      weight: '10kg',
+      location: 'Camaragibe, PE',
+      quality: 'Estilhaçado',
+      image: product3,
+    },
+    {
+      id: 4,
+      seller: 'Anice de Oliveira',
+      type: 'Painel de vidro',
+      quantity: '10 unidades',
+      weight: '40kg',
+      location: 'Recife, PE',
+      quality: 'Ótimo estado',
+      image: product4,
+    },
+  ];
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-      {/* Restante do código */}
       <View style={styles.container}>
         <View style={styles.leftContainer}>
           <Image source={LocalizaIcon} style={styles.icon} />
@@ -128,7 +174,29 @@ const ProfileHeader = () => {
           <Text style={[styles.categoryButtonText, selectedCategory === 'Papelão' && styles.selectCategoryText]}>Papelão</Text>
         </TouchableOpacity>
       </View>
-      <ProductCard />
+
+      {/* Adicionando os textos "Próximos à você" e "Veja todos" */}
+      <View style={styles.locationContainer}>
+        <LocationText
+          location="Próximos à você"
+          isSelected={selectedLocation === 'proximos'}
+          onPress={() => handleLocationPress('proximos')}
+        />
+        <LocationText
+          location="Veja todos"
+          isSelected={selectedLocation === 'todos'}
+          onPress={() => handleLocationPress('todos')}
+        />
+      </View>
+
+      {/* Utilize FlatList para renderizar os produtos */}
+      <FlatList
+        data={products}
+        renderItem={renderItem}
+        keyExtractor={keyExtractor}
+        numColumns={2}
+        columnWrapperStyle={styles.productList}
+      />
     </SafeAreaView>
   );
 };
@@ -181,6 +249,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: 'rgba(30, 30, 30, 0.38)',
     textAlign: 'left',
+    marginRight: 20,
   },
   profileImageContainer: {
     width: 60,
@@ -255,13 +324,12 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   card: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '45%',
-    height: '95%',
-    marginBottom: 20,
-    marginTop: 30,
-    marginLeft: 18,
+    flex: 1,
+    width: 200,
+    height: 330,
+    marginBottom: -10,
+    marginLeft: -7,
+    marginRight: -5,
     borderRadius: 8,
     overflow: 'hidden',
     borderWidth: 1,
@@ -274,14 +342,14 @@ const styles = StyleSheet.create({
     elevation: 20,
   },
   cardImage: {
-    width: '84%',
+    width: '86%',
     height: 150,
-    marginTop: 20,
-    marginLeft: 20,
+    marginTop: 10,
+    marginLeft: 14,
   },
   cardInfo: {
     padding: 10,
-    marginLeft: 13,
+    marginLeft: 7,
   },
   cardSeller: {
     fontSize: 16,
@@ -327,6 +395,38 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 10,
     fontWeight: 'bold',
+  },
+  productList: {
+    justifyContent: 'space-between',
+  },
+  columnWrapperStyle: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  locationContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 10,
+  },
+  locationTextContainer: {
+    padding: 10,
+  },
+  locationText: {
+    color: 'rgba(30, 30, 30, 0.38)',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  selectedLocationText: {
+    color: '#109946',
+    borderBottomWidth: 2,
+    borderBottomColor: 'rgba(119, 104, 104, 0.34)',
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  selectedText: {
+    color: '#109946',
   },
 });
 

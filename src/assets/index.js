@@ -14,9 +14,9 @@ import product1 from './produto1.png'
 
 export {product1}
 
-import Product2 from './produto2.png'
+import product2 from './produto2.png'
 
-export {Product2}
+export {product2}
 
 import product3 from './produto3.png'
 
