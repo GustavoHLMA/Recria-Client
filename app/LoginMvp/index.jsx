@@ -6,7 +6,7 @@ import { PrevArrowPng } from '../../src/assets';
 import { NextArrowSvg } from '../../src/assets';
 import { Link } from 'expo-router'
 
-export default function App() {
+export default function Login() {
   let [fontsLoaded] = useFonts({
     Inter_600SemiBold, Inter_500Medium, Inter_900Black
   });

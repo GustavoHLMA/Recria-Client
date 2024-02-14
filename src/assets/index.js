@@ -42,5 +42,9 @@ import Test from './teste.jpg';
 import Test2 from './teste2.png';
 import PrevArrowPng from './PrevArrow.png';
 import NextArrowSvg from './arrowRight.svg';
+import LogoSvg from './logo.svg';
+import LocalizaSvg from './localizacao.svg';
+import CatadorPhoto from './catador.jpg';
+import LupaSvg from './lupa.svg';
 
-export { Test, Test2, PrevArrowPng, NextArrowSvg };
+export { Test, Test2, PrevArrowPng, NextArrowSvg, LogoSvg, LocalizaSvg, CatadorPhoto, LupaSvg };
