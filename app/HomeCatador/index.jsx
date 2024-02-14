@@ -13,7 +13,7 @@ export default function App() {
   
   return (
     <View style={styles.container}>
-      <Text>Home Maker</Text>
+      <Text>Home Catador</Text>
       <StatusBar style="auto" />
     </View>
   );

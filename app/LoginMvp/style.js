@@ -49,13 +49,11 @@ export const NextButton = styled(LinearGradient)`
     flex-shrink: 0;
     border-radius: 60px;
 
-    /* Adicione display: flex e justify-content: center para centralizar o texto verticalmente */
     display: flex;
     justify-content: center;`;
 
 // Estilize o conteúdo do botão dentro do LinearGradient
 export const NextButtonText = styled.Text`
     color: white;
-    /* Adicione textAlign: center para centralizar o texto horizontalmente */
     text-align: center;
 `;
