@@ -1,5 +1,8 @@
-import { Text } from 'react-native';
+import ProfileHeader from "./HomeMaker";
 
 export default function Page() {
-  return <Text>Home page</Text>;
+  return (
+    <ProfileHeader/>
+  )
+  
 }
