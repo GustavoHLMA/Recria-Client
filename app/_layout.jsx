@@ -9,7 +9,7 @@ export default function RootLayout() {
         }
       } />
 
-      <Stack.Screen name="HomeCatador/index" options={
+      <Stack.Screen name="HomeCatador" options={
         {
           headerShown: false,
         }

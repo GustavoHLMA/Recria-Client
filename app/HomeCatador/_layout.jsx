@@ -3,11 +3,11 @@ import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Tabs, useNavigation } from 'expo-router';
 import { HomeIcon, DadosIcon, ChatIcon, MarketplaceIcon } from '../../src/assets';
 
-export default function RootLayout() {
+export default function RootLayoutaa() {
   const navigation = useNavigation();
 
   return (
-    <Tabs
+    <Tabs 
       screenOptions={{
         tabBarStyle: {
           position: 'absolute',
