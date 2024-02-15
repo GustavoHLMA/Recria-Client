@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Tabs, useNavigation } from 'expo-router';
 import { HomeIcon, DadosIcon, ChatIcon, MarketplaceIcon } from '../../src/assets';
 
 export default function RootLayoutaa() {
   const navigation = useNavigation();
+  const [activeTab, setActiveTab] = useState("home");
 
   return (
     <Tabs 
@@ -28,7 +29,7 @@ export default function RootLayoutaa() {
         options={{
           headerShown: false,
           tabBarIcon: () => (
-            <TouchableOpacity style={styles.tabIcon} onPress={() => navigation.navigate("home")}>
+            <TouchableOpacity style={[styles.tabIcon, activeTab === "home" && styles.activeTab]} onPress={() => { setActiveTab("home"); navigation.navigate("home"); }}>
               <HomeIcon />
             </TouchableOpacity>
           ),
@@ -41,7 +42,7 @@ export default function RootLayoutaa() {
         options={{
           headerShown: false,
           tabBarIcon: () => (
-            <TouchableOpacity style={styles.tabIcon} onPress={() => navigation.navigate("chat")}>
+            <TouchableOpacity style={[styles.tabIcon, activeTab === "chat" && styles.activeTab]} onPress={() => { setActiveTab("chat"); navigation.navigate("chat"); }}>
               <ChatIcon />
             </TouchableOpacity>
           ),
@@ -53,7 +54,7 @@ export default function RootLayoutaa() {
         options={{
           headerShown: false,
           tabBarIcon: () => (
-            <TouchableOpacity style={styles.tabIcon} onPress={() => navigation.navigate("dados")}>
+            <TouchableOpacity style={[styles.tabIcon, activeTab === "dados" && styles.activeTab]} onPress={() => { setActiveTab("dados"); navigation.navigate("dados"); }}>
               <DadosIcon />
             </TouchableOpacity>
           ),
@@ -66,7 +67,7 @@ export default function RootLayoutaa() {
         options={{
           headerShown: false,
           tabBarIcon: () => (
-            <TouchableOpacity style={styles.tabIcon} onPress={() => navigation.navigate("marketplace")}>
+            <TouchableOpacity style={[styles.tabIcon, activeTab === "marketplace" && styles.activeTab]} onPress={() => { setActiveTab("marketplace"); navigation.navigate("marketplace"); }}>
               <MarketplaceIcon />
             </TouchableOpacity>
           ),
@@ -78,12 +79,11 @@ export default function RootLayoutaa() {
 }
 
 const styles = StyleSheet.create({
-  TabBar: {
-    backgroundColor: '#109946',
-    borderTopColor: '#E5E5E5',
-    borderTopWidth: 1,
-  },
   tabIcon: {
-    padding: 25,
+    paddingBottom: 30,
+  },
+  activeTab: {
+    borderBottomWidth: 2,
+    borderBottomColor: '#FFFFFF',
   },
 });

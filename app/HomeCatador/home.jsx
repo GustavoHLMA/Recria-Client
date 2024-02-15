@@ -324,6 +324,7 @@ const styles = StyleSheet.create({
     width: 'auto',
     marginLeft: -7,
     marginRight: -5,
+    marginBottom: 20,
     overflow: 'hidden',
     color: '#F5F5F5',
     shadowColor: 'rgba(0, 0, 0, 0.1)',
@@ -338,6 +339,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginLeft: 14,
     borderRadius: 20,
+
   },
   cardInfo: {
     padding: 10,
