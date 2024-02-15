@@ -22,11 +22,12 @@ import { LocalizaIcon,
   product2,
   product3,
   product4,
-
 } from '../../src/assets';
 
 export default function Catador() {
-  const [searchText, setSearchText] = useState('');  
+  const [searchText, setSearchText] = useState('');
+  const [selectedTab, setSelectedTab] = useState('venda'); // Estado para controlar a aba selecionada
+
   let [fontsLoaded] = useFonts({	
     Inter_400Regular,
     Inter_600SemiBold,
@@ -37,32 +38,7 @@ export default function Catador() {
     return null;
   }
 
-  const renderItem = ({ item }) => {
-    return (
-      <View style={{ margin: 10, paddingRight: 0 }}>
-        <View style={styles.card}>
-          <Image source={item.image} style={styles.cardImage} />
-          <View style={styles.cardInfo}>
-            <Text style={styles.cardSeller}>{item.type}</Text>
-            <Text style={styles.cardText}>{item.type} </Text>
-            <Text style={styles.cardText}>{item.quantity} {item.weight}</Text>
-            <Text style={styles.cardText}>{item.location}</Text>
-            <Text style={styles.cardText}>{item.quality}</Text>
-            <Text style={styles.cardText}>Categoria: {item.category}</Text>
-          </View>
-          <TouchableOpacity onPress={null}>
-            <Text style={styles.chatButtonText}>Chat</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  };
-
-  const keyExtractor = (item) => item.id.toString();
-
-
-
-  const products = [
+  const productsForSale = [
     {
       id: 1,
       type: 'Garrafas de Vidro',
@@ -72,6 +48,7 @@ export default function Catador() {
       quality: 'Ótimo estado',
       category: 'Vidro',
       image: product1,
+      tipo: 'venda', // Produto para venda
     },
     {
       id: 2,
@@ -82,7 +59,11 @@ export default function Catador() {
       quality: 'Bom estado',
       category: 'Vidro',
       image: product2,
+      tipo: 'venda', // Produto para venda
     },
+  ];
+
+  const collectionRequests = [
     {
       id: 3,
       type: 'Resíduos de vidro',
@@ -92,6 +73,7 @@ export default function Catador() {
       quality: 'Estilhaçado',
       category: 'Vidro',
       image: product3,
+      tipo: 'coleta', // Solicitação de coleta
     },
     {
       id: 4,
@@ -102,15 +84,76 @@ export default function Catador() {
       quality: 'Ótimo estado',
       category: 'Vidro',
       image: product4,
+      tipo: 'coleta', // Solicitação de coleta
     },
   ];
 
-  
+  const renderButtons = () => {
+    if (selectedTab === 'venda') {
+      return (
+        <TouchableOpacity style={styles.botaoDeletar}>
+          <Text style={{ color: '#109946', textAlign: 'center' }}>Deletar</Text>
+        </TouchableOpacity>
+      );
+    } else {
+      return (
+        <View>
+          <TouchableOpacity style={styles.botaoAceitar}>
+            <Text style={{ color: '#fff', textAlign: 'center' }}>Aceitar</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.botaoRecusarDeletar}>
+            <Text style={{ color: '#109946', textAlign: 'center' }}>Recusar</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    }
+  };
+
+  const renderProducts = () => {
+    if (selectedTab === 'venda') {
+      return (
+        <FlatList
+          data={productsForSale}
+          renderItem={renderItem}
+          keyExtractor={keyExtractor}
+          numColumns={1}
+        />
+      );
+    } else {
+      return (
+        <FlatList
+          data={collectionRequests}
+          renderItem={renderItem}
+          keyExtractor={keyExtractor}
+          numColumns={1}
+        />
+      );
+    }
+  };
+
+    const renderItem = ({ item }) => {
+      return (
+        <View style={{ marginLeft: 15, paddingRight: 0 }}>
+          <View style={styles.card}>
+            <Image source={item.image} style={styles.cardImage} />
+            <View style={styles.cardInfo}>
+              <Text style={styles.cardSeller}>{item.type}</Text>
+              <Text style={styles.cardText}>{item.quantity} {item.weight}</Text>
+              <Text style={styles.cardText}>{item.location}</Text>
+              <Text style={styles.cardText}>{item.quality}</Text>
+              <Text style={styles.cardText}>Categoria: {item.category}</Text>
+              {renderButtons()}
+            </View>
+          </View>
+        </View>
+      );
+    };
+
+  const keyExtractor = (item) => item.id.toString();
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white', display: 'flex', }} >
-      <LogoSvg width={150} height={50} style={{
-        alignSelf: 'center',
-      }} />
+      <LogoSvg width={150} height={50} style={{ alignSelf: 'center' }} />
       <View style={styles.container}>
         <View style={styles.leftContainer}>
           <LocalizaSvg />
@@ -122,9 +165,6 @@ export default function Catador() {
               <Text style={styles.welcomeText}>Olá, Davi!</Text>
               <Text style={styles.profileText}>Catador</Text>
             </View>
-            <View style={styles.profileImageContainer}>
-              <Image source={CatadorPhoto} style={styles.profileImage} />
-            </View>
           </View>
         </View>
       </View>
@@ -132,7 +172,7 @@ export default function Catador() {
       <View style={styles.searchBarContainer}>
         <Image source={SearchIcon} style={styles.searchIcon} />
         <TextInput
-          placeholder="Buscar produto ou catregoria"
+          placeholder="Buscar produto ou categoria"
           placeholderTextColor="rgba(30, 30, 30, 0.38)"
           style={styles.searchInput}
           value={searchText}
@@ -140,18 +180,28 @@ export default function Catador() {
         />
       </View>
 
-      <FlatList
-        data={products}
-        renderItem={renderItem}
-        keyExtractor={keyExtractor}
-        numColumns={1}
-      />
+      <View style={styles.tabButtons}>
+        <TouchableOpacity
+          style={[styles.tabButton, selectedTab === 'venda' && styles.selectedTabButton]}
+          onPress={() => setSelectedTab('venda')}
+        >
+          <Text style={[styles.tabButtonText, selectedTab === 'venda' && styles.selectedTabButtonText]}>Seus produtos</Text>
+          {selectedTab === 'venda' && <View style={styles.underline} /> }
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.tabButton, selectedTab === 'coleta' && styles.selectedTabButton]}
+          onPress={() => setSelectedTab('coleta')}
+        >
+          <Text style={[styles.tabButtonText, selectedTab === 'coleta' && styles.selectedTabButtonText]}>Solicitações de coleta</Text>
+          {selectedTab === 'coleta' && <View style={styles.underline} />}
+        </TouchableOpacity>
+      </View>
 
-
+      {renderProducts()}
+      
     </SafeAreaView>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
@@ -176,12 +226,12 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: 'Inter_600SemiBold',
     color: 'rgba(16, 148, 70, 0.7)',
   },
   welcomeText: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: 'Inter_600SemiBold',
     color: 'rgba(16, 148, 70, 0.7)',
     marginBottom: 2,
   },
@@ -218,7 +268,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     alignSelf: 'center',
-    backgroundColor: '#F4F4F4',
+    backgroundColor: '#ffffff',
     width: 370,
     height: 45,
     paddingVertical: 8,
@@ -226,7 +276,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     marginTop: 15,
     shadowColor: 'rgba(0, 0, 0, 0.25)',
-    shadowOffset: { width: 0, height: 4 },
+    shadowOffset: { width: 0, height: 3,  },
     shadowOpacity: 0.8,
     shadowRadius: 2,
     elevation: 20,
@@ -241,38 +291,32 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#1E1E1E',
   },
-  categoriesText: {
-    color: '#B0D9C1',
-    marginTop: 20,
-    marginLeft: 20,
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  buttonsContainer: {
+  tabButtons: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 0,
-    marginLeft: 18,
+    alignItems: 'flex-start',
+    justifyContent: 'space-around',
+    marginTop: 31,
+    marginBottom: 25,
   },
-  categoryButton: {
-    flex: 1,
-    backgroundColor: '#D9D9D9',
-    padding: 10,
-    borderRadius: 8,
-    marginHorizontal: 5,
-    alignItems: 'center',
-    marginTop: 13,
+  tabButton: {
+    color: '#A3A3A3',
   },
-  selectedCategoryButton: {
-    backgroundColor: '#109946',
-  },
-  categoryButtonText: {
-    color: '#109946',
+  tabButtonText: {
+    display: 'flex',
+    color: '#A3A3A3',
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: 'Inter_600SemiBold',
+    alignSelf: 'flex-end',
+    lineHeight: 16,
   },
-  selectCategoryText: {
-    color: 'white',
+  selectedTabButtonText: {
+    color: '#109946',
+  },
+  underline: {
+    marginTop: 1,
+    width: 'auto',
+    height: 2,
+    backgroundColor: '#c3d6cb',
   },
   card: {
     flex: 1,
@@ -287,7 +331,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowRadius: 2,
     elevation: 20,
-      
   },
   cardImage: {
     width: '30%',
@@ -313,69 +356,55 @@ const styles = StyleSheet.create({
     color: '#109946', 
     lineHeight: 12,
   },
-  chatButton: {
+
+  botaoAceitar : {
     position: 'absolute',
-    bottom: 10,
-    right: 10,
-    width: '37%',
-    height: 30,
-    marginBottom: 1,
-    backgroundColor: '#109946',
-    padding: 10,
-    borderRadius: 8,
-    flexDirection: 'row',
-    alignItems: 'center',
-      paddingVertical: 8,
-    paddingHorizontal: 12,
-    borderRadius: 100,
-    marginTop: 15,
-    shadowColor: 'rgba(0, 0, 0, 0.1)',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.8,
+    width: 57,
+    height: 18,
+    borderRadius: 3,  
+    backgroundColor: '#58C044',
+    color: '#fff',
+    marginLeft: 170,
+    bottom: 40,
+    shadowColor: 'rgba(0, 0, 0, 0.25)',
+    shadowOffset: { width: 0, height: 3,  },
+    shadowOpacity: 0.6,
     shadowRadius: 2,
     elevation: 20,
   },
-  chatIcon: {
-    width: 20,
-    height: 20,
-    marginRight: 2,
-    marginLeft: -1,
+
+  botaoRecusarDeletar : {
+    position: 'absolute',
+    width: 57,
+    height: 18,
+    borderWidth: 1, 
+    borderColor: '#109946',
+    borderRadius: 3,  
+    backgroundColor: '#fff',
+    marginLeft: 170,
+    bottom: 15,
+    shadowColor: 'rgba(0, 0, 0, 0.25)',
+    shadowOffset: { width: 0, height: 3,  },
+    shadowOpacity: 0.6,
+    shadowRadius: 2,
+    elevation: 20,
   },
-  chatButtonText: {
-    color: 'white',
-    fontSize: 10,
-    fontWeight: 'bold',
+
+  botaoDeletar : {
+    position: 'absolute',
+    width: 57,
+    height: 18,
+    borderWidth: 1, 
+    borderColor: '#109946',
+    borderRadius: 3,  
+    backgroundColor: '#fff',
+    marginLeft: 170,
+    bottom: 50,
+    shadowColor: 'rgba(0, 0, 0, 0.25)',
+    shadowOffset: { width: 0, height: 3,  },
+    shadowOpacity: 0.6,
+    shadowRadius: 2,
+    elevation: 20,
   },
-  productList: {
-    justifyContent: 'space-between',
-  },
-  columnWrapperStyle: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  locationContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 10,
-  },
-  locationTextContainer: {
-    padding: 10,
-  },
-  locationText: {
-    color: 'rgba(30, 30, 30, 0.38)',
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginLeft: 10,
-    marginRight: 10,
-  },
-  selectedLocationText: {
-    color: '#109946',
-    borderBottomWidth: 2,
-    borderBottomColor: 'rgba(119, 104, 104, 0.34)',
-    marginLeft: 10,
-    marginRight: 10,
-  },
-  selectedText: {
-    color: '#109946',
-  },
+
 });
