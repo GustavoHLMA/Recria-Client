@@ -21,7 +21,7 @@ export default function Login() {
         setNextPage('/HomeMaker');
         break;
       case 1:
-        setNextPage('/Vender');
+        setNextPage('/HomeCatador');
         break;
       case 2:
         setNextPage('/Descartar');

@@ -4,7 +4,7 @@ import Catador from "./HomeCatador";
 
 export default function Page() {
   return (
-    <Catador/>
+    <Login/>
   )
   
 }

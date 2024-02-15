@@ -8,6 +8,7 @@ export const Container = styled.View`
   background-color: #fff;
   align-items: flex-start;
   padding-left: 34px;
+  height: 100%;
 `;
 
 export const TitleContainer = styled.Text`
@@ -34,7 +35,6 @@ export const UserButton = styled.View`
   font-family: 'Inter_500Medium';
   font-size: 14px;
   font-style: normal;
-  line-height: normal;
   color: #4D4D4D;
 
   width: 245px;
