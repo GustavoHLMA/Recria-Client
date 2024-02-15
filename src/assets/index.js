@@ -46,5 +46,22 @@ import LogoSvg from './logo.svg';
 import LocalizaSvg from './localizacao.svg';
 import CatadorPhoto from './catador.jpg';
 import LupaSvg from './lupa.svg';
+import HomeIcon from './home.svg';
+import ChatIcon from './chat.svg';
+import DadosIcon from './dados.svg';
+import MarketplaceIcon from './marketplace.svg';
 
-export { Test, Test2, PrevArrowPng, NextArrowSvg, LogoSvg, LocalizaSvg, CatadorPhoto, LupaSvg };
+export { 
+  Test, 
+  Test2, 
+  PrevArrowPng, 
+  NextArrowSvg, 
+  LogoSvg, 
+  LocalizaSvg, 
+  CatadorPhoto, 
+  LupaSvg, 
+  HomeIcon, 
+  ChatIcon, 
+  DadosIcon, 
+  MarketplaceIcon
+};
