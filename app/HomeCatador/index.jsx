@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useFonts, Inter_400Regular } from '@expo-google-fonts/inter';
-import { Tabs } from 'expo-router/tabs';
 import {
   SafeAreaView,
   StyleSheet,

@@ -7,18 +7,21 @@ export default function RootLayout() {
         {
           headerShown: false,
         }
-      
-      }/>
-      <Stack.Screen name="HomeMaker/index" options={
-        {
-          headerShown: false,
-        }
-      }/>
+      } />
+
       <Stack.Screen name="HomeCatador/index" options={
         {
           headerShown: false,
         }
-      }/>
+      } />
+
+      <Stack.Screen name="HomeMaker/index" options={
+        {
+          headerShown: false,
+          
+        }
+      } />
+      
     </Stack>
   )
 }
