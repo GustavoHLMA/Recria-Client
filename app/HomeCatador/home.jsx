@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useFonts, Inter_400Regular } from '@expo-google-fonts/inter';
+import { useFonts, Inter_400Regular, Inter_600SemiBold, Inter_700Bold } from '@expo-google-fonts/inter';
 import {
   SafeAreaView,
   StyleSheet,
@@ -15,22 +15,96 @@ import { LocalizaIcon,
   ProfilePic, 
   SearchIcon, 
   chatIcon, 
-  product1, 
-  product2, 
-  product3, 
-  product4, 
   LogoSvg, 
   LocalizaSvg, 
   CatadorPhoto,
+  product1, 
+  product2,
+  product3,
+  product4,
+
 } from '../../src/assets';
 
-
 export default function Catador() {
+  const [searchText, setSearchText] = useState('');  
   let [fontsLoaded] = useFonts({	
     Inter_400Regular,
+    Inter_600SemiBold,
+    Inter_700Bold,
   });
+  
+  if (!fontsLoaded) {
+    return null;
+  }
 
-  const [searchText, setSearchText] = useState('');  
+  const renderItem = ({ item }) => {
+    return (
+      <View style={{ margin: 10, paddingRight: 0 }}>
+        <View style={styles.card}>
+          <Image source={item.image} style={styles.cardImage} />
+          <View style={styles.cardInfo}>
+            <Text style={styles.cardSeller}>{item.type}</Text>
+            <Text style={styles.cardText}>{item.type} </Text>
+            <Text style={styles.cardText}>{item.quantity} {item.weight}</Text>
+            <Text style={styles.cardText}>{item.location}</Text>
+            <Text style={styles.cardText}>{item.quality}</Text>
+            <Text style={styles.cardText}>Categoria: {item.category}</Text>
+          </View>
+          <TouchableOpacity onPress={null}>
+            <Text style={styles.chatButtonText}>Chat</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  };
+
+  const keyExtractor = (item) => item.id.toString();
+
+
+
+  const products = [
+    {
+      id: 1,
+      type: 'Garrafas de Vidro',
+      quantity: '11 unidades',
+      weight: '3,3kg',
+      location: 'Recife, PE',
+      quality: 'Ótimo estado',
+      category: 'Vidro',
+      image: product1,
+    },
+    {
+      id: 2,
+      type: 'Garrafas de Vidro',
+      quantity: '50 unidades',
+      weight: '20kg',
+      location: 'Paulista, PE',
+      quality: 'Bom estado',
+      category: 'Vidro',
+      image: product2,
+    },
+    {
+      id: 3,
+      type: 'Resíduos de vidro',
+      quantity: '100 unidades',
+      weight: '10kg',
+      location: 'Camaragibe, PE',
+      quality: 'Estilhaçado',
+      category: 'Vidro',
+      image: product3,
+    },
+    {
+      id: 4,
+      type: 'Painel de vidro',
+      quantity: '10 unidades',
+      weight: '40kg',
+      location: 'Recife, PE',
+      quality: 'Ótimo estado',
+      category: 'Vidro',
+      image: product4,
+    },
+  ];
+
   
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white', display: 'flex', }} >
@@ -65,6 +139,15 @@ export default function Catador() {
           onChangeText={(text) => setSearchText(text)}
         />
       </View>
+
+      <FlatList
+        data={products}
+        renderItem={renderItem}
+        keyExtractor={keyExtractor}
+        numColumns={1}
+      />
+
+
     </SafeAreaView>
   );
 }
@@ -193,15 +276,11 @@ const styles = StyleSheet.create({
   },
   card: {
     flex: 1,
-    width: 200,
-    height: 300,
-    marginBottom: -10,
+    flexDirection: 'row',
+    width: 'auto',
     marginLeft: -7,
     marginRight: -5,
-    borderRadius: 8,
     overflow: 'hidden',
-    borderWidth: 1,
-    borderColor: '#D9D9D9',
     color: '#F5F5F5',
     shadowColor: 'rgba(0, 0, 0, 0.1)',
     shadowOffset: { width: 0, height: 2 },
@@ -211,26 +290,27 @@ const styles = StyleSheet.create({
       
   },
   cardImage: {
-    width: '86%',
-    height: 150,
+    width: '30%',
+    height: 100,
     marginTop: 10,
     marginLeft: 14,
-    borderRadius: 10,
+    borderRadius: 20,
   },
   cardInfo: {
     padding: 10,
     marginLeft: 7,
   },
   cardSeller: {
+    fontFamily: 'Inter_700Bold',
     fontSize: 16,
-    fontWeight: 'bold',
     marginBottom: 5,
     color: '#109946', 
   },
   cardText: {
+    fontFamily: 'Inter_600SemiBold',
     fontSize: 11,
     marginBottom: 3,
-    color: '#4D4D4D', 
+    color: '#109946', 
     lineHeight: 12,
   },
   chatButton: {

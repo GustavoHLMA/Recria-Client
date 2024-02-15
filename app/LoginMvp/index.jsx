@@ -31,6 +31,11 @@ export default function Login() {
         break;
     }
   };
+  
+  if (!fontsLoaded) {
+    return null; // Ou qualquer componente de carregamento
+  }
+
 
   return (
     <Container>
