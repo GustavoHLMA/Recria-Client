@@ -6,6 +6,9 @@ import ProfilePic from './Ellipse 3.png'
 
 export {ProfilePic}
 
+import SearchIcon from './lupa.png'
+
+export {SearchIcon}
 
 import product1 from './produto1.png'
 
@@ -23,7 +26,14 @@ import product4 from './produto4.png'
 
 export {product4}
 
-
 import chatIcon from './chatIcon.png'
 
 export {chatIcon}
+
+import starAmarela from './staramarela.png'
+
+export {starAmarela}
+
+import starCinza from './starcinza.png'
+
+export {starCinza}
