@@ -1,8 +1,9 @@
-import ProfileHeader from "./HomeMaker";
+import { Text } from 'react-native';
+import PageTest from './DescarteMarketplace';
+
+
 
 export default function Page() {
-  return (
-    <ProfileHeader/>
-  )
-  
+  return <PageTest />;
+
 }
