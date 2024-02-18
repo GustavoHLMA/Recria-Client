@@ -37,3 +37,11 @@ export {starAmarela}
 import starCinza from './starcinza.png'
 
 export {starCinza}
+
+import leftArrow from './leftArrow.png'
+
+export {leftArrow}
+
+import camIcon from './camIcon.png'
+
+export {camIcon}
