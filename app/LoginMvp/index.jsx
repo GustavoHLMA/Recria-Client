@@ -6,7 +6,7 @@ import { PrevArrowPng } from '../../src/assets';
 import { NextArrowSvg } from '../../src/assets';
 import { Link } from 'expo-router'
 
-export default function App() {
+export default function Login() {
   let [fontsLoaded] = useFonts({
     Inter_600SemiBold, Inter_500Medium, Inter_900Black
   });
@@ -21,7 +21,7 @@ export default function App() {
         setNextPage('/HomeMaker');
         break;
       case 1:
-        setNextPage('/Vender');
+        setNextPage('/HomeCatador');
         break;
       case 2:
         setNextPage('/Descartar');
@@ -31,6 +31,11 @@ export default function App() {
         break;
     }
   };
+  
+  if (!fontsLoaded) {
+    return null; // Ou qualquer componente de carregamento
+  }
+
 
   return (
     <Container>
