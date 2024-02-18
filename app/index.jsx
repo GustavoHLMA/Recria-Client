@@ -3,6 +3,6 @@ import App from './LoginMvp';
 import PageTest from './Teste';
 import ProfileHeader from "./HomeMaker";
 
-
 export default function Page() {
-  return <PageTest />;
+  return <App />;
+}
