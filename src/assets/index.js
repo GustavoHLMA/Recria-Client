@@ -26,6 +26,10 @@ import product4 from './produto4.png'
 
 export {product4}
 
+import chatIcon from './chatIcon.png'
+
+export {chatIcon}
+
 import starAmarela from './staramarela.png'
 
 export {starAmarela}
@@ -33,10 +37,6 @@ export {starAmarela}
 import starCinza from './starcinza.png'
 
 export {starCinza}
-
-import chatIcon from './chatIcon.png'
-
-export {chatIcon}
 
 import Test from './teste.jpg';
 import Test2 from './teste2.png';
