@@ -50,6 +50,7 @@ import HomeIcon from './home.svg';
 import ChatIcon from './chat.svg';
 import DadosIcon from './dados.svg';
 import MarketplaceIcon from './marketplace.svg';
+import EspacoRecriaIcon from './espacoRecria.svg';
 
 export { 
   Test, 
@@ -63,5 +64,6 @@ export {
   HomeIcon, 
   ChatIcon, 
   DadosIcon, 
-  MarketplaceIcon
+  MarketplaceIcon,
+  EspacoRecriaIcon
 };

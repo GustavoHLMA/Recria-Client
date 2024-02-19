@@ -1,8 +1,7 @@
-import Login from './LoginMvp';
-import PageTest from './Teste';
-import ProfileHeader from "./HomeMaker";
+import Login from "./LoginMvp";
 
-
-export default function Page() {
-  return <Login />;
+export default function App() {
+  return (
+    <Login />
+  );
 }
