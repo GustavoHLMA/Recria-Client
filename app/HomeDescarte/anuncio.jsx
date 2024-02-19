@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Image, TextInput, StyleSheet, ScrollView } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import * as ImagePicker from 'expo-image-picker';
-import { leftArrow, camIcon } from '../src/assets';
+import { leftArrow, camIcon } from '../../src/assets';
 
 const NovaPagina = ({ navigation }) => {
   const { control, handleSubmit, formState } = useForm();
@@ -55,7 +55,7 @@ const NovaPagina = ({ navigation }) => {
             />
           </TouchableOpacity>
 
-          <Text style={{ color: '#109946', fontSize: 18, marginLeft: 130, marginTop: 5, fontWeight: '600' }}>Anúncio</Text>
+          <Text style={{ color: '#109946', fontSize: 18, marginLeft: 79, marginTop: 5, fontWeight: '600' }}>Solicitar descarte</Text>
         </View>
 
         <View style={{ alignItems: 'center', marginTop: 20, flexDirection: 'column' }}>
@@ -242,27 +242,19 @@ const NovaPagina = ({ navigation }) => {
           </TouchableOpacity>
 
           <View style={{ flexDirection: 'row', justifyContent: 'space-around', flexWrap: 'wrap' }}>
-            {selectedImages.map((uri, index) => (
-              <Image key={index} source={{ uri }} style={styles.selectedImage} />
-            ))}
-          </View>
+  {selectedImages.map((uri, index) => (
+    <Image key={index} source={{ uri }} style={styles.selectedImage} />
+  ))}
+</View>
 
-      </View>
-
-      <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 20 }}>
           <TouchableOpacity style={styles.button} onPress={handleSubmit(onSubmit)} disabled={formState.isSubmitting}>
-            <Text style={styles.buttonText}>Anunciar</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.verifyButton} onPress={() => console.log('Verificar selo de qualidade')}>
-            <Text style={styles.verifyButtonText}>Verificar selo{'\n'}de qualidade</Text>
+            <Text style={styles.buttonText}>Solicitar!</Text>
           </TouchableOpacity>
         </View>
       </View>
     </ScrollView>
   );
 };
-
 
 const styles = StyleSheet.create({
   inputContainer: {
@@ -294,13 +286,13 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: '#58C044',
     padding: 12,
-    borderRadius: 60,
-    width: 170,
-    height: 70,
+    borderRadius: 5,
+    width: 100,
+    height: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    marginLeft: 25,
     marginTop: 20,
+    marginLeft: 150,
   },
   buttonText: {
     color: 'white',
@@ -351,26 +343,6 @@ const styles = StyleSheet.create({
     height: 100,
     margin: 8,
     borderRadius: 8,
-  },
-  verifyButton: {
-    backgroundColor: 'white',
-    borderColor: '#58C044',
-    borderWidth: 2,
-    padding: 12,
-    borderRadius: 60,
-    width: 170,
-    height: 70,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: 30,
-    marginTop: 20,
-  },
-  verifyButtonText: {
-    color: '#58C044',
-    fontSize: 16,
-    fontWeight: '600',
-    textAlign: 'center', 
-    lineHeight: 20, 
   },
 });
 
