@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useFonts, Inter_400Regular, Inter_600SemiBold, Inter_700Bold } from '@expo-google-fonts/inter';
+import { useFonts, Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_700Bold, Inter_800ExtraBold } from '@expo-google-fonts/inter';
 import {
   SafeAreaView,
   StyleSheet,
@@ -15,14 +15,17 @@ import { LocalizaIcon,
   ProfilePic, 
   SearchIcon, 
   chatIcon, 
-  LogoSvg, 
+  EspacoRecriaIcon, 
+  EspacoRegriaPng,
+  Svgaaa,
   LocalizaSvg, 
   CatadorPhoto,
-  product1, 
-  product2,
-  product3,
-  product4,
+  Upcycle1, 
+  Upcycle2,
+  Upcycle3,
+  Upcycle4,
 } from '../../src/assets';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function MarketplaceCatador() {
   const [searchText, setSearchText] = useState('');
@@ -30,8 +33,10 @@ export default function MarketplaceCatador() {
 
   let [fontsLoaded] = useFonts({	
     Inter_400Regular,
+    Inter_500Medium,
     Inter_600SemiBold,
     Inter_700Bold,
+    Inter_800ExtraBold,
   });
   
   if (!fontsLoaded) {
@@ -42,75 +47,41 @@ export default function MarketplaceCatador() {
     {
       id: 1,
       type: 'Garrafas de Vidro',
-      quantity: '11 unidades',
-      weight: '3,3kg',
-      location: 'Recife, PE',
-      quality: 'Ótimo estado',
-      category: 'Vidro',
-      image: product1,
-      tipo: 'venda', // Produto para venda
+      price: '15',
+      image: Upcycle1,
     },
     {
       id: 2,
       type: 'Garrafas de Vidro',
-      quantity: '50 unidades',
-      weight: '20kg',
-      location: 'Paulista, PE',
-      quality: 'Bom estado',
-      category: 'Vidro',
-      image: product2,
-      tipo: 'venda', // Produto para venda
+      price: '15',
+      image: Upcycle2,
     },
-  ];
 
-  const collectionRequests = [
     {
       id: 3,
-      type: 'Resíduos de vidro',
-      quantity: '100 unidades',
-      weight: '10kg',
-      location: 'Camaragibe, PE',
-      quality: 'Estilhaçado',
-      category: 'Vidro',
-      image: product3,
-      tipo: 'coleta', // Solicitação de coleta
+      type: 'Garrafas de Vidro',
+      price: '15',
+      image: Upcycle3,
     },
+
     {
       id: 4,
-      type: 'Painel de vidro',
-      quantity: '10 unidades',
-      weight: '40kg',
-      location: 'Recife, PE',
-      quality: 'Ótimo estado',
-      category: 'Vidro',
-      image: product4,
-      tipo: 'coleta', // Solicitação de coleta
+      type: 'Garrafas de Vidro',
+      price: '15',
+      image: Upcycle4,
     },
+
   ];
 
   const renderButtons = () => {
-    if (selectedTab === 'venda') {
       return (
-        <TouchableOpacity style={styles.botaoDeletar}>
-          <Text style={{ color: '#109946', textAlign: 'center' }}>Deletar</Text>
+        <TouchableOpacity style={styles.botaoComprar}>
+          <Text style={{ color: '#fff', textAlign: 'center', fontSize: 13 }}>Comprar</Text>
         </TouchableOpacity>
       );
-    } else {
-      return (
-        <View>
-          <TouchableOpacity style={styles.botaoAceitar}>
-            <Text style={{ color: '#fff', textAlign: 'center' }}>Aceitar</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.botaoRecusarDeletar}>
-            <Text style={{ color: '#109946', textAlign: 'center' }}>Recusar</Text>
-          </TouchableOpacity>
-        </View>
-      );
-    }
-  };
+    } 
 
   const renderProducts = () => {
-    if (selectedTab === 'venda') {
       return (
         <FlatList
           data={productsForSale}
@@ -119,17 +90,7 @@ export default function MarketplaceCatador() {
           numColumns={1}
         />
       );
-    } else {
-      return (
-        <FlatList
-          data={collectionRequests}
-          renderItem={renderItem}
-          keyExtractor={keyExtractor}
-          numColumns={1}
-        />
-      );
-    }
-  };
+    } 
 
     const renderItem = ({ item }) => {
       return (
@@ -137,11 +98,8 @@ export default function MarketplaceCatador() {
           <View style={styles.card}>
             <Image source={item.image} style={styles.cardImage} />
             <View style={styles.cardInfo}>
-              <Text style={styles.cardSeller}>{item.type}</Text>
-              <Text style={styles.cardText}>{item.quantity} {item.weight}</Text>
-              <Text style={styles.cardText}>{item.location}</Text>
-              <Text style={styles.cardText}>{item.quality}</Text>
-              <Text style={styles.cardText}>Categoria: {item.category}</Text>
+              <Text style={styles.cardProduct}>{item.type}</Text>
+              <Text style={styles.cardPrice}>{item.price} $</Text>
               {renderButtons()}
             </View>
           </View>
@@ -152,23 +110,57 @@ export default function MarketplaceCatador() {
   const keyExtractor = (item) => item.id.toString();
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'white', display: 'flex', }} >
-      <LogoSvg width={150} height={50} style={{ alignSelf: 'center' }} />
-      <View style={styles.container}>
-        <View style={styles.leftContainer}>
-          <LocalizaSvg />
-          <Text style={styles.text}>Recife, PE</Text>
-        </View>
-        <View style={styles.rightContainer}>
-          <View style={styles.profileContainer}>
-            <View style={styles.profileTextContainer}>
-              <Text style={styles.welcomeText}>Olá, Davi!</Text>
-              <Text style={styles.profileText}>Catador</Text>
-            </View>
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'white', display: 'flex', marginBottom: 56, }} >
+      <Image source={EspacoRegriaPng} style={{ alignSelf: 'center' }} />
+      <LinearGradient 
+        colors={['#1fb4d5', '#b9d1f6']}
+        start={[0, 0]}
+        end={[0, 1]}
+        style={{ flexDirection: 'column', width: 337, height: 215 , borderRadius: 26, alignSelf: 'center', marginTop: 19, paddingRight: 0,
+      }}
+        >
+        <View style={{
+          flexDirection: 'row',
+          paddingTop: 15,
+        }}> 
+          <View style={styles.profileImageContainer}>
+            <Image source={CatadorPhoto} style={styles.profileImage} />
           </View>
+          <Text style={{
+              width: 189,
+              marginTop: 20,
+              fontFamily: 'Inter_800ExtraBold',
+              lineHeight: 'normal',
+              fontSize: 16,
+              color: '#fff',
+              textAlign: 'left',
+            }}>
+              Olá, me chamo Ricardo! Seja muito bem-vindo ao Espaço Recria!
+            </Text>
         </View>
-      </View>
+        <View style={{
+          width: 339,
+          height: 1,
+          backgroundColor: '#fff',
+          marginTop: 9,
+        }}
+        />
+        <Text style={{
+            marginTop: 3,
+            marginLeft: 35,
+            marginRight: 35,
+            fontFamily: 'Inter_500Medium',
+            lineHeight: 'normal',
+            alignSelf: 'center',
+            fontSize: 16,
+            color: '#fff',
+            }}>
+          Tenho uma lojinha de souvenirs feitos de materiais reciclados.
+          Comprando meu trabalho você ajuda a movimentar a economia.
+        </Text>
 
+
+      </LinearGradient>
       <View style={styles.searchBarContainer}>
         <Image source={SearchIcon} style={styles.searchIcon} />
         <TextInput
@@ -182,18 +174,11 @@ export default function MarketplaceCatador() {
 
       <View style={styles.tabButtons}>
         <TouchableOpacity
-          style={[styles.tabButton, selectedTab === 'venda' && styles.selectedTabButton]}
+          style={[styles.tabButton, selectedTab === 'produtos' && styles.selectedTabButton]}
           onPress={() => setSelectedTab('venda')}
         >
-          <Text style={[styles.tabButtonText, selectedTab === 'venda' && styles.selectedTabButtonText]}>Seus produtos</Text>
+          <Text style={[styles.tabButtonText, selectedTab === 'venda' && styles.selectedTabButtonText]}>Produtos a venda</Text>
           {selectedTab === 'venda' && <View style={styles.underline} /> }
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.tabButton, selectedTab === 'coleta' && styles.selectedTabButton]}
-          onPress={() => setSelectedTab('coleta')}
-        >
-          <Text style={[styles.tabButtonText, selectedTab === 'coleta' && styles.selectedTabButtonText]}>Solicitações de coleta</Text>
-          {selectedTab === 'coleta' && <View style={styles.underline} />}
         </TouchableOpacity>
       </View>
 
@@ -253,9 +238,11 @@ const styles = StyleSheet.create({
     marginRight: 20,
   },
   profileImageContainer: {
-    width: 60,
-    height: 60,
+    width: 100,
+    height: 100,
     borderRadius: 9999,
+    marginLeft: 20,
+    marginRight: 15,
     overflow: 'hidden',
     borderWidth: 2,
     borderColor: '#58C044',
@@ -294,23 +281,25 @@ const styles = StyleSheet.create({
   tabButtons: {
     flexDirection: 'row',
     alignItems: 'flex-start',
+    alignSelf: 'flex-start',
     justifyContent: 'space-around',
     marginTop: 31,
     marginBottom: 25,
+    marginLeft: 20,
   },
   tabButton: {
-    color: '#A3A3A3',
+    color: '#38b4d0',
   },
   tabButtonText: {
     display: 'flex',
-    color: '#A3A3A3',
+    color: '#38b4d0',
     fontSize: 16,
     fontFamily: 'Inter_600SemiBold',
     alignSelf: 'flex-end',
     lineHeight: 16,
   },
   selectedTabButtonText: {
-    color: '#109946',
+    color: '#38b4d0',
   },
   underline: {
     marginTop: 1,
@@ -345,18 +334,17 @@ const styles = StyleSheet.create({
     padding: 10,
     marginLeft: 7,
   },
-  cardSeller: {
+  cardProduct: {
     fontFamily: 'Inter_700Bold',
-    fontSize: 16,
-    marginBottom: 5,
-    color: '#109946', 
+    fontSize: 15,
+    marginBottom: 2,
+    color: '#38b4d0', 
   },
-  cardText: {
+  cardPrice: {
     fontFamily: 'Inter_600SemiBold',
-    fontSize: 11,
-    marginBottom: 3,
-    color: '#109946', 
-    lineHeight: 12,
+    fontSize: 14,
+    marginBottom: 2,
+    color: '#38b4d0', 
   },
 
   botaoAceitar : {
@@ -364,7 +352,7 @@ const styles = StyleSheet.create({
     width: 57,
     height: 18,
     borderRadius: 3,  
-    backgroundColor: '#58C044',
+    backgroundColor: '#38b4d0',
     color: '#fff',
     marginLeft: 170,
     bottom: 40,
@@ -392,16 +380,14 @@ const styles = StyleSheet.create({
     elevation: 20,
   },
 
-  botaoDeletar : {
+  botaoComprar : {
     position: 'absolute',
-    width: 57,
+    width: 60,
     height: 18,
-    borderWidth: 1, 
-    borderColor: '#109946',
+    backgroundColor: '#38b4d0',
     borderRadius: 3,  
-    backgroundColor: '#fff',
     marginLeft: 170,
-    bottom: 50,
+    bottom: 60,
     shadowColor: 'rgba(0, 0, 0, 0.25)',
     shadowOffset: { width: 0, height: 3,  },
     shadowOpacity: 0.6,
