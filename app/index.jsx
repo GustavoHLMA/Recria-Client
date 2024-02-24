@@ -1,8 +1,7 @@
-import { Text } from 'react-native';
-import App from './LoginMvp';
-import PageTest from './Teste';
-import ProfileHeader from "./HomeMaker";
+import Dados from './DescarteDadosGraficos';
+import PageTest from './DescarteDadosGamificacao';
+
 
 export default function Page() {
-  return <App />;
+  return <Dados />;
 }
