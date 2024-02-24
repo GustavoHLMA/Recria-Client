@@ -12,13 +12,8 @@ import {
 } from 'react-native';
 
 import { LocalizaIcon, 
-  ProfilePic, 
   SearchIcon, 
-  chatIcon, 
-  EspacoRecriaIcon, 
   EspacoRegriaPng,
-  Svgaaa,
-  LocalizaSvg, 
   CatadorPhoto,
   Upcycle1, 
   Upcycle2,
@@ -152,7 +147,7 @@ export default function MarketplaceCatador() {
             fontFamily: 'Inter_500Medium',
             lineHeight: 'normal',
             alignSelf: 'center',
-            fontSize: 16,
+            fontSize: 15,
             color: '#fff',
             }}>
           Tenho uma lojinha de souvenirs feitos de materiais reciclados.
@@ -382,11 +377,11 @@ const styles = StyleSheet.create({
 
   botaoComprar : {
     position: 'absolute',
-    width: 60,
+    width: 69,
     height: 18,
     backgroundColor: '#38b4d0',
     borderRadius: 3,  
-    marginLeft: 170,
+    marginLeft: 160,
     bottom: 60,
     shadowColor: 'rgba(0, 0, 0, 0.25)',
     shadowOffset: { width: 0, height: 3,  },
