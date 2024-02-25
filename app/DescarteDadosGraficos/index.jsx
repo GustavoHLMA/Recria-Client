@@ -1,7 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { StackedBarChart, XAxis, YAxis } from 'react-native-svg-charts';
+import { View, Text, StyleSheet, Image } from 'react-native';
+import { StackedBarChart, LineChart, XAxis, YAxis } from 'react-native-svg-charts';
 import * as scale from 'd3-scale';
+import { LocalizaIcon, ProfilePic } from '../../src/assets';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const ChartScreen = () => {
   const data = [
@@ -20,7 +22,7 @@ const ChartScreen = () => {
     // Adicione os dados para os outros meses...
   ];
 
-  const colors = ['#7b4173', '#a55194', '#ce6dbd'];
+  const colors = ['#109946', '#1A9DBA', '#00FFA3'];
   const keys = ['Vidro', 'Plástico', 'Papel'];
 
   const contentInset = { top: 20, bottom: 20 };
@@ -32,24 +34,50 @@ const ChartScreen = () => {
       </View>
     );
   };
+
   const renderCategoryTotal = () => {
     return (
       <View style={styles.categoryTotalContainer}>
         {keys.map((key, index) => (
           <View key={index} style={styles.categoryTotalItem}>
             <Text style={styles.categoryName}>{key}</Text>
-            <Text style={styles.categoryValue}>
-              {data.reduce((acc, cur) => acc + cur[key], 0)}
-            </Text>
+            <View style={[styles.categoryValueContainer, { backgroundColor: colors[index] }]}>
+              <Text style={styles.categoryValueText}>
+                {data.reduce((acc, cur) => acc + cur[key], 0)}
+              </Text>
+            </View>
           </View>
         ))}
       </View>
     );
   };
 
+  // Dados de exemplo para o gráfico de linha
+  const lineChartData = [10, 15, 8, 12, 18, 10, 16];
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Meu Gráfico</Text>
+    <SafeAreaView style={{ flex: 1 }}>
+
+
+    <Text style={styles.TituloText}>Progresso</Text>
+      <View style={styles.container}>
+        <View style={styles.leftContainer}>
+          <Image source={LocalizaIcon} style={styles.icon} />
+          <Text style={styles.text}>Recife, PE</Text>
+        </View>
+        <View style={styles.rightContainer}>
+          <View style={styles.profileContainer}>
+            <View style={styles.profileTextContainer}>
+              <Text style={styles.welcomeText}>Olá, Ricardo!</Text>
+              <Text style={styles.profileText}>DESCARTE</Text>
+            </View>
+            <View style={styles.profileImageContainer}>
+              <Image source={ProfilePic} style={styles.profileImage} />
+            </View>
+          </View>
+        </View>
+      </View>
+      <Text style={styles.title}>Quantidade de resíduos descartados</Text>
       {renderCategoryTotal()}
       <View style={styles.chartContainer}>
         <YAxis
@@ -80,21 +108,103 @@ const ChartScreen = () => {
           />
         </View>
       </View>
-    </View>
+      <View style={styles.lineChartContainer}>
+        <Text style={styles.titleSegundoGrafico}>Quantidade de produtos {'\n'} comprados no espaço recria</Text>
+        {/* Adicione aqui seu LineChart */}
+        <LineChart
+          style={{ height: 200, width: '90%' }}
+          data={lineChartData}
+          svg={{ stroke: 'rgb(134, 65, 244)' }}
+          contentInset={{ top: 20, bottom: 20 }}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
+    flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 10,
+    marginTop: 20,
   },
-  title: {
+  TituloText: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 10,
+    color: '#109946',
+    textAlign: 'center'
   },
+  leftContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  rightContainer: {
+    alignItems: 'flex-end',
+  },
+  icon: {
+    width: 52,
+    height: 52,
+    marginRight: 5,
+  },
+  text: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'rgba(16, 148, 70, 0.7)',
+  },
+  welcomeText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'rgba(16, 148, 70, 0.7)',
+    marginBottom: 2,
+  },
+  profileContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginLeft: 50,
+  },
+  profileTextContainer: {
+    marginRight: 10,
+    marginBottom: 2,
+    justifyContent: 'flex-start',
+    flexDirection: 'column',
+  },
+  profileText: {
+    fontSize: 14,
+    color: 'rgba(30, 30, 30, 0.38)',
+    textAlign: 'left',
+    marginRight: 20,
+  },
+  profileImageContainer: {
+    width: 60,
+    height: 60,
+    borderRadius: 9999,
+    overflow: 'hidden',
+    borderWidth: 2,
+    borderColor: '#58C044',
+  },
+  profileImage: {
+    width: '100%',
+    height: '100%',
+  },
+  title: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginTop: 30,
+    marginBottom:15,
+    color: '#A3A3A3',
+    textAlign: 'center',
+  },
+
+  titleSegundoGrafico: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginTop: 30,
+    color: '#A3A3A3',
+    textAlign: 'center',
+  },
+
   chartContainer: {
     flexDirection: 'row',
     height: 200,
@@ -106,6 +216,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '90%',
     marginBottom: 10,
+    marginLeft: 20,
   },
   categoryTotalItem: {
     alignItems: 'center',
@@ -113,9 +224,20 @@ const styles = StyleSheet.create({
   categoryName: {
     fontSize: 16,
     fontWeight: 'bold',
+    color: '#4D4D4D',
   },
-  categoryValue: {
+  categoryValueContainer: {
+    borderRadius: 12,
+    padding: 6,
+  },
+  categoryValueText: {
     fontSize: 14,
+    color: 'white',
+  },
+  lineChartContainer: {
+    flex: 1,
+    alignItems: 'center',
+    marginTop: 20,
   },
 });
 
