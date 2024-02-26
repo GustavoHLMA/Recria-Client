@@ -24,7 +24,7 @@ export default function Login() {
         setNextPage('/HomeCatador');
         break;
       case 2:
-        setNextPage('/Descartar');
+        setNextPage('/HomeDescarte');
         break;
       default:
         setNextPage(null);

@@ -10,7 +10,7 @@ import { Image, SafeAreaView, ScrollView } from 'react-native';
 import { LocalizaIcon, ProfilePic, chatIcon, product1, product2, product3, product4 } from '../../src/assets';
 import React, { useState } from 'react';
 
-const PageTest = () => {
+const DescarteHome = () => {
   let [fontsLoaded] = useFonts({	  
     Inter_400Regular,
   });
@@ -431,4 +431,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PageTest;
+export default DescarteHome;

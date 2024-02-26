@@ -1,7 +1,8 @@
 import Login from './LoginMvp';
-import PageTest from './Teste';
 import ProfileHeader from "./HomeMaker";
+import PageTest from './DescarteMarketplace';
 
 
 export default function App() {
   return <Login />;
+}
