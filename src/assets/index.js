@@ -38,6 +38,14 @@ import starCinza from './starcinza.png'
 
 export {starCinza}
 
+import leftArrow from './leftArrow.png'
+
+export {leftArrow}
+
+import camIcon from './camIcon.png'
+
+export {camIcon}
+
 import Test from './teste.jpg';
 import Test2 from './teste2.png';
 import PrevArrowPng from './PrevArrow.png';
@@ -64,4 +72,4 @@ export {
   ChatIcon, 
   DadosIcon, 
   MarketplaceIcon
-};
+}
