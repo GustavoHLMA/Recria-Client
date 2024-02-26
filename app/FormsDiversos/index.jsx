@@ -4,7 +4,7 @@ import { useForm, Controller } from 'react-hook-form';
 import * as ImagePicker from 'expo-image-picker';
 import { leftArrow, camIcon } from '../../src/assets';
 
-const NovaPagina = ({ navigation }) => {
+const FormGen = ({ navigation }) => {
   const { control, handleSubmit, formState } = useForm();
   const [selectedImages, setSelectedImages] = useState([]);
 
@@ -374,4 +374,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default NovaPagina;
+export default FormGen;
