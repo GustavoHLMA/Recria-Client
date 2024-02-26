@@ -1,5 +1,5 @@
-import FormGen from "./FormsDiversos";
+import Login from './LoginMvp';
 
 export default function App() {
-  return <FormGen/>
+  return <Login />;
 }
