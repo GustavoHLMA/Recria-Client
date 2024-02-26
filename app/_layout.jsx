@@ -21,7 +21,7 @@ export default function RootLayout() {
           
         }
       } />
-      <Stack.Screen name="HomeDescart" options={
+      <Stack.Screen name="HomeDescarte" options={
         {
           headerShown: false,
         }
