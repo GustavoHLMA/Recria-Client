@@ -110,7 +110,6 @@ const ChartScreen = () => {
       </View>
       <View style={styles.lineChartContainer}>
         <Text style={styles.titleSegundoGrafico}>Quantidade de produtos {'\n'} comprados no espaço recria</Text>
-        {/* Adicione aqui seu LineChart */}
         <LineChart
           style={{ height: 200, width: '90%' }}
           data={lineChartData}

@@ -322,7 +322,7 @@ const styles = StyleSheet.create({
   },
   card: {
     flex: 1,
-    width: 200,
+    width: 185,
     height: 300,
     marginBottom: -10,
     marginLeft: -7,
