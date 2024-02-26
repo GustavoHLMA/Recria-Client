@@ -1,9 +1,7 @@
-import { Text } from 'react-native';
-import PageTest from './DescarteMarketplace';
+import Login from './LoginMvp';
+import PageTest from './Teste';
+import ProfileHeader from "./HomeMaker";
 
 
-
-export default function Page() {
-  return <PageTest />;
-
-}
+export default function App() {
+  return <Login />;
