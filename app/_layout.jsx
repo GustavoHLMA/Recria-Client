@@ -15,7 +15,7 @@ export default function RootLayout() {
         }
       } />
 
-      <Stack.Screen name="HomeMaker/index" options={
+      <Stack.Screen name="HomeMaker" options={
         {
           headerShown: false,
           

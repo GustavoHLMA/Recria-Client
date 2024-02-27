@@ -105,7 +105,7 @@ export default function MarketplaceCatador() {
   const keyExtractor = (item) => item.id.toString();
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'white', display: 'flex', marginBottom: 56, }} >
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#ffffff', display: 'flex', paddingBottom: 56, }} >
       <Image source={EspacoRegriaPng} style={{ alignSelf: 'center' }} />
       <LinearGradient 
         colors={['#1fb4d5', '#b9d1f6']}

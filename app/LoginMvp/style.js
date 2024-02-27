@@ -15,7 +15,6 @@ export const TitleContainer = styled.Text`
   font-family: 'Inter_600SemiBold';
   font-size: 16px;
   font-style: normal;
-  line-height: normal;
   color: #109946; 
 
   .secondary
