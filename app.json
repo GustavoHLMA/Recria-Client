@@ -32,10 +32,22 @@
       [
         "expo-image-picker",
         {
-          "photosPermission": "The app accesses your photos to let you share them with your friends."
+          "permissions": [
+            "CAMERA",
+            "READ_EXTERNAL_STORAGE",
+            "WRITE_EXTERNAL_STORAGE",
+            "MEDIA_LIBRARY",
+            "CAMERA_ROLL"
+          ],
+          "photosPermission": "The app accesses your photos to let you share them with your friends.",
+          "cameraPermission": "The app accesses your camera to let you take a picture and share it with your friends.",
+          "mediaLibraryPermission": "The app accesses your media library to let you share your pictures with your friends.",
+          "cameraRollPermission": "The app accesses your camera roll to let you share your pictures with your friends.",
+          "saveToCameraRollPermission": "The app accesses your camera roll to let you save your pictures.",
+          "accessPrivileges": "The app accesses your photos and camera to let you share your pictures with your friends."
+
         }
       ]
-
     ],
     "scheme": "your-app-scheme"
   }
