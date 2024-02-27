@@ -5,7 +5,7 @@ import { HomeIcon, DadosIcon, ChatIcon, MarketplaceIcon } from '../../src/assets
 
 export default function RootLayoutaa() {
   const navigation = useNavigation();
-  const [activeTab, setActiveTab] = useState("home");
+  const [activeTab, setActiveTab] = useState("homeCatador");
 
   return (
     <Tabs 
@@ -25,11 +25,12 @@ export default function RootLayoutaa() {
       }}
     >
       <Tabs.Screen
-        name="home"
+        name="homeCatador"
         options={{
           headerShown: false,
           tabBarIcon: () => (
-            <TouchableOpacity style={[styles.tabIcon, activeTab === "home" && styles.activeTab]} onPress={() => { setActiveTab("home"); navigation.navigate("home"); }}>
+            <TouchableOpacity style={[styles.tabIcon, activeTab === "homeCatador" && styles.activeTab]} onPress={
+              () => { setActiveTab("homeCatador"); navigation.navigate("homeCatador"); }}>
               <HomeIcon />
             </TouchableOpacity>
           ),
@@ -38,11 +39,12 @@ export default function RootLayoutaa() {
       />
 
       <Tabs.Screen
-        name="chat"
+        name="chatCatador"
         options={{
           headerShown: false,
           tabBarIcon: () => (
-            <TouchableOpacity style={[styles.tabIcon, activeTab === "chat" && styles.activeTab]} onPress={() => { setActiveTab("chat"); navigation.navigate("chat"); }}>
+            <TouchableOpacity style={[styles.tabIcon, activeTab === "chatCatador" && styles.activeTab]} onPress={
+              () => { setActiveTab("chatCatador"); navigation.navigate("chatCatador"); }}>
               <ChatIcon />
             </TouchableOpacity>
           ),
@@ -50,11 +52,12 @@ export default function RootLayoutaa() {
         }}
       />
       <Tabs.Screen
-        name="dados"
+        name="dadosCatador"
         options={{
           headerShown: false,
           tabBarIcon: () => (
-            <TouchableOpacity style={[styles.tabIcon, activeTab === "dados" && styles.activeTab]} onPress={() => { setActiveTab("dados"); navigation.navigate("dados"); }}>
+            <TouchableOpacity style={[styles.tabIcon, activeTab === "dadosCatador" && styles.activeTab]} onPress={
+              () => { setActiveTab("dadosCatador"); navigation.navigate("dadosCatador"); }}>
               <DadosIcon />
             </TouchableOpacity>
           ),
@@ -63,11 +66,12 @@ export default function RootLayoutaa() {
       />
 
       <Tabs.Screen
-        name="marketplace"
+        name="marketplaceCatador"
         options={{
           headerShown: false,
           tabBarIcon: () => (
-            <TouchableOpacity style={[styles.tabIcon, activeTab === "marketplace" && styles.activeTab]} onPress={() => { setActiveTab("marketplace"); navigation.navigate("marketplace"); }}>
+            <TouchableOpacity style={[styles.tabIcon, activeTab === "marketplaceCatador" && styles.activeTab]} onPress={
+              () => { setActiveTab("marketplaceCatador"); navigation.navigate("marketplaceCatador"); }}>
               <MarketplaceIcon />
             </TouchableOpacity>
           ),
