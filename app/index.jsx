@@ -1,7 +1,5 @@
-import Login from "./LoginMvp";
+import Login from './LoginMvp';
 
 export default function App() {
-  return (
-    <Login />
-  );
+  return <Login />;
 }
