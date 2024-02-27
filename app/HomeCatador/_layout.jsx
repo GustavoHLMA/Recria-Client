@@ -11,12 +11,15 @@ export default function RootLayoutaa() {
     <Tabs 
       screenOptions={{
         tabBarStyle: {
-          position: 'absolute',
+          display: 'flex',
           paddingTop: 30,
           height: 55,
-          borderRadius: 20,
+          borderTopLeftRadius: 20,
+          borderTopRightRadius: 20,
           backgroundColor: '#24bc61',
           overflow: 'hidden',
+          justifyContent: 'space-between',
+          alignItems: 'center',
         },
         tabBarLabelStyle: {
           fontSize: 12,
@@ -76,6 +79,13 @@ export default function RootLayoutaa() {
             </TouchableOpacity>
           ),
           tabBarLabel: '',
+        }}
+      />
+
+      <Tabs.Screen
+        name="anuncioResiduo"
+        options={{
+          href:null,
         }}
       />
     </Tabs>

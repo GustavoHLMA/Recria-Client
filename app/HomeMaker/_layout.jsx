@@ -78,6 +78,14 @@ export default function RootLayoutaa() {
           tabBarLabel: '',
         }}
       />
+
+      <Tabs.Screen
+        name="anuncioProduto"
+        options={{
+          href: null,
+        }}
+      />
+
     </Tabs>
   );
 }
