@@ -163,7 +163,10 @@ export default function Catador() {
           <View style={styles.profileContainer}>
             <View style={styles.profileTextContainer}>
               <Text style={styles.welcomeText}>Olá, Davi!</Text>
-              <Text style={styles.profileText}>Catador</Text>
+              <Text style={styles.profileText}>Catador</Text>  
+            </View>
+            <View style={styles.profileImageContainer}>
+              <Image source={CatadorPhoto} style={styles.profileImage} />
             </View>
           </View>
         </View>

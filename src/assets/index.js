@@ -38,6 +38,14 @@ import starCinza from './starcinza.png'
 
 export {starCinza}
 
+import leftArrow from './leftArrow.png'
+
+export {leftArrow}
+
+import camIcon from './camIcon.png'
+
+export {camIcon}
+
 import Test from './teste.jpg';
 import Test2 from './teste2.png';
 import PrevArrowPng from './PrevArrow.png';
@@ -50,6 +58,13 @@ import HomeIcon from './home.svg';
 import ChatIcon from './chat.svg';
 import DadosIcon from './dados.svg';
 import MarketplaceIcon from './marketplace.svg';
+import EspacoRecriaIcon from './espacoRecria.svg';
+import EspacoRegriaPng from './espacoRecriapng.png';
+import Svgaaa from './svgaaa.svg';
+import Upcycle1 from './upcycle1.jpg';
+import Upcycle2 from './upcycle2.jpeg';
+import Upcycle3 from './upcycle3.jpg';
+import Upcycle4 from './upcycle4.jpg';
 
 export { 
   Test, 
@@ -63,5 +78,12 @@ export {
   HomeIcon, 
   ChatIcon, 
   DadosIcon, 
-  MarketplaceIcon
+  MarketplaceIcon,
+  EspacoRecriaIcon,
+  EspacoRegriaPng,
+  Svgaaa,
+  Upcycle1,
+  Upcycle2,
+  Upcycle3,
+  Upcycle4,
 };
