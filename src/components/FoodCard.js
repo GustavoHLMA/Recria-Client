@@ -6,7 +6,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 export default function FoodCard({ item, index }) {
     const navigation = useNavigation();
-    const gradientColors = ['#1A9DBA', '#AACCFE'];
+    const gradientColors = ['#1A9DBA', '#AACCFE'];  
     
     const handleConhecerPress = (negocioId) => {
         // Lógica para cancelar o produto com o ID especificado
