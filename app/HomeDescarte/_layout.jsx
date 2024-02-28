@@ -13,6 +13,8 @@ export default function RootLayoutaa() {
         tabBarStyle: {
           position: 'absolute',
           paddingTop: 30,
+          marginTop: 30,
+          paddingBottom: 30,
           height: 55,
           borderRadius: 20,
           backgroundColor: '#24bc61',
@@ -76,6 +78,13 @@ export default function RootLayoutaa() {
             </TouchableOpacity>
           ),
           tabBarLabel: '',
+        }}
+      />
+      <Tabs.Screen 
+        name="makerProdutos"
+        options={{
+          href: null,
+          headerShown: false
         }}
       />
     </Tabs>

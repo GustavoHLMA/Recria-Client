@@ -9,6 +9,7 @@ import {
   TextInput,
   TouchableOpacity,
   FlatList,
+  Alert,
 } from 'react-native';
 
 import { LocalizaIcon, 
@@ -28,17 +29,7 @@ export default function Catador() {
   const [searchText, setSearchText] = useState('');
   const [selectedTab, setSelectedTab] = useState('venda'); // Estado para controlar a aba selecionada
 
-  let [fontsLoaded] = useFonts({	
-    Inter_400Regular,
-    Inter_600SemiBold,
-    Inter_700Bold,
-  });
-  
-  if (!fontsLoaded) {
-    return null;
-  }
-
-  const productsForSale = [
+  const [productsForSale, setProductsForSale] = useState([
     {
       id: 1,
       type: 'Garrafas de Vidro',
@@ -61,7 +52,7 @@ export default function Catador() {
       image: product2,
       tipo: 'venda', // Produto para venda
     },
-  ];
+  ]);
 
   const collectionRequests = [
     {
@@ -88,20 +79,37 @@ export default function Catador() {
     },
   ];
 
-  const renderButtons = () => {
+  let [fontsLoaded] = useFonts({	
+    Inter_400Regular,
+    Inter_600SemiBold,
+    Inter_700Bold,
+  });
+  
+  if (!fontsLoaded) {
+    return null;
+  }
+
+
+  const renderButtons = ( item ) => {
     if (selectedTab === 'venda') {
       return (
-        <TouchableOpacity style={styles.botaoDeletar}>
+        <TouchableOpacity style={styles.botaoDeletar} onPress={
+          () => handleCancel(item)
+        }>
           <Text style={{ color: '#109946', textAlign: 'center' }}>Deletar</Text>
         </TouchableOpacity>
       );
     } else {
       return (
         <View>
-          <TouchableOpacity style={styles.botaoAceitar}>
+          <TouchableOpacity style={styles.botaoAceitar} onPress={
+            () => handleAccept(item)
+          }>
             <Text style={{ color: '#fff', textAlign: 'center' }}>Aceitar</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.botaoRecusarDeletar}>
+          <TouchableOpacity style={styles.botaoRecusarDeletar} onPress={
+            () => handleCancel(item)
+          }>
             <Text style={{ color: '#109946', textAlign: 'center' }}>Recusar</Text>
           </TouchableOpacity>
         </View>
@@ -142,15 +150,55 @@ export default function Catador() {
               <Text style={styles.cardText}>{item.location}</Text>
               <Text style={styles.cardText}>{item.quality}</Text>
               <Text style={styles.cardText}>Categoria: {item.category}</Text>
-              {renderButtons()}
+              {renderButtons( item )}
             </View>
           </View>
         </View>
       );
     };
 
-  const keyExtractor = (item) => item.id.toString();
+    const keyExtractor = (item) => item.id.toString();
 
+    const handleCancel = (item) => {
+      // Abre um pop-up/modal de confirmação
+      Alert.alert(
+        "Deseja cancelar a venda ou recusar a coleta?",
+        "",
+        [
+          {
+            text: "Cancelar",
+            onPress: () => console.log("Cancelado"),
+            style: "cancel"
+          },
+          { text: "Sim", onPress: () => deleteRequest(item) }
+        ],
+        { cancelable: false }
+      );
+    };
+  
+    const deleteRequest = (item) => {
+      // Remove o item da lista
+      const updatedProducts = productsForSale.filter(product => product.id !== item.id);
+      setProductsForSale(updatedProducts);
+    };
+
+    const handleAccept = (item) => {
+      // Abre um pop-up/modal de confirmação
+      Alert.alert(
+        "Deseja aceitar a solicitação?",
+        "",
+        [
+          {
+            text: "Cancelar",
+            onPress: () => console.log("Cancelado"),
+            style: "cancel"
+          },
+          { text: "Sim", onPress: () => deleteRequest(item) }
+        ],
+        { cancelable: false }
+      );
+    };
+  
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white', display: 'flex', }} >
       <LogoSvg width={150} height={50} style={{ alignSelf: 'center' }} />
@@ -364,12 +412,12 @@ const styles = StyleSheet.create({
 
   botaoAceitar : {
     position: 'absolute',
-    width: 57,
+    width: 65,
     height: 18,
     borderRadius: 3,  
     backgroundColor: '#58C044',
     color: '#fff',
-    marginLeft: 170,
+    marginLeft: 160,
     bottom: 40,
     shadowColor: 'rgba(0, 0, 0, 0.25)',
     shadowOffset: { width: 0, height: 3,  },
@@ -380,13 +428,13 @@ const styles = StyleSheet.create({
 
   botaoRecusarDeletar : {
     position: 'absolute',
-    width: 57,
+    width: 65,
     height: 18,
     borderWidth: 1, 
     borderColor: '#109946',
     borderRadius: 3,  
     backgroundColor: '#fff',
-    marginLeft: 170,
+    marginLeft: 160,
     bottom: 15,
     shadowColor: 'rgba(0, 0, 0, 0.25)',
     shadowOffset: { width: 0, height: 3,  },
@@ -397,7 +445,7 @@ const styles = StyleSheet.create({
 
   botaoDeletar : {
     position: 'absolute',
-    width: 57,
+    width: 65,
     height: 18,
     borderWidth: 1, 
     borderColor: '#109946',
@@ -411,5 +459,16 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 20,
   },
+
+  backgroundCurvedContainer: {
+    backgroundColor: '#B8FFD4',
+    height: 2050,
+    position: 'absolute',
+    top: -1 * (2000 - 230),
+    width: 2000,
+    borderRadius: 2000,
+    alignSelf: 'center',
+    zIndex: -1,
+  },  
 
 });

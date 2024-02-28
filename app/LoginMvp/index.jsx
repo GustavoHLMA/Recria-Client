@@ -64,15 +64,18 @@ export default function Login() {
           paddingVertical: 7,
           paddingHorizontal: 16,
           marginBottom: 14,
-          width: 280,
-          height: 34,
+          width: 325,
+          height: 50,
         }}
         onPress={() => handleButtonPress(0)}
       >
         <Text style={{ 
           color: activeButtonIndex === 0 ? '#fff' : '#4D4D4D',
           fontFamily: 'Inter_500Medium',
-        }}>Quero comprar resíduos sólidos</Text>
+        }}>Sou <Text style={{
+          fontFamily: 'Inter_900Black',
+          color: activeButtonIndex === 0 ? '#fff' : '#58C044',
+        }}>Artesão</Text> e quero comprar resíduos sólidos</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -84,15 +87,18 @@ export default function Login() {
           paddingVertical: 7,
           paddingHorizontal: 16,
           marginBottom: 14,
-          width: 280,
-          height: 34,
+          width: 325,
+          height: 50,
         }}
         onPress={() => handleButtonPress(1)}
       >
         <Text style={{ 
           color: activeButtonIndex === 1 ? '#fff' : '#4D4D4D',
           fontFamily: 'Inter_500Medium',
-        }}>Quero vender resíduos sólidos </Text>
+        }}>Sou <Text style={{
+          fontFamily: 'Inter_900Black',
+          color: activeButtonIndex === 1 ? '#fff' : '#58C044',
+        }}>Catador</Text> e quero coletar/vender resíduos sólidos </Text>
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -104,15 +110,18 @@ export default function Login() {
           paddingVertical: 7,
           paddingHorizontal: 16,
           marginBottom: 60,
-          width: 280,
-          height: 34,
+          width: 325,
+          height: 50,
         }}
         onPress={() => handleButtonPress(2)}
       >
         <Text style={{ 
           color: activeButtonIndex === 2 ? '#fff' : '#4D4D4D',
           fontFamily: 'Inter_500Medium',
-        }}>Quero descartar resíduos sólidos  </Text>
+        }}>Quero <Text style ={{
+          fontFamily: 'Inter_900Black',
+          color: activeButtonIndex === 2 ? '#fff' : '#58C044',
+        }}>Descartar </Text>resíduos sólidos  </Text>
       </TouchableOpacity>
 
       {nextPage && (

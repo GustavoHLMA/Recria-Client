@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons'; // Importe o componente FontAwesome corretamente
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export default function FoodCard({ item, index }) {
@@ -61,7 +61,8 @@ export default function FoodCard({ item, index }) {
                     <Text style={styles.ingredients}>{item.ingredients}</Text>
                 </View>
 
-                <TouchableOpacity style={styles.conhecerButton} onPress={() => handleConhecerPress(item.id)}>
+                <TouchableOpacity style={styles.conhecerButton} 
+                onPress={() => {handleConhecerPress(item.id), navigation.navigate('makerProdutos')}}>
                     <Text style={styles.conhecerButtonText}>Conhecer</Text>
                 </TouchableOpacity>
             </LinearGradient>

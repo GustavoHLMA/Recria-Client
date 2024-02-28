@@ -65,6 +65,10 @@ import Upcycle1 from './upcycle1.jpg';
 import Upcycle2 from './upcycle2.jpeg';
 import Upcycle3 from './upcycle3.jpg';
 import Upcycle4 from './upcycle4.jpg';
+import MesGratis from './1MesGratis.svg';
+import RecriaPremio from './Recria2.svg';
+import EspacoRecriaTest from './espacoRecriaTest.svg';
+import ChatSvg from './chatSvg.svg';
 
 export { 
   Test, 
@@ -86,4 +90,8 @@ export {
   Upcycle2,
   Upcycle3,
   Upcycle4,
+  MesGratis,
+  RecriaPremio,
+  EspacoRecriaTest,
+  ChatSvg
 };

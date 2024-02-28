@@ -1,87 +1,39 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { useFonts, Inter_400Regular } from '@expo-google-fonts/inter';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Feather from 'react-native-vector-icons/Feather';
-import Separator from '../../src/components/Separator';
-import { TouchableOpacity } from 'react-native';
-import { Image, SafeAreaView, ScrollView } from 'react-native';
-import { LocalizaIcon, ProfilePic, chatIcon, product1, product2, product3, product4 } from '../../src/assets';
 import React, { useState } from 'react';
+import { useFonts, Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_700Bold } from '@expo-google-fonts/inter';
+import {
+  SafeAreaView,
+  StyleSheet,
+  View,
+  Image,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+  Button,
+  Platform,
+  Alert // Importar Alert do React Native
+} from 'react-native';
 
-const DescarteHome = () => {
-  let [fontsLoaded] = useFonts({	  
-    Inter_400Regular,
-  });
+import { LocalizaIcon, 
+  ProfilePic, 
+  LogoSvg, 
+  LocalizaSvg, 
+  product1, 
+  product2,
+  product3,
+  product4,
+  ChatSvg
+} from '../../src/assets';
+import { Link, useNavigation } from 'expo-router';
 
+export default function Catador() {
   const [searchText, setSearchText] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [selectedLocation, setSelectedLocation] = useState('minhas');
+  const [selectedTab, setSelectedTab] = useState('venda'); // Estado para controlar a aba selecionada
+  navigator = useNavigation();
 
-  const handleChatPress = () => {
-    // lógica para abrir o chat com o vendedor
-    console.log('Abrir chat com o vendedor');
-  };
-
-  const handleLocationPress = (location) => {
-    setSelectedLocation(location);
-  };
-
-  const handleCancelPress = (productId) => {
-    // Lógica para cancelar o produto com o ID especificado
-    console.log('Cancelar produto com ID:', productId);
-  };
-  
-
-  const LocationText = ({ location, isSelected, onPress }) => (
-    <TouchableOpacity
-      style={[
-        styles.locationTextContainer,
-        isSelected && styles.selectedLocationText,
-      ]}
-      onPress={() => onPress(location)}
-    >
-      <Text style={[styles.locationText, isSelected && styles.selectedText]}>
-        {location}
-      </Text>
-    </TouchableOpacity>
-  );
-
-  const renderProductItem = (item) => (
-    <View key={item.id} style={styles.productItem}>
-      <Image source={item.image} style={styles.productItemImage} />
-      <View style={styles.productItemDetails}>
-        <Text style={styles.productItemTitle}>{item.type}</Text>
-        <Text>{item.quantity}</Text>
-        <Text>{item.weight}</Text>
-        <Text>{item.location}</Text>
-        <Text>{item.quality}</Text>
-        <Text>Categoria: {item.category}</Text>
-        
-
-        {selectedLocation === 'minhas' && ( // Condição para excluir o botão de cancelar
-          <TouchableOpacity style={styles.cancelButton} onPress={handleCancelPress}>
-            <Text style={styles.cancelButtonText}>Cancelar</Text>
-          </TouchableOpacity>
-        )}
-
-        {selectedLocation === 'aceitas' && (
-          <TouchableOpacity style={styles.chatButton} onPress={handleChatPress}>
-            <Image source={chatIcon} style={styles.chatIcon} />
-            <Text style={styles.chatButtonText}>Chat</Text>
-          </TouchableOpacity>
-        )}
-
-       
-      </View>
-    </View>
-  );
-
-  const products = [
+  const [productsForSale, setProductsForSale] = useState([
     {
       id: 1,
-      seller: 'João Silva',
       type: 'Garrafas de Vidro',
       quantity: '11 unidades',
       weight: '3,3kg',
@@ -89,10 +41,10 @@ const DescarteHome = () => {
       quality: 'Ótimo estado',
       category: 'Vidro',
       image: product1,
+      tipo: 'venda', // Produto para venda
     },
     {
       id: 2,
-      seller: 'Maria do Carmo',
       type: 'Garrafas de Vidro',
       quantity: '50 unidades',
       weight: '20kg',
@@ -100,10 +52,25 @@ const DescarteHome = () => {
       quality: 'Bom estado',
       category: 'Vidro',
       image: product2,
+      tipo: 'venda', // Produto para venda
     },
+  ]);
+
+  let [fontsLoaded] = useFonts({	
+    Inter_400Regular,
+    Inter_500Medium,
+    Inter_600SemiBold,
+    Inter_700Bold,
+  });
+  
+  if (!fontsLoaded) {
+    return null;
+  }
+
+  
+  const collectionRequests = [
     {
       id: 3,
-      seller: 'Carlos Lima',
       type: 'Resíduos de vidro',
       quantity: '100 unidades',
       weight: '10kg',
@@ -111,10 +78,10 @@ const DescarteHome = () => {
       quality: 'Estilhaçado',
       category: 'Vidro',
       image: product3,
+      tipo: 'coleta', // Solicitação de coleta
     },
     {
       id: 4,
-      seller: 'Anice de Oliveira',
       type: 'Painel de vidro',
       quantity: '10 unidades',
       weight: '40kg',
@@ -122,76 +89,181 @@ const DescarteHome = () => {
       quality: 'Ótimo estado',
       category: 'Vidro',
       image: product4,
+      tipo: 'coleta', // Solicitação de coleta
     },
   ];
 
-  return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-      <StatusBar
-        barStyle="light-content"
-        backgroundColor={'#b8ffd4'}
-        translucent
-      />
-      <Separator height={StatusBar.currentHeight} />
-      <View style={styles.backgroundCurvedContainer}/>
-      <Image
-          source={require('../../src/assets/logotipo.png')} 
-          style={styles.logo}
-          resizeMode="contain" 
-      />
-          <View style={styles.container}>
-        <View style={styles.leftContainer}>
-          <Image source={LocalizaIcon} style={styles.icon} />
-          <Text style={styles.text}>Recife, PE</Text>
+  const renderButtons = (item) => {
+    if (selectedTab === 'venda') {
+      return (
+        <TouchableOpacity style={styles.botaoDeletar} onPress={() => handleCancel(item)}>
+          <Text style={{ color: '#109946', textAlign: 'center' }}>Cancelar</Text>
+        </TouchableOpacity>
+      );
+    } else {
+      return (
+        <View>
+          <TouchableOpacity style={styles.chatStyles} onPress={() => navigator.navigate('chatDescarte')}>
+            <ChatSvg/>
+          </TouchableOpacity>
         </View>
-        <View style={styles.rightContainer}>
-          <View style={styles.profileContainer}>
-            <View style={styles.profileTextContainer}>
-              <Text style={styles.welcomeText}>Olá, Ricardo!</Text>
-              <Text style={styles.profileText}>DESCARTE</Text>
-            </View>
-            <View style={styles.profileImageContainer}>
-              <Image source={ProfilePic} style={styles.profileImage} />
-            </View>
+      );
+    }
+  };
+
+  const renderProducts = () => {
+    if (selectedTab === 'venda') {
+      return (
+        <FlatList
+          data={productsForSale}
+          renderItem={renderItem}
+          keyExtractor={keyExtractor}
+          numColumns={1}
+        />
+      );
+    } else {
+      return (
+        <FlatList
+          data={collectionRequests}
+          renderItem={renderItem}
+          keyExtractor={keyExtractor}
+          numColumns={1}
+        />
+      );
+    }
+  };
+
+  const renderItem = ({ item }) => {
+    return (
+      <View style={{ marginLeft: 15, paddingRight: 0 }}>
+        <View style={styles.card}>
+          <Image source={item.image} style={styles.cardImage} />
+          <View style={styles.cardInfo}>
+            <Text style={styles.cardSeller}>{item.type}</Text>
+            <Text style={styles.cardText}>{item.quantity} {item.weight}</Text>
+            <Text style={styles.cardText}>{item.location}</Text>
+            <Text style={styles.cardText}>{item.quality}</Text>
+            <Text style={styles.cardText}>Categoria: {item.category}</Text>
+            {renderButtons(item)}
           </View>
         </View>
-      </View> 
-      
-
-      <View style={styles.centeredContent}>
-        <Text style={styles.centeredText}>
-          Bem-vindo ao nosso espaço de{'\n'}descarte de resíduos sólidos.
-        </Text>
-        <Text style={styles.boldText}>
-          <Text style={styles.bold}>Deseja solicitar uma coleta?</Text>
-        </Text>
-        <TouchableOpacity style={styles.button} onPress={() => {}}>
-          <Text style={styles.buttonText}>Solicitar</Text>
-        </TouchableOpacity>
       </View>
+    );
+  };
 
-      <View style={styles.locationContainer}>
-        <LocationText
-          location="Minhas solicitações"
-          isSelected={selectedLocation === 'minhas'}
-          onPress={() => handleLocationPress('minhas')}
-        />
-        <LocationText
-          location={
-            <Text>
-              Solicitações {'\n'}
-              aceitas
+  const keyExtractor = (item) => item.id.toString();
+
+  const handleCancel = (item) => {
+    // Abre um pop-up/modal de confirmação
+    Alert.alert(
+      "Deseja cancelar a solicitação?",
+      "",
+      [
+        {
+          text: "Cancelar",
+          onPress: () => console.log("Cancelado"),
+          style: "cancel"
+        },
+        { text: "Sim", onPress: () => deleteRequest(item) }
+      ],
+      { cancelable: false }
+    );
+  };
+
+  const deleteRequest = (item) => {
+    // Remove o item da lista
+    const updatedProducts = productsForSale.filter(product => product.id !== item.id);
+    setProductsForSale(updatedProducts);
+  };
+  
+  return (
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#B8FFD4'}}>
+      <View style={{ flex: 1, backgroundColor: 'white', display: 'flex', }} >
+        <SafeAreaView>
+          <View style={{
+            backgroundColor: '#B8FFD4',
+            paddingBottom: 30,
+            borderBottomRightRadius: 25,
+            borderBottomLeftRadius: 25,
+          }}>
+            <LogoSvg width={150} height={50} style={{ alignSelf: 'center' }} />
+            <View style={styles.container}>
+              <View style={styles.leftContainer}>
+                <LocalizaSvg />
+                <Text style={styles.text}>Recife, PE</Text>
+              </View>
+              <View style={styles.rightContainer}>
+                <View style={styles.profileContainer}>
+                  <View style={styles.profileTextContainer}>
+                    <Text style={styles.welcomeText}>Olá, Davi!</Text>
+                    <Text style={styles.profileText}>Descarte</Text>  
+                  </View>
+                  <View style={styles.profileImageContainer}>
+                    <Image source={ProfilePic} style={styles.profileImage} />
+                  </View>
+                </View>
+              </View>
+            </View>
+
+            <Text style={{
+              alignSelf: 'center',
+              color: '#109946',
+              width: 251,
+              fontFamily: 'Inter_500Medium',
+              fontSize: 16,
+              textAlign: 'center',
+              marginTop: 27,
+            }}>
+              Bem-vindo ao nosso espaço de descarte de resíduos sólidos. Deseja solicitar uma coleta?
             </Text>
-          }
-          isSelected={selectedLocation === 'aceitas'}
-          onPress={() => handleLocationPress('aceitas')}
-        />
-      </View>
+            <TouchableOpacity
+              style={{  
+                width: 100,
+                height: 30,
+                borderRadius: 3,
+                backgroundColor: '#58C044',
+                alignSelf: 'center',
+                justifyContent: 'center',
+                marginTop: 8,
+              }}
+            >
+              <Text
+                style={{
+                  alignSelf: 'center',
+                  color: '#FFF',
+                  textAlign: 'center',
+                  fontFamily: 'Inter_600SemiBold',
+                  fontSize: 14,
+                }}
+              >
+                Solicitar!
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>  
 
-      <ScrollView contentContainerStyle={styles.productList}>
-        {products.map((product) => renderProductItem(product))}
-      </ScrollView>
+        <View style={styles.tabButtons}>
+          <TouchableOpacity
+            style={[styles.tabButton, selectedTab === 'venda' && styles.selectedTabButton]}
+            onPress={() => setSelectedTab('venda')}
+          >
+            <Text style={[styles.tabButtonText, selectedTab === 'venda' && styles.selectedTabButtonText]}>Minhas solicitações</Text>
+            {selectedTab === 'venda' && <View style={styles.underline} /> }
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.tabButton, selectedTab === 'coleta' && styles.selectedTabButton]}
+            onPress={() => setSelectedTab('coleta')}
+          >
+            <Text style={[styles.tabButtonText, selectedTab === 'coleta' && styles.selectedTabButtonText]}>Solicitações aceitas</Text>
+            {selectedTab === 'coleta' && <View style={styles.underline} />}
+          </TouchableOpacity>
+        </View>
+
+        {renderProducts()}
+        
+      </View>
     </SafeAreaView>
+
   );
 }
 
@@ -200,30 +272,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 10,
     marginTop: 20,
-  },
-
-  backgroundCurvedContainer: {
-    backgroundColor: '#b8ffd4',
-    height: 2050,
-    position: 'absolute',
-    top: -1 * (2000 - 230),
-    width: 2000,
-    borderRadius: 2000,
-    alignSelf: 'center',
-    zIndex: -1,
-  },
-  logo: {
-    marginTop: 20,
-    alignSelf: 'center',
   },
   leftContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginLeft: 10,
   },
   rightContainer: {
     alignItems: 'flex-end',
+    marginRight: 10,
   },
   icon: {
     width: 52,
@@ -232,19 +290,19 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: 'Inter_600SemiBold',
     color: 'rgba(16, 148, 70, 0.7)',
   },
   welcomeText: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: 'Inter_600SemiBold',
     color: 'rgba(16, 148, 70, 0.7)',
     marginBottom: 2,
   },
   profileContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginLeft: 50,
+    marginLeft: 10,
   },
   profileTextContainer: {
     marginRight: 10,
@@ -270,165 +328,167 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  centeredContent: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 50,
-    marginLeft: 10,
-  },
-  centeredText: {
-    fontSize: 16,
-    lineHeight: 13 * 1.4,
-    fontWeight: 'bold',
-    marginTop: 0,
-    color: '#109946',
-  },
-  boldText: {
-    fontSize: 16,
-    lineHeight: 13 * 1.4,
-  },
-  bold: {
-    fontWeight: 'bold',
-    color: '#097534',
-  },
-  buttonText: {
-    color: '#ffffff',
-    marginTop: 10,
-    fontSize: 14,
-  },
-  button: {
-    backgroundColor: '#58C044', 
-    paddingVertical: 6,
-    paddingHorizontal: 20,
-    paddingBottom:4,
-    paddingTop:0,
-    borderRadius: 5,
-    marginTop: 10,
-  },
-  productList: {
-    paddingHorizontal: 20,
-    paddingTop: 10,
-  },
-  productItem: {
+  searchBarContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 20,
-    backgroundColor: '#F5F5F5',
-    padding: 10,
-    borderRadius: 8,
-    shadowColor: 'rgba(0, 0, 0, 0.1)',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
-    elevation: 5,
-  },
-  productItemImage: {
-    width: 100,
-    height: 100,
-    borderRadius: 8,
-    marginRight: 10,
-  },
-  productItemDetails: {
-    flex: 1,
-  },
-  productItemTitle: {
-    fontWeight: 'bold',
-    fontSize: 16,
-    marginBottom: 5,
-    color: '#109946',
-  },
-  locationContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 10,
-  },
-  locationTextContainer: {
-    padding: 10,
-  },
-  locationText: {
-    color: 'rgba(30, 30, 30, 0.38)',
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginLeft: 10,
-    marginRight: 10,
-  },
-  selectedLocationText: {
-    color: '#109946',
-    borderBottomWidth: 2,
-    borderBottomColor: 'rgba(119, 104, 104, 0.34)',
-    marginLeft: 10,
-    marginRight: 10,
-  },
-  selectedText: {
-    color: '#109946',
-  },
-
-  
-  cancelButton: {
-    position: 'absolute',
-    bottom: 10,
-    right: 10,
-    width: '37%',
-    height: 30,
-    marginBottom: 1,
-    backgroundColor: 'white',
-    padding: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
+    alignSelf: 'center',
+    backgroundColor: '#ffffff',
+    width: 370,
+    height: 45,
     paddingVertical: 8,
-    paddingHorizontal: 12,
-    borderRadius: 7,
-    marginTop: 15,
-    shadowColor: 'rgba(0, 0, 0, 0.1)',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.8,
-   
-    elevation: 20,
-  },
-  cancelButtonText: {
-    color: 'green',
-    fontSize: 10,
-    fontWeight: 'bold',
-  },
-
-  acceptButton: {
-    color: 'green',
-    marginTop: 5,
-  },
-  
-  chatButton: {
-    position: 'absolute',
-    bottom: 10,
-    right: 10,
-    width: '37%',
-    height: 30,
-    marginBottom: 1,
-    backgroundColor: '#109946',
-    padding: 10,
-    borderRadius: 8,
-    flexDirection: 'row',
-    alignItems: 'center',
-      paddingVertical: 8,
     paddingHorizontal: 12,
     borderRadius: 100,
     marginTop: 15,
-    shadowColor: 'rgba(0, 0, 0, 0.1)',
-    shadowOffset: { width: 0, height: 2 },
+    shadowColor: 'rgba(0, 0, 0, 0.25)',
+    shadowOffset: { width: 0, height: 3,  },
     shadowOpacity: 0.8,
     shadowRadius: 2,
     elevation: 20,
   },
-  chatIcon: {
-    width: 20,
-    height: 20,
-    marginRight: 2,
-    marginLeft: -1,
+  searchIcon: {
+    width: 25,
+    height: 25,
+    marginRight: 8,
   },
-  chatButtonText: {
-    color: 'white',
-    fontSize: 10,
-    fontWeight: 'bold',
+  searchInput: {
+    flex: 1,
+    fontSize: 16,
+    color: '#1E1E1E',
   },
-});
+  tabButtons: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'space-around',
+    marginTop: 31,
+    marginBottom: 25,
+  },
+  tabButton: {
+    color: '#A3A3A3',
+  },
+  tabButtonText: {
+    display: 'flex',
+    color: '#A3A3A3',
+    fontSize: 16,
+    fontFamily: 'Inter_600SemiBold',
+    alignSelf: 'flex-end',
+    lineHeight: 16,
+  },
+  selectedTabButtonText: {
+    color: '#109946',
+  },
+  underline: {
+    marginTop: 1,
+    width: 'auto',
+    height: 2,
+    backgroundColor: '#c3d6cb',
+  },
+  card: {
+    flex: 1,
+    flexDirection: 'row',
+    width: 'auto',
+    marginLeft: -7,
+    marginRight: -5,
+    marginBottom: 20,
+    overflow: 'hidden',
+    color: '#F5F5F5',
+  },
+  cardImage: {
+    width: '30%',
+    height: 100,
+    marginTop: 10,
+    marginLeft: 14,
+    borderRadius: 20,
+  },
+  cardInfo: {
+    padding: 10,
+    marginLeft: 7,
+  },
+  cardSeller: {
+    fontFamily: 'Inter_700Bold',
+    fontSize: 16,
+    marginBottom: 5,
+    color: '#109946', 
+  },
+  cardText: {
+    fontFamily: 'Inter_600SemiBold',
+    fontSize: 11,
+    marginBottom: 3,
+    color: '#109946', 
+    lineHeight: 12,
+  },
 
-export default DescarteHome;
+  botaoAceitar : {
+    position: 'absolute',
+    width: 57,
+    height: 18,
+    borderRadius: 3,  
+    backgroundColor: '#58C044',
+    color: '#fff',
+    marginLeft: 170,
+    bottom: 40,
+    shadowColor: 'rgba(0, 0, 0, 0.25)',
+    shadowOffset: { width: 0, height: 3,  },
+    shadowOpacity: 0.6,
+    shadowRadius: 2,
+    elevation: 20,
+  },
+
+  botaoRecusarDeletar : {
+    position: 'absolute',
+    width: 57,
+    height: 18,
+    borderWidth: 1, 
+    borderColor: '#109946',
+    borderRadius: 3,  
+    backgroundColor: '#fff',
+    marginLeft: 170,
+    bottom: 15,
+    shadowColor: 'rgba(0, 0, 0, 0.25)',
+    shadowOffset: { width: 0, height: 3,  },
+    shadowOpacity: 0.6,
+    shadowRadius: 2,
+    elevation: 20,
+  },
+
+  botaoDeletar : {
+    position: 'absolute',
+    width: 65,
+    height: 18,
+    borderWidth: 1, 
+    borderColor: '#109946',
+    borderRadius: 3,  
+    backgroundColor: '#fff',
+    marginLeft: 170,
+    bottom: 50,
+    shadowColor: 'rgba(0, 0, 0, 0.25)',
+    shadowOffset: { width: 0, height: 3,  },
+    shadowOpacity: 0.6,
+    shadowRadius: 2,
+    elevation: 20,
+  },
+
+  chatStyles : {
+    position: 'absolute',
+    width: 57,
+    height: 18,
+    marginLeft: 170,
+    bottom: 50,
+    shadowColor: 'rgba(0, 0, 0, 0.25)',
+    shadowOffset: { width: 0, height: 3,  },
+    shadowOpacity: 0.6,
+    shadowRadius: 2,
+    elevation: 20,
+  },
+
+  backgroundCurvedContainer: {
+    backgroundColor: '#B8FFD4',
+    height: 2050,
+    position: 'absolute',
+    top: -1 * (2000 - 230),
+    width: 2000,
+    borderRadius: 2000,
+    alignSelf: 'center',
+    zIndex: -1,
+  },  
+
+});

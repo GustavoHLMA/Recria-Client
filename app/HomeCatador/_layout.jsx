@@ -88,7 +88,17 @@ export default function RootLayoutaa() {
           href:null,
         }}
       />
+      
+      <Tabs.Screen
+        name="makerProdutos"
+        options={{
+          href: null,
+          headerShown: false,
+        }}
+      />
+
     </Tabs>
+            
   );
 }
 

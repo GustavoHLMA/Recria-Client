@@ -7,11 +7,13 @@ import * as Animatable from 'react-native-animatable';
 import FoodCard from '../../src/components/FoodCard';
 import { LinearGradient } from 'expo-linear-gradient';
 import { LocalizaIcon, ProfilePic,SearchIcon, chatIcon, product1, product2, product3, product4 } from '../../src/assets';
+import { Link, useNavigation } from 'expo-router';
 
 const DescarteMarket = () => {
   const [searchText, setSearchText] = useState('');
   const [activeCategory, setActiveCategory] = useState('Burger');
   const [selectedLocation, setSelectedLocation] = useState('descubra');
+  const navigation = useNavigation();
 
   const handleLocationPress = (location) => {
     setSelectedLocation(location);
@@ -24,7 +26,11 @@ const DescarteMarket = () => {
         styles.locationTextContainer,
         isSelected && styles.selectedLocationText,
       ]}
-      onPress={() => onPress(location)}
+      onPress={
+        onPress
+      }
+
+    
     >
       <Text style={[styles.locationText, isSelected && styles.selectedText]}>
         {location}
@@ -33,7 +39,7 @@ const DescarteMarket = () => {
   );
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1}}>
       <View style={{ padding: 10 }}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
          
@@ -93,7 +99,9 @@ const DescarteMarket = () => {
 
         
 
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 20 }}>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ 
+          paddingHorizontal: 20,
+          }}>
           {foodItems.map((item, index) => <FoodCard item={item} index={index} key={index} />)}
         </ScrollView>
       </View>
@@ -107,7 +115,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 10,
+    padding: 0,
     marginTop: 20,
   },
 

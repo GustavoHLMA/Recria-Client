@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Platform } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
+import { useFonts, Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_700Bold, Inter_800ExtraBold } from '@expo-google-fonts/inter';
+import { MesGratis, RecriaPremio, EspacoRecriaTest } from '../../src/assets';
+
 
 const ProgressoScreen = () => {
   const [progressoResiduos, setProgressoResiduos] = useState(20);
@@ -8,6 +11,15 @@ const ProgressoScreen = () => {
   const [pontosProdutosDescartados, setPontosProdutosDescartados] = useState(10);
   const [pontosProdutosComprados, setPontosProdutosComprados] = useState(30);
 
+  let [fontsLoaded] = useFonts({	
+    Inter_400Regular,
+    Inter_500Medium,
+    Inter_600SemiBold,
+    Inter_700Bold,
+    Inter_800ExtraBold,
+  });
+  
+  
   const renderCirculosDescartados = () => {
     const circulosPreenchidos = Math.floor((progressoResiduos / 100) * 6);
     const circulosVazios = 6 - circulosPreenchidos;
@@ -51,6 +63,10 @@ const ProgressoScreen = () => {
     console.log(`Recompensa selecionada: ${recompensa.nome}`);
   }
 
+  if (!fontsLoaded) {
+    return null;
+  } 
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -86,21 +102,98 @@ const ProgressoScreen = () => {
       </View>
       
       <View style={styles.rewards}>
-       
-        {recompensas.map((recompensa, index) => (
-          <TouchableOpacity
-            key={index}
-            style={styles.rewardItem}
-            onPress={() => selecionarRecompensa(recompensa)}
-          >
-            <FontAwesome5 name="award" size={24} color="#FFD700" />
-            <View style={styles.rewardTextContainer}>
-              <Text style={styles.rewardTitle}>{recompensa.nome}</Text>
-              <Text style={styles.rewardDescription}>{recompensa.descricao}</Text>
-              <Text style={styles.rewardPoints}>{recompensa.pontos} pontos</Text>
-            </View>
+        <View style={{
+          width: 166,
+          height: 152,
+          flexShrink: 0,
+          borderRadius: 10,
+          border: '1px solid #E0E0E0',
+          backgroundColor: '#F5F5F5',
+          display: 'flex',
+          alignItems: 'center',
+          paddingTop: 10,
+          ...Platform.select({
+            ios: {
+              shadowColor: '#000',
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.25,
+              shadowRadius: 2,
+            },
+            android: {
+              elevation: 5,
+            },
+          }),
+        }}>
+          <RecriaPremio />
+          <MesGratis />
+          <Text style={{
+            color: 'rgba(30, 30, 30, 0.38)',
+            marginTop: 10,
+
+
+          }}>
+            Assinatura Premium {"\n"}
+            500 pontos
+          </Text>
+          <TouchableOpacity style={{
+            width: 57,
+            height: 14,
+            borderRadius: 3,
+            border: '10px solid #1A9DBA',
+            borderWidth: 1,
+          }}>
+            <Text>
+              Trocar
+            </Text>
           </TouchableOpacity>
-        ))}
+        </View>       
+
+        <View style={{
+          width: 166,
+          height: 152,
+          flexShrink: 0,
+          borderRadius: 10,
+          border: '1px solid #E0E0E0',
+          backgroundColor: '#F5F5F5',
+          display: 'flex',
+          alignItems: 'center',
+          paddingTop: 10,
+          ...Platform.select({
+            ios: {
+              shadowColor: '#000',
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.25,
+              shadowRadius: 2,
+            },
+            android: {
+              elevation: 5,
+            },
+          }),
+        }}>
+          <View style={{
+            flexDirection: 'row',
+          }}>
+            <EspacoRecriaTest />
+            <Text style={{
+              color: '#1A9DBA',
+              fontSize: 24,
+              fontFamily: 'Inter_600SemiBold',
+              marginTop: 10,
+            }}>
+              10%
+            </Text>
+          </View>
+          <Text style={{
+            color: 'rgba(30, 30, 30, 0.38)',
+            marginTop: 10,
+
+
+          }}>
+            Desconto nos produtos {"\n"}
+            200 pontos
+          </Text>
+        </View>       
+
       </View>
     </View>
   );
@@ -113,12 +206,15 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
     marginTop: 20
   },
   title: {
     fontSize: 20,
+    fontFamily: 'Inter_700Bold',
+    color: '#1A9DBA',
+    marginRight: 20,
   },
   trophy: {
     width: 50,
@@ -139,7 +235,8 @@ const styles = StyleSheet.create({
   },
   progressLabel: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 15,
+    fontFamily: 'Inter_600SemiBold',
   },
   residuosTitle: {
     backgroundColor: '#1A9DBA',
@@ -185,6 +282,8 @@ const styles = StyleSheet.create({
   },
   rewards: {
     marginTop: 50,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   rewardsLabel: {
     
