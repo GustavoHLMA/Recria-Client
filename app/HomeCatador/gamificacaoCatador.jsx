@@ -2,15 +2,10 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Platform } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { useFonts, Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_700Bold, Inter_800ExtraBold } from '@expo-google-fonts/inter';
-import { MesGratis, RecriaPremio, EspacoRecriaTest } from '../../src/assets';
+import { MesGratis, RecriaPremio, EspacoRecriaTest, PontosGame, TrophySvg} from '../../src/assets';
 
 
-const ProgressoScreen = () => {
-  const [progressoResiduos, setProgressoResiduos] = useState(20);
-  const [progressoProdutos, setProgressoProdutos] = useState(50);
-  const [pontosProdutosDescartados, setPontosProdutosDescartados] = useState(10);
-  const [pontosProdutosComprados, setPontosProdutosComprados] = useState(30);
-
+const GamificacaoScreen = () => {
   let [fontsLoaded] = useFonts({	
     Inter_400Regular,
     Inter_500Medium,
@@ -21,47 +16,54 @@ const ProgressoScreen = () => {
   
   
   const renderCirculosDescartados = () => {
-    const circulosPreenchidos = Math.floor((progressoResiduos / 100) * 6);
+    const circulosPreenchidos = 1;
     const circulosVazios = 6 - circulosPreenchidos;
 
     let circulos = [];
 
     for (let i = 0; i < circulosPreenchidos; i++) {
-      circulos.push(<FontAwesome5 key={i} name="circle" size={20} color="#FF6347" />);
+      circulos.push(<View style={{
+        borderRadius: 999,
+        backgroundColor: '#58C044',
+        marginRight: 10,
+      }}><FontAwesome5 key={i} name="circle" size={20} color="#58C044" fill="#58C044" /></View>);
     }
 
     for (let i = 0; i < circulosVazios; i++) {
-      circulos.push(<FontAwesome5 key={circulosPreenchidos + i} name="circle" size={20} color="#ccc" />);
+      circulos.push(<View style={{
+        borderRadius: 999,
+        backgroundColor: '#D9D9D9',
+        marginRight: 10,
+      }}><FontAwesome5 key={i} name="circle" size={20} color="#D9D9D9" fill="#58C044" /></View>);
     }
 
     return circulos;
   };
 
   const renderCirculosComprados = () => {
-    const circulosPreenchidos = Math.floor((progressoProdutos / 100) * 6);
+    const circulosPreenchidos = 1;
     const circulosVazios = 6 - circulosPreenchidos;
 
     let circulos = [];
 
     for (let i = 0; i < circulosPreenchidos; i++) {
-      circulos.push(<FontAwesome5 key={i} name="circle" size={20} color="#FF6347" />);
+      circulos.push(<View style={{
+        borderRadius: 999,
+        backgroundColor: '#58C044',
+        marginRight: 10,
+      }}><FontAwesome5 key={i} name="circle" size={20} color="#58C044" fill="#58C044" /></View>);
     }
 
     for (let i = 0; i < circulosVazios; i++) {
-      circulos.push(<FontAwesome5 key={circulosPreenchidos + i} name="circle" size={20} color="#ccc" />);
+      circulos.push(<View style={{
+        borderRadius: 999,
+        backgroundColor: '#D9D9D9',
+        marginRight: 10,
+      }}><FontAwesome5 key={i} name="circle" size={20} color="#D9D9D9" fill="#58C044" /></View>);
     }
 
     return circulos;
   };
-
-  const [recompensas, setRecompensas] = useState([
-    { nome: 'Recria+', descricao: '10% de espaço extra', pontos: 500 },
-    { nome: 'PIX - R$ 100', descricao: 'Fazemos um PIX de R$ 100 para a sua conta!', pontos: 12000 }
-  ]);
-
-  const selecionarRecompensa = (recompensa) => {
-    console.log(`Recompensa selecionada: ${recompensa.nome}`);
-  }
 
   if (!fontsLoaded) {
     return null;
@@ -71,34 +73,61 @@ const ProgressoScreen = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>Progresso e conquistas</Text>
-        <Image style={styles.trophy} source={require('../../src/assets/Vector.png')} />
+        <TrophySvg/>
       </View>
       <View style={styles.progress}>
         <View style={[styles.progressLabelContainer, styles.residuosTitle]}>
-          <Text style={styles.progressLabel}>Resíduos descartados</Text>
+          <Text style={styles.progressLabel}>Resíduos coletados</Text>
         </View>
         <View style={styles.progressItem}>
           <View style={styles.progressCircleContainer}>
+            <PontosGame style={{
+              shadowColor: '#000',
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.25,
+              shadowRadius: 2,
+              marginRight: 15,
+            }} />
             {renderCirculosDescartados()}
-            <Text style={styles.progressPoints}>{pontosProdutosDescartados} pontos</Text>
           </View>
         </View>
         <View style={[styles.progressLabelContainer, styles.residuosTitle]}>
-          <Text style={styles.progressLabel}>Produtos comprados</Text>
+          <Text style={styles.progressLabel}>Resíduos vendidos</Text>
         </View>
         <View style={styles.progressItem}>
           <View style={styles.progressCircleContainer}>
+          <PontosGame style={{
+              shadowColor: '#000',
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.25,
+              shadowRadius: 2,
+              marginRight: 15,
+            }} />
             {renderCirculosComprados()}
-            <Text style={styles.progressPoints}>{pontosProdutosComprados} pontos</Text>
           </View>
         </View>
       </View>
 
       <View style={styles.totalPointsContainer}>
-        <View style={[styles.progressLabelContainer, styles.pontosTitle]}>
-          <Text style={[styles.totalPointsLabel]}>Seus pontos</Text>
+        <View style={{
+              backgroundColor: '#109946',
+              marginRight: 140,
+              marginLeft: -30,
+              borderTopRightRadius: 20,
+              borderBottomRightRadius: 20,
+              padding: 5,
+              paddingLeft: 35,
+              width: 200,
+              height: 35,
+              justifyContent: 'center',
+              alignText: 'center',
+        }}>
+          <Text style={[styles.totalPointsLabel]}>Seus pontos: <Text style={{
+            color: '#9febcf',
+            fontFamily: 'Inter_700Bold',
+            fontSize: 20,
+          }}>40</Text></Text>
         </View>
-        <Text style={styles.totalPointsValue}>{pontosProdutosDescartados + pontosProdutosComprados}</Text>
       </View>
       
       <View style={styles.rewards}>
@@ -136,13 +165,22 @@ const ProgressoScreen = () => {
             500 pontos
           </Text>
           <TouchableOpacity style={{
-            width: 57,
-            height: 14,
+            width: 65,
+            height: 20,
             borderRadius: 3,
-            border: '10px solid #1A9DBA',
             borderWidth: 1,
+            borderColor: '#1A9DBA',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: 10,
+            marginLeft: 75,
           }}>
-            <Text>
+            <Text style={{
+              color: '#1A9DBA',
+              fontSize: 10,
+              textAlign: 'center',
+              fontFamily: 'Inter_600SemiBold',
+            }}>
               Trocar
             </Text>
           </TouchableOpacity>
@@ -192,6 +230,27 @@ const ProgressoScreen = () => {
             Desconto nos produtos {"\n"}
             200 pontos
           </Text>
+          <TouchableOpacity style={{
+            width: 65,
+            height: 20,
+            borderRadius: 3,
+            borderWidth: 1,
+            borderColor: '#1A9DBA',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: 21,
+            marginLeft: 75,
+          }}>
+            <Text style={{
+              color: '#1A9DBA',
+              fontSize: 10,
+              textAlign: 'center',
+              fontFamily: 'Inter_600SemiBold',
+            }}>
+              Trocar
+            </Text>
+          </TouchableOpacity>
+
         </View>       
 
       </View>
@@ -208,7 +267,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 20
+    marginTop: 30,
+    marginBottom: 20,
   },
   title: {
     fontSize: 20,
@@ -224,7 +284,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   progressItem: {
-    borderWidth: 1,
     borderColor: '#ccc',
     borderRadius: 5,
     padding: 10,
@@ -242,9 +301,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#1A9DBA',
     marginRight: 140,
     marginLeft: -30,
-    borderRadius: 20,
+    borderTopRightRadius: 20,
+    borderBottomRightRadius: 20,
     padding: 5,
-    paddingLeft: 35
+    paddingLeft: 35,
+    height: 35,
+    justifyContent: 'center',
   },
   pontosTitle: {
     backgroundColor: '#1A9DBA ',
@@ -269,7 +331,8 @@ const styles = StyleSheet.create({
   },
   totalPointsLabel: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 15,
+    fontFamily: 'Inter_600SemiBold',
   },
   
   totalPointsValue: {
@@ -319,4 +382,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProgressoScreen;
+export default GamificacaoScreen;

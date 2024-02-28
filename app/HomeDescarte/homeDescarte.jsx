@@ -22,7 +22,8 @@ import { LocalizaIcon,
   product2,
   product3,
   product4,
-  ChatSvg
+  ChatSvg,
+  HomeIcon,
 } from '../../src/assets';
 import { Link, useNavigation } from 'expo-router';
 
@@ -195,7 +196,7 @@ export default function Catador() {
               <View style={styles.rightContainer}>
                 <View style={styles.profileContainer}>
                   <View style={styles.profileTextContainer}>
-                    <Text style={styles.welcomeText}>Olá, Davi!</Text>
+                    <Text style={styles.welcomeText}>Olá, Ricardo!</Text>
                     <Text style={styles.profileText}>Descarte</Text>  
                   </View>
                   <View style={styles.profileImageContainer}>

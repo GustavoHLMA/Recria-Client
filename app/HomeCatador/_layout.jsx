@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Tabs, useNavigation } from 'expo-router';
-import { HomeIcon, DadosIcon, ChatIcon, MarketplaceIcon } from '../../src/assets';
+import { HomeIcon, DadosIcon, ChatIcon, MarketplaceIcon, GameIcon} from '../../src/assets';
 
 export default function RootLayoutaa() {
   const navigation = useNavigation();
@@ -81,6 +81,21 @@ export default function RootLayoutaa() {
           tabBarLabel: '',
         }}
       />
+
+    <Tabs.Screen
+        name="gamificacaoCatador"
+        options={{
+          headerShown: false,
+          tabBarIcon: () => (
+            <TouchableOpacity style={[styles.tabIcon, activeTab === "gamificacaoCatador" && styles.activeTab]} onPress={
+              () => { setActiveTab("gamificacaoCatador"); navigation.navigate("gamificacaoCatador"); }}>
+              <GameIcon />
+            </TouchableOpacity>
+          ),
+          tabBarLabel: '',
+        }}
+      />
+
 
       <Tabs.Screen
         name="anuncioResiduo"

@@ -19,6 +19,7 @@ import { LocalizaIcon,
   Upcycle2,
   Upcycle3,
   Upcycle4,
+  Artesao
 } from '../../src/assets';
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -119,7 +120,7 @@ export default function MarketplaceCatador() {
           paddingTop: 15,
         }}> 
           <View style={styles.profileImageContainer}>
-            <Image source={CatadorPhoto} style={styles.profileImage} />
+            <Image source={Artesao} style={styles.profileImage} />
           </View>
           <Text style={{
               width: 189,
@@ -130,7 +131,7 @@ export default function MarketplaceCatador() {
               color: '#fff',
               textAlign: 'left',
             }}>
-              Olá, me chamo Ricardo! Seja muito bem-vindo ao Espaço Recria!
+              Olá, me chamo Vincente! Seja muito bem-vindo ao Espaço Recria!
             </Text>
         </View>
         <View style={{

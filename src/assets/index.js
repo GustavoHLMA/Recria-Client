@@ -69,6 +69,10 @@ import MesGratis from './1MesGratis.svg';
 import RecriaPremio from './Recria2.svg';
 import EspacoRecriaTest from './espacoRecriaTest.svg';
 import ChatSvg from './chatSvg.svg';
+import PontosGame from './pontosGame.svg';
+import TrophySvg from './trophySvg.svg';
+import GameIcon from './game.svg';
+import Artesao from './artesao.jpg';
 
 export { 
   Test, 
@@ -93,5 +97,9 @@ export {
   MesGratis,
   RecriaPremio,
   EspacoRecriaTest,
-  ChatSvg
+  ChatSvg,
+  PontosGame,
+  TrophySvg,
+  GameIcon,
+  Artesao
 };

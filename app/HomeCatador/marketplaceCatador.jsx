@@ -6,7 +6,7 @@ import { categories, foodItems } from '../../src/constants';
 import * as Animatable from 'react-native-animatable';
 import FoodCard from '../../src/components/FoodCard';
 import { LinearGradient } from 'expo-linear-gradient';
-import { LocalizaIcon, ProfilePic,SearchIcon, chatIcon, product1, product2, product3, product4 } from '../../src/assets';
+import { LocalizaIcon, ProfilePic,SearchIcon, chatIcon, product1, product2, product3, product4, CatadorPhoto } from '../../src/assets';
 import { Link, useNavigation } from 'expo-router';
 
 const DescarteMarket = () => {
@@ -60,11 +60,11 @@ const DescarteMarket = () => {
         <View style={styles.rightContainer}>
           <View style={styles.profileContainer}>
             <View style={styles.profileTextContainer}>
-              <Text style={styles.welcomeText}>Olá, Ricardo!</Text>
+              <Text style={styles.welcomeText}>Olá, Davi!</Text>
               <Text style={styles.profileText}>COMPRADOR</Text>
             </View>
             <View style={styles.profileImageContainer}>
-              <Image source={ProfilePic} style={styles.profileImage} />
+              <Image source={CatadorPhoto} style={styles.profileImage} />
             </View>
           </View>
         </View>

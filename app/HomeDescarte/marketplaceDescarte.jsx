@@ -6,7 +6,7 @@ import { categories, foodItems } from '../../src/constants';
 import * as Animatable from 'react-native-animatable';
 import FoodCard from '../../src/components/FoodCard';
 import { LinearGradient } from 'expo-linear-gradient';
-import { LocalizaIcon, ProfilePic,SearchIcon, chatIcon, product1, product2, product3, product4 } from '../../src/assets';
+import { LocalizaSvg, ProfilePic,SearchIcon, chatIcon, product1, product2, product3, product4 } from '../../src/assets';
 import { Link, useNavigation } from 'expo-router';
 
 const DescarteMarket = () => {
@@ -54,7 +54,7 @@ const DescarteMarket = () => {
       />
           <View style={styles.container}>
         <View style={styles.leftContainer}>
-          <Image source={LocalizaIcon} style={styles.icon} />
+          <LocalizaSvg />
           <Text style={styles.text}>Recife, PE</Text>
         </View>
         <View style={styles.rightContainer}>
@@ -75,7 +75,7 @@ const DescarteMarket = () => {
       <View style={styles.searchBarContainer}>
         <Image source={SearchIcon} style={styles.searchIcon} />
         <TextInput
-          placeholder="Buscar produto"
+          placeholder="Buscar produto/negócio"
           placeholderTextColor="rgba(30, 30, 30, 0.38)"
           style={styles.searchInput}
           value={searchText}
@@ -83,8 +83,19 @@ const DescarteMarket = () => {
         />
       </View>
 
-
-        <LinearGradient colors={['#25A3A5', '#58C044']} style={{ borderRadius: 15, padding: 30, marginVertical: 15 }}>
+        <LinearGradient colors={['#58C044', '#25A3A5']}
+          style={{ 
+            borderRadius: 15, 
+            padding: 30, 
+            marginVertical: 15,
+            flexDirection: 'row', // Define a direção do gradiente como horizontal
+            justifyContent: 'flex-start', // Alinha o gradiente à esquerda
+            alignItems: 'center' // Alinha os itens verticalmente ao centro
+          }}
+          start={{ x: 0, y: 0 }} // Define o ponto de partida do gradiente (esquerda)
+          end={{ x: 1, y: 0 }}   // Define o ponto de término do gradiente (direita)
+        >
+        
           <Text style={{ color: 'white' }}>Conheça agora os incríveis produtos criados a partir dos materiais que você disponibilizou e colabore ainda mais com nossa comunidade de makers.</Text>
         </LinearGradient>
 
