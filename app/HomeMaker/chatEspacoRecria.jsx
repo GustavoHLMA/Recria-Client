@@ -18,16 +18,18 @@ import { LocalizaIcon,
   chatIcon, 
   LogoSvg, 
   LocalizaSvg, 
-  CatadorPhoto,
   product1, 
   product2,
   product3,
   product4,
-  ProfilePic,
+  CatadorPhoto,
   PicChat,
+  ArtesaoPhoto,
+  EspacoRecriaTest,
+  Sino
 } from '../../src/assets';
 
-export default function ChatDescarte() {
+export default function ChatEspacoRecria() {
   const [searchText, setSearchText] = useState('');
   const [selectedTab, setSelectedTab] = useState('venda'); // Estado para controlar a aba selecionada
   const navigation = useNavigation();
@@ -242,7 +244,7 @@ export default function ChatDescarte() {
   
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white', display: 'flex', }} >
-      <LogoSvg width={150} height={50} style={{ alignSelf: 'center' }} />
+      <EspacoRecriaTest width={150} height={50} style={{ alignSelf: 'center' }} />
       <View style={styles.container}>
         <View style={styles.leftContainer}>
           <LocalizaSvg />
@@ -251,10 +253,10 @@ export default function ChatDescarte() {
         <View style={styles.rightContainer}>
           <View style={styles.profileContainer}>
             <View style={styles.profileTextContainer}>
-              <Text style={styles.welcomeText}>Olá, Ricardo!</Text>
+              <Text style={styles.welcomeText}>Olá, Giorgio!</Text>
             </View>
             <View style={styles.profileImageContainer}>
-              <Image source={ProfilePic} style={styles.profileImage} />
+              <Image source={ArtesaoPhoto} style={styles.profileImage} />
             </View>
           </View>
         </View>
@@ -283,7 +285,7 @@ export default function ChatDescarte() {
           style={[styles.tabButton, selectedTab === 'coleta' && styles.selectedTabButton]}
           onPress={() => setSelectedTab('coleta')}
         >
-          <Text style={[styles.tabButtonText, selectedTab === 'coleta' && styles.selectedTabButtonText]}>Espaço Recria</Text>
+          <Text style={[styles.tabButtonText, selectedTab === 'coleta' && styles.selectedTabButtonText]}>Makers</Text>
           {selectedTab === 'coleta' && <View style={styles.underline} />}
         </TouchableOpacity>
       </View>

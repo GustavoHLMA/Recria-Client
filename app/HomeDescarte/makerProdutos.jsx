@@ -19,7 +19,9 @@ import { LocalizaIcon,
   Upcycle2,
   Upcycle3,
   Upcycle4,
-  Artesao
+  ArtesaoPhoto,
+  Vassoura,
+  EspacoRecriaTest
 } from '../../src/assets';
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -42,28 +44,34 @@ export default function MarketplaceCatador() {
   const productsForSale = [
     {
       id: 1,
-      type: 'Garrafas de Vidro',
-      price: '15',
-      image: Upcycle1,
+      type: 'Vassoura Pet',
+      price: '20,00',
+      image: Vassoura,
     },
     {
       id: 2,
-      type: 'Garrafas de Vidro',
-      price: '15',
+      type: 'Pote de Vidro',
+      price: '5,99',
+      image: Upcycle1,
+    },
+    {
+      id: 3,
+      type: 'Casa para aves',
+      price: '5,99',
       image: Upcycle2,
     },
 
     {
-      id: 3,
-      type: 'Garrafas de Vidro',
-      price: '15',
+      id: 4,
+      type: 'Cadeira de guitarra',
+      price: '119,00',
       image: Upcycle3,
     },
 
     {
-      id: 4,
-      type: 'Garrafas de Vidro',
-      price: '15',
+      id: 5,
+      type: 'Vaso de rolhas',
+      price: '5,99',
       image: Upcycle4,
     },
 
@@ -95,7 +103,7 @@ export default function MarketplaceCatador() {
             <Image source={item.image} style={styles.cardImage} />
             <View style={styles.cardInfo}>
               <Text style={styles.cardProduct}>{item.type}</Text>
-              <Text style={styles.cardPrice}>{item.price} $</Text>
+              <Text style={styles.cardPrice}>${item.price}</Text>
               {renderButtons()}
             </View>
           </View>
@@ -107,7 +115,7 @@ export default function MarketplaceCatador() {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#ffffff', display: 'flex', paddingBottom: 56, }} >
-      <Image source={EspacoRegriaPng} style={{ alignSelf: 'center' }} />
+      <EspacoRecriaTest width={150} height={70} preserveAspectRatio="none" style={{ alignSelf: 'center' }} />
       <LinearGradient 
         colors={['#1fb4d5', '#b9d1f6']}
         start={[0, 0]}
@@ -120,7 +128,7 @@ export default function MarketplaceCatador() {
           paddingTop: 15,
         }}> 
           <View style={styles.profileImageContainer}>
-            <Image source={Artesao} style={styles.profileImage} />
+            <Image source={ArtesaoPhoto} style={styles.profileImage} />
           </View>
           <Text style={{
               width: 189,
@@ -131,7 +139,7 @@ export default function MarketplaceCatador() {
               color: '#fff',
               textAlign: 'left',
             }}>
-              Olá, me chamo Vincente! Seja muito bem-vindo ao Espaço Recria!
+              Olá, me chamo Giorgio! Seja muito bem-vindo ao Espaço Recria!
             </Text>
         </View>
         <View style={{
@@ -280,7 +288,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     justifyContent: 'space-around',
     marginTop: 31,
-    marginBottom: 25,
+    marginBottom: 5,
     marginLeft: 20,
   },
   tabButton: {
@@ -319,8 +327,8 @@ const styles = StyleSheet.create({
     elevation: 20,
   },
   cardImage: {
-    width: '30%',
-    height: 100,
+    width: 90,
+    height: 80,
     marginTop: 10,
     marginLeft: 14,
     borderRadius: 20,
@@ -351,7 +359,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#38b4d0',
     color: '#fff',
     marginLeft: 170,
-    bottom: 40,
+    bottom: 0,
     shadowColor: 'rgba(0, 0, 0, 0.25)',
     shadowOffset: { width: 0, height: 3,  },
     shadowOpacity: 0.6,
@@ -364,11 +372,11 @@ const styles = StyleSheet.create({
     width: 57,
     height: 18,
     borderWidth: 1, 
-    borderColor: '#109946',
+    borderColor: '#1A9DBA',
     borderRadius: 3,  
     backgroundColor: '#fff',
     marginLeft: 170,
-    bottom: 15,
+    bottom: -25,
     shadowColor: 'rgba(0, 0, 0, 0.25)',
     shadowOffset: { width: 0, height: 3,  },
     shadowOpacity: 0.6,

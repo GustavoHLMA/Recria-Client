@@ -86,6 +86,14 @@ export default function RootLayoutaa() {
         }}
       />
 
+      <Tabs.Screen
+        name="chatEspacoRecria"
+        options={{
+          href: null,
+          headerShown: false,
+        }}
+      />
+
     </Tabs>
   );
 }

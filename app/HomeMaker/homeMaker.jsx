@@ -9,21 +9,36 @@ import {
   TouchableOpacity,
   FlatList,
 } from 'react-native';
+import { useNavigation } from 'expo-router';
+import { useFonts, Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_700Bold } from '@expo-google-fonts/inter';
 
-import { LocalizaIcon, ProfilePic, SearchIcon, chatIcon, product1, product2, product3, product4 } from '../../src/assets';
+
+import { LocalizaSvg, ProfilePic, SearchIcon, chatIcon, product1, product2, product3, product4, CatadorPhoto, ArtesaoPhoto } from '../../src/assets';
 
 const ProfileHeader = () => {
   const [searchText, setSearchText] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState('proximos');
+  const navigation = useNavigation();
+  
+  let [fontsLoaded] = useFonts({	
+    Inter_400Regular,
+    Inter_500Medium,
+    Inter_600SemiBold,
+    Inter_700Bold,
+  });
+  
+  if (!fontsLoaded) {
+    return null;
+  }
+
 
   const handleChatPress = () => {
-    // Implemente a lógica para abrir o chat com o vendedor aqui
-    console.log('Abrir chat com o vendedor');
+    navigation.navigate('chatMaker');
   };
 
   const handleCategoryPress = (category) => {
-    setSelectedCategory(category);
+    setSelectedCategory(selectedCategory === category ? null : category);
   };
 
   const handleLocationPress = (location) => {
@@ -45,8 +60,11 @@ const ProfileHeader = () => {
   );
 
   const renderItem = ({ item }) => {
+    if (selectedCategory && !item.type.toLowerCase().includes(selectedCategory.toLowerCase())) {
+      return null; // Não renderizar o item se não corresponder à categoria selecionada
+    }
     return (
-      <View style={{ margin: 10, paddingRight: 0 }}>
+      <View>
         <View style={styles.card}>
           <Image source={item.image} style={styles.cardImage} />
           <View style={styles.cardInfo}>
@@ -109,23 +127,34 @@ const ProfileHeader = () => {
       quality: 'Ótimo estado',
       image: product4,
     },
+    {
+      id: 5,
+      seller: 'Anice de Oliveira',
+      type: 'Garrafas de plástico',
+      quantity: '12 unidades',
+      weight: '1kg',
+      location: 'Recife, PE',
+      quality: 'Ótimo estado',
+      image: product4,
+    },
+
   ];
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
       <View style={styles.container}>
         <View style={styles.leftContainer}>
-          <Image source={LocalizaIcon} style={styles.icon} />
+          <LocalizaSvg />
           <Text style={styles.text}>Recife, PE</Text>
         </View>
         <View style={styles.rightContainer}>
           <View style={styles.profileContainer}>
             <View style={styles.profileTextContainer}>
-              <Text style={styles.welcomeText}>Olá, Ricardo!</Text>
-              <Text style={styles.profileText}>MAKER</Text>
+              <Text style={styles.welcomeText}>Olá, Giorgio!</Text>
+              <Text style={styles.profileText}>Maker</Text>
             </View>
             <View style={styles.profileImageContainer}>
-              <Image source={ProfilePic} style={styles.profileImage} />
+              <Image source={ArtesaoPhoto} style={styles.profileImage} />
             </View>
           </View>
         </View>
@@ -180,11 +209,6 @@ const ProfileHeader = () => {
           isSelected={selectedLocation === 'proximos'}
           onPress={() => handleLocationPress('proximos')}
         />
-        <LocationText
-          location="Veja todos"
-          isSelected={selectedLocation === 'todos'}
-          onPress={() => handleLocationPress('todos')}
-        />
       </View>
 
       <FlatList
@@ -197,8 +221,6 @@ const ProfileHeader = () => {
     </SafeAreaView>
   );
 };
-
-
 
 const styles = StyleSheet.create({
   container: {
@@ -227,7 +249,7 @@ const styles = StyleSheet.create({
   },
   welcomeText: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: 'Inter_600SemiBold',
     color: 'rgba(16, 148, 70, 0.7)',
     marginBottom: 2,
   },
@@ -247,6 +269,7 @@ const styles = StyleSheet.create({
     color: 'rgba(30, 30, 30, 0.38)',
     textAlign: 'left',
     marginRight: 20,
+    fontFamily: 'Inter_600SemiBold',
   },
   profileImageContainer: {
     width: 60,
@@ -324,9 +347,6 @@ const styles = StyleSheet.create({
     flex: 1,
     width: 185,
     height: 300,
-    marginBottom: -10,
-    marginLeft: -7,
-    marginRight: -5,
     borderRadius: 8,
     overflow: 'hidden',
     borderWidth: 1,
@@ -337,7 +357,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowRadius: 2,
     elevation: 20,
-      
+    marginTop: 15,
+    marginLeft: 5,
+    marginRight: 5,
   },
   cardImage: {
     width: '86%',
@@ -352,7 +374,7 @@ const styles = StyleSheet.create({
   },
   cardSeller: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: 'Inter_600SemiBold',
     marginBottom: 5,
     color: '#109946', 
   },
@@ -360,7 +382,7 @@ const styles = StyleSheet.create({
     fontSize: 11,
     marginBottom: 3,
     color: '#4D4D4D', 
-    lineHeight: 12,
+    fontFamily: 'Inter_500Medium',
   },
   chatButton: {
     position: 'absolute',
@@ -374,11 +396,11 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     flexDirection: 'row',
     alignItems: 'center',
-      paddingVertical: 8,
+    paddingVertical: 8,
     paddingHorizontal: 12,
     borderRadius: 100,
     marginTop: 15,
-    shadowColor: 'rgba(0, 0, 0, 0.1)',
+    shadowColor: 'rgba(0, 0, 0, 0.25)',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.8,
     shadowRadius: 2,
@@ -395,9 +417,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: 'bold',
   },
-  productList: {
-    justifyContent: 'space-between',
-  },
+  productList: {},
   columnWrapperStyle: {
     flexDirection: 'row',
     justifyContent: 'space-between',

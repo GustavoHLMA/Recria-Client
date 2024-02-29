@@ -73,6 +73,13 @@ import PontosGame from './pontosGame.svg';
 import TrophySvg from './trophySvg.svg';
 import GameIcon from './game.svg';
 import Artesao from './artesao.jpg';
+import PicChat from './picChat.png';
+import ArtesaoPhoto from './artesaoPhoto.jpg';
+import ChatEspacoRecria from './chatEspacoRecria.svg';
+import PublicarEspacoRecria from './publicarEspacoRecria.svg';
+import NegocioEspacoRecria from './negocioEspacoRecria.svg';
+import Vassoura from './vassoura.jpg';
+import Sino from './sino.svg';
 
 export { 
   Test, 
@@ -101,5 +108,12 @@ export {
   PontosGame,
   TrophySvg,
   GameIcon,
-  Artesao
+  Artesao,
+  PicChat,
+  ArtesaoPhoto,
+  ChatEspacoRecria,
+  PublicarEspacoRecria,
+  NegocioEspacoRecria,
+  Vassoura,
+  Sino
 };

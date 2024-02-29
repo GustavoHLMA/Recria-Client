@@ -6,7 +6,7 @@ import { categories, foodItems } from '../../src/constants';
 import * as Animatable from 'react-native-animatable';
 import FoodCard from '../../src/components/FoodCard';
 import { LinearGradient } from 'expo-linear-gradient';
-import { LocalizaSvg, ProfilePic,SearchIcon, chatIcon, product1, product2, product3, product4 } from '../../src/assets';
+import { LocalizaSvg, ProfilePic,SearchIcon, chatIcon, product1, product2, product3, product4, EspacoRecriaTest } from '../../src/assets';
 import { Link, useNavigation } from 'expo-router';
 
 const DescarteMarket = () => {
@@ -47,11 +47,7 @@ const DescarteMarket = () => {
       
 
       <View/>
-      <Image
-          source={require('../../src/assets/logo_espaco_recria.png')} 
-          style={styles.logo}
-          resizeMode="contain" 
-      />
+      <EspacoRecriaTest width={150} height={70} preserveAspectRatio="none" style={{ alignSelf: 'center' }} />
           <View style={styles.container}>
         <View style={styles.leftContainer}>
           <LocalizaSvg />
@@ -127,7 +123,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: 0,
-    marginTop: 20,
+    marginTop: 0,
   },
 
   backgroundCurvedContainer: {

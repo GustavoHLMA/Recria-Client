@@ -24,6 +24,7 @@ import { LocalizaIcon,
   product4,
   ChatSvg,
   HomeIcon,
+  Vassoura,
 } from '../../src/assets';
 import { Link, useNavigation } from 'expo-router';
 

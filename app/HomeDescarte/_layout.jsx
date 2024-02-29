@@ -25,6 +25,8 @@ export default function RootLayoutaa() {
           marginTop: 8,
         },
       }}
+      initialRouteName="homeDescarte" backBehavior="history"
+      
     >
       <Tabs.Screen
         name="homeDescarte"
@@ -97,6 +99,14 @@ export default function RootLayoutaa() {
 
       <Tabs.Screen 
         name="makerProdutos"
+        options={{
+          href: null,
+          headerShown: false
+        }}
+      />
+
+      <Tabs.Screen
+        name="mensagemDescarte"
         options={{
           href: null,
           headerShown: false

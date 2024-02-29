@@ -17,55 +17,82 @@ const GamificacaoScreen = () => {
   
   const renderCirculosDescartados = () => {
     const circulosPreenchidos = 1;
-    const circulosVazios = 6 - circulosPreenchidos;
-
+    const circulosVazios = 5 - circulosPreenchidos;
+  
     let circulos = [];
-
+  
     for (let i = 0; i < circulosPreenchidos; i++) {
-      circulos.push(<View style={{
-        borderRadius: 999,
-        backgroundColor: '#58C044',
-        marginRight: 10,
-      }}><FontAwesome5 key={i} name="circle" size={20} color="#58C044" fill="#58C044" /></View>);
+      circulos.push(
+        <View
+          key={'preenchido_' + i}
+          style={{
+            borderRadius: 999,
+            backgroundColor: '#58C044',
+            marginRight: 10,
+          }}
+        >
+          <FontAwesome5 name="circle" size={20} color="#58C044" fill="#58C044" />
+        </View>
+      );
     }
-
-    for (let i = 0; i < circulosVazios; i++) {
-      circulos.push(<View style={{
-        borderRadius: 999,
-        backgroundColor: '#D9D9D9',
-        marginRight: 10,
-      }}><FontAwesome5 key={i} name="circle" size={20} color="#D9D9D9" fill="#58C044" /></View>);
+  
+    for (let x = 0; x < circulosVazios; x++) {
+      circulos.push(
+        <View
+          key={'vazio_' + x}
+          style={{
+            borderRadius: 999,
+            backgroundColor: '#D9D9D9',
+            marginRight: 10,
+          }}
+        >
+          <FontAwesome5 name="circle" size={20} color="#D9D9D9" fill="#58C044" />
+        </View>
+      );
     }
-
+  
     return circulos;
   };
-
+  
   const renderCirculosComprados = () => {
     const circulosPreenchidos = 1;
-    const circulosVazios = 6 - circulosPreenchidos;
-
+    const circulosVazios = 5 - circulosPreenchidos;
+  
     let circulos = [];
-
+  
     for (let i = 0; i < circulosPreenchidos; i++) {
-      circulos.push(<View style={{
-        borderRadius: 999,
-        backgroundColor: '#58C044',
-        marginRight: 10,
-      }}><FontAwesome5 key={i} name="circle" size={20} color="#58C044" fill="#58C044" /></View>);
+      circulos.push(
+        <View
+          key={'preenchido_' + i}
+          style={{
+            borderRadius: 999,
+            backgroundColor: '#58C044',
+            marginRight: 10,
+          }}
+        >
+          <FontAwesome5 name="circle" size={20} color="#58C044" fill="#58C044" />
+        </View>
+      );
     }
-
+  
     for (let i = 0; i < circulosVazios; i++) {
-      circulos.push(<View style={{
-        borderRadius: 999,
-        backgroundColor: '#D9D9D9',
-        marginRight: 10,
-      }}><FontAwesome5 key={i} name="circle" size={20} color="#D9D9D9" fill="#58C044" /></View>);
+      circulos.push(
+        <View
+          key={'vazio_' + i}
+          style={{
+            borderRadius: 999,
+            backgroundColor: '#D9D9D9',
+            marginRight: 10,
+          }}
+        >
+          <FontAwesome5 name="circle" size={20} color="#D9D9D9" fill="#58C044" />
+        </View>
+      );
     }
-
+  
     return circulos;
   };
-
-  if (!fontsLoaded) {
+    if (!fontsLoaded) {
     return null;
   } 
 
