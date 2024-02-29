@@ -14,12 +14,36 @@ const ChartMaker = () => {
       Papel: 20,
     },
     {
-      month: 'Feb',
+      month: 'Fev',
       Vidro: 10,
       Plástico: 10,
       Papel: 20,
     },
-    // Adicione os dados para os outros meses...
+    {
+      month: 'Mar',
+      Vidro: 10,
+      Plástico: 5,
+      Papel: 20,
+    },
+    {
+      month: 'Abr',
+      Vidro: 10,
+      Plástico: 10,
+      Papel: 20,
+    },
+    {
+      month: 'Mai',
+      Vidro: 10,
+      Plástico: 5,
+      Papel: 20,
+    },
+    {
+      month: 'Jul',
+      Vidro: 10,
+      Plástico: 10,
+      Papel: 20,
+    },
+
   ];
 
   const colors = ['#109946', '#1A9DBA', '#00FFA3'];
@@ -29,7 +53,7 @@ const ChartMaker = () => {
 
   const renderCustomBarLabel = ({ x, y, width, height, value }) => {
     return (
-      <View style={{ position: 'absolute', left: x + width / 2, top: y - 20, alignItems: 'center' }}>
+      <View style={{ position: 'absolute', left: x + width / 2, top: y - 40, alignItems: 'center' }}>
         <Text style={{ fontSize: 12, color: 'black' }}>{value}</Text>
       </View>
     );
@@ -77,7 +101,7 @@ const ChartMaker = () => {
           </View>
         </View>
       </View>
-      <Text style={styles.title}>Quantidade de resíduos descartados</Text>
+      <Text style={styles.title}> Métrica de produtos vendidos</Text>
       {renderCategoryTotal()}
       <View style={styles.chartContainer}>
         <YAxis
@@ -183,7 +207,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 30,
     marginBottom:15,
-    color: '#A3A3A3',
+    color: '#58C044',
     textAlign: 'center',
   },
 
@@ -197,9 +221,10 @@ const styles = StyleSheet.create({
 
   chartContainer: {
     flexDirection: 'row',
-    height: 200,
+    height: 300,
     width: '90%',
     padding: 10,
+    marginTop: 20,
   },
   categoryTotalContainer: {
     flexDirection: 'row',

@@ -43,7 +43,7 @@ const ChartScreen = () => {
             <Text style={styles.categoryName}>{key}</Text>
             <View style={[styles.categoryValueContainer, { backgroundColor: colors[index] }]}>
               <Text style={styles.categoryValueText}>
-                {data.reduce((acc, cur) => acc + cur[key], 0)}
+                {data.reduce((acc, cur) => acc + cur[key], 0)}Kg
               </Text>
             </View>
           </View>
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 30,
     marginBottom:15,
-    color: '#A3A3A3',
+    color: '#58C044',
     textAlign: 'center',
   },
 
@@ -197,9 +197,10 @@ const styles = StyleSheet.create({
 
   chartContainer: {
     flexDirection: 'row',
-    height: 200,
+    height: 300,
     width: '90%',
     padding: 10,
+    marginTop: 20,
   },
   categoryTotalContainer: {
     flexDirection: 'row',

@@ -9,23 +9,47 @@ const ChartScreen = () => {
   const data = [
     {
       month: 'Jan',
-      Vidro: 10,
-      Plástico: 5,
-      Papel: 20,
+      Vidro: 5,
+      Plástico: 2,
+      Papel: 1,
     },
     {
-      month: 'Feb',
-      Vidro: 10,
-      Plástico: 10,
-      Papel: 20,
+      month: 'Fev',
+      Vidro: 7,
+      Plástico: 3,
+      Papel: 0.2,
     },
-    // Adicione os dados para os outros meses...
+    {
+      month: 'Mar',
+      Vidro: 10,
+      Plástico: 5,
+      Papel: 1,
+    },
+    {
+      month: 'Abr',
+      Vidro: 5,
+      Plástico: 2,
+      Papel: 0,
+    },
+    {
+      month: 'Mai',
+      Vidro: 10,
+      Plástico: 6,
+      Papel: 1,
+    },
+    {
+      month: 'Jul',
+      Vidro: 3,
+      Plástico: 1,
+      Papel: 4,
+    },
+
   ];
 
   const colors = ['#109946', '#1A9DBA', '#00FFA3'];
   const keys = ['Vidro', 'Plástico', 'Papel'];
 
-  const contentInset = { top: 20, bottom: 20 };
+  const contentInset = { top: 0, bottom: 0  };
 
   const renderCustomBarLabel = ({ x, y, width, height, value }) => {
     return (
@@ -88,7 +112,7 @@ const ChartScreen = () => {
           contentInset={contentInset}
           spacingInner={0.2}
           formatLabel={(value, index) => data[index].month}
-          svg={{ fontSize: 15, fill: 'black', fontWeight: 'bold' }}
+          svg={{ fontSize: 14, fill: 'black'}}
         />
         <View style={{ flex: 1 }}>
           <StackedBarChart
@@ -106,7 +130,7 @@ const ChartScreen = () => {
             data={data}
             formatLabel={(value, index) => keys.reduce((acc, cur) => acc + data[index][cur], 0)}
             contentInset={{ left: 10, right: 10 }}
-            svg={{ fontSize: 15, fill: 'black', fontWeight: 'bold' }}
+            svg={{ fontSize: 12, fill: 'black' }}
           />
         </View>
       </View>
@@ -185,7 +209,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 30,
     marginBottom:15,
-    color: '#A3A3A3',
+    color: '#58C044',
     textAlign: 'center',
   },
 
@@ -199,9 +223,10 @@ const styles = StyleSheet.create({
 
   chartContainer: {
     flexDirection: 'row',
-    height: 200,
+    height: 300,
     width: '90%',
     padding: 10,
+    marginTop: 20,
   },
   categoryTotalContainer: {
     flexDirection: 'row',
