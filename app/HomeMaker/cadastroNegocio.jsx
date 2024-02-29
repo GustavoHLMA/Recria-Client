@@ -4,7 +4,7 @@ import { useForm, Controller } from 'react-hook-form';
 import * as ImagePicker from 'expo-image-picker';
 import { leftArrow, camIcon, VideoIcon } from '../../src/assets';
 
-const VenderResiduo = ({ navigation }) => {
+const SolicitarColeta = ({ navigation }) => {
   const { control, handleSubmit, formState } = useForm();
   const [selectedImages, setSelectedImages] = useState([]);
 
@@ -45,14 +45,13 @@ const VenderResiduo = ({ navigation }) => {
   };
 
   return (
-    <ScrollView style={{ flex: 1, height: '100%', backgroundColor: 'white', marginBottom: 60}}>
+    <ScrollView style={{ flex: 1, height: '100%', backgroundColor: 'white'}}>
       <View style={{ flexDirection: 'column' }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: 'white', padding: 16, marginRight: 10 }}>
         </View>
 
         <View style={{ alignItems: 'center', marginTop: 20, flexDirection: 'column' }}>
-          <Text style={{ color: '#109946', fontSize: 26, fontWeight: '700' }}>Informações</Text>
-          <Text style={{ color: '#109946', fontSize: 26, fontWeight: '700' }}>sobre o resíduo</Text>
+          <Text style={{ color: '##1A9DBA', fontSize: 26, fontWeight: '700' }}>Negócio</Text>
         </View>
 
         <View style={{ 
@@ -374,4 +373,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default VenderResiduo;
+export default SolicitarColeta;

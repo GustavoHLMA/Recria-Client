@@ -95,6 +95,14 @@ export default function RootLayoutaa() {
         }}
       />
 
+      <Tabs.Screen
+         name="cadastroNegocio"
+          options={{
+            href: null,
+            headerShown: false,
+          }}
+        />
+
     </Tabs>
   );
 }

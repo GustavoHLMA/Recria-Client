@@ -79,7 +79,7 @@ export default function MarketplaceCatador() {
       price: '5,99',
       image: Upcycle4,
       rating: 5,
-    },
+    }
 
   ];
 
@@ -147,7 +147,6 @@ export default function MarketplaceCatador() {
               width: 189,
               marginTop: 20,
               fontFamily: 'Inter_800ExtraBold',
-              lineHeight: 'normal',
               fontSize: 16,
               color: '#fff',
               textAlign: 'left',
@@ -167,7 +166,6 @@ export default function MarketplaceCatador() {
             marginLeft: 35,
             marginRight: 35,
             fontFamily: 'Inter_500Medium',
-            lineHeight: 'normal',
             alignSelf: 'center',
             fontSize: 15,
             color: '#fff',

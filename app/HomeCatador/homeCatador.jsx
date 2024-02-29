@@ -60,7 +60,7 @@ export default function Catador() {
 
   ]);
 
-  const collectionRequests = [
+  const [collectionRequests, setCollectionRequests] = useState([
     {
       id: 3,
       type: 'Resíduos de vidro',
@@ -85,7 +85,8 @@ export default function Catador() {
       tipo: 'coleta', // Solicitação de coleta
       rating: 5,
     },
-  ];
+  ]);
+  
   let [fontsLoaded] = useFonts({	
     Inter_400Regular,
     Inter_600SemiBold,
@@ -115,7 +116,7 @@ export default function Catador() {
             <Text style={{ color: '#fff', textAlign: 'center' }}>Aceitar</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.botaoRecusarDeletar} onPress={
-            () => handleCancel(item)
+            () => handleCancelCollection(item)
           }>
             <Text style={{ color: '#109946', textAlign: 'center' }}>Recusar</Text>
           </TouchableOpacity>
@@ -209,11 +210,38 @@ export default function Catador() {
         { cancelable: false }
       );
     };
+
+    const handleCancelCollection = (item) => {
+      // Abre um pop-up/modal de confirmação
+      Alert.alert(
+        "Deseja cancelar a venda ou recusar a coleta?",
+        "",
+        [
+          {
+            text: "Cancelar",
+            onPress: () => console.log("Cancelado"),
+            style: "cancel"
+          },
+          { text: "Sim", onPress: () => delteCollectionRequest(item) }
+        ],
+        { cancelable: false }
+      );
+    };
   
     const deleteRequest = (item) => {
       // Remove o item da lista
       const updatedProducts = productsForSale.filter(product => product.id !== item.id);
       setProductsForSale(updatedProducts);
+    };
+
+    const delteCollectionRequest = (item) => {
+      // Remove o item da lista
+      const updatedCollectionRequests = collectionRequests.filter(request => request.id !== item.id);
+      setCollectionRequests(updatedCollectionRequests);
+    };
+
+    const acceptRquest = () => {
+      navigation.navigate('chatCatador');
     };
 
     const handleAccept = (item) => {
@@ -227,7 +255,7 @@ export default function Catador() {
             onPress: () => console.log("Cancelado"),
             style: "cancel"
           },
-          { text: "Sim", onPress: () => deleteRequest(item) }
+          { text: "Sim", onPress: () => acceptRquest(item) }
         ],
         { cancelable: false }
       );

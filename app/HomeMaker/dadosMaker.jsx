@@ -72,7 +72,7 @@ const ChartMaker = () => {
               <Text style={styles.profileText}>Maker</Text>
             </View>
             <View style={styles.profileImageContainer}>
-              <Image source={A} style={styles.profileImage} />
+              <Image source={ArtesaoPhoto} style={styles.profileImage} />
             </View>
           </View>
         </View>
