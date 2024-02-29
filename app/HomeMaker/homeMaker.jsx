@@ -13,7 +13,11 @@ import { useNavigation } from 'expo-router';
 import { useFonts, Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_700Bold } from '@expo-google-fonts/inter';
 
 
-import { LocalizaSvg, ProfilePic, SearchIcon, chatIcon, product1, product2, product3, product4, CatadorPhoto, ArtesaoPhoto } from '../../src/assets';
+import { 
+  LocalizaSvg, 
+  ProfilePic, 
+  SearchIcon, 
+  chatIcon, product1, product2, product3, product4, CatadorPhoto, ArtesaoPhoto, GarrafaPet} from '../../src/assets';
 
 const ProfileHeader = () => {
   const [searchText, setSearchText] = useState('');
@@ -139,14 +143,14 @@ const ProfileHeader = () => {
       weight: '1kg',
       location: 'Recife, PE',
       quality: 'Ótimo estado',
-      image: product4,
+      image: GarrafaPet,
       rating: 5,
     },
 
   ];
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'white',marginBottom: 65 }}>
       <View style={styles.container}>
         <View style={styles.leftContainer}>
           <LocalizaSvg />

@@ -84,6 +84,7 @@ import AdicionarProduto from './adicionarProduto.svg';
 import VideoIcon from './videoIcon.svg';
 import VassouraPet from './vassouraPet.jpg';
 import StarSvg from './starSvg.svg';
+import GarrafaPet from './garrafaPet.jpg';
 
 export { 
   Test, 
@@ -123,5 +124,6 @@ export {
   AdicionarProduto,
   VideoIcon,
   VassouraPet,
-  StarSvg
+  StarSvg,
+  GarrafaPet
 };

@@ -124,6 +124,31 @@ export default function Catador() {
     }
   };
 
+  const handleAdicionarProduto = () => {
+    if (selectedTab === 'venda') {
+      
+      return(
+        <TouchableOpacity 
+        onPress={
+          () => navigation.navigate('anuncioResiduo')
+        }
+        
+        style={{
+          alignSelf: 'center',
+          justifyContent: 'center',
+          marginBottom: 20,
+          marginTop: 5,
+        }}>
+          <AdicionarProduto 
+            width={80}
+            height={80}
+            preserveAspectRatio="none"
+          />
+        </TouchableOpacity>
+      )
+      }
+    }
+
   const renderProducts = () => {
     if (selectedTab === 'venda') {
       return (
@@ -259,25 +284,8 @@ export default function Catador() {
       </View>
 
       {renderProducts()}
-
-      <TouchableOpacity 
-      onPress={
-        () => navigation.navigate('anuncioResiduo')
-      }
+      {handleAdicionarProduto()}
       
-      style={{
-        alignSelf: 'center',
-        justifyContent: 'center',
-        marginBottom: 20,
-        marginTop: 5,
-      }}>
-        <AdicionarProduto 
-          width={80}
-          height={80}
-          preserveAspectRatio="none"
-        />
-      </TouchableOpacity>
-
     
     </SafeAreaView>
   );
