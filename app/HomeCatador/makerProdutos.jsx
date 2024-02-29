@@ -21,7 +21,8 @@ import { LocalizaIcon,
   Upcycle4,
   ArtesaoPhoto,
   Vassoura,
-  EspacoRecriaTest
+  EspacoRecriaTest,
+  StarSvg
 } from '../../src/assets';
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -47,18 +48,21 @@ export default function MarketplaceCatador() {
       type: 'Vassoura Pet',
       price: '20,00',
       image: Vassoura,
+      rating: 5,
     },
     {
       id: 2,
       type: 'Pote de Vidro',
       price: '5,99',
       image: Upcycle1,
+      rating: 5,
     },
     {
       id: 3,
       type: 'Casa para aves',
       price: '5,99',
       image: Upcycle2,
+      rating: 5,
     },
 
     {
@@ -66,6 +70,7 @@ export default function MarketplaceCatador() {
       type: 'Cadeira de guitarra',
       price: '119,00',
       image: Upcycle3,
+      rating: 5,
     },
 
     {
@@ -73,6 +78,7 @@ export default function MarketplaceCatador() {
       type: 'Vaso de rolhas',
       price: '5,99',
       image: Upcycle4,
+      rating: 5,
     },
 
   ];
@@ -104,6 +110,13 @@ export default function MarketplaceCatador() {
             <View style={styles.cardInfo}>
               <Text style={styles.cardProduct}>{item.type}</Text>
               <Text style={styles.cardPrice}>${item.price}</Text>
+              <View style={{
+                flexDirection:'row',
+                alignItems: 'center',
+              }}>
+                <Text style={styles.cardPrice}>{item.rating} </Text>
+                <StarSvg width={15} height={15} />
+              </View>
               {renderButtons()}
             </View>
           </View>
@@ -386,12 +399,14 @@ const styles = StyleSheet.create({
 
   botaoComprar : {
     position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
     width: 69,
-    height: 18,
+    height: 20,
     backgroundColor: '#38b4d0',
     borderRadius: 3,  
     marginLeft: 160,
-    bottom: 60,
+    bottom: 35,
     shadowColor: 'rgba(0, 0, 0, 0.25)',
     shadowOffset: { width: 0, height: 3,  },
     shadowOpacity: 0.6,

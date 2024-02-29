@@ -96,6 +96,7 @@ const ProfileHeader = () => {
       location: 'Recife, PE',
       quality: 'Ótimo estado',
       image: product1,
+      rating: 5,
     },
     {
       id: 2,
@@ -106,6 +107,7 @@ const ProfileHeader = () => {
       location: 'Paulista, PE',
       quality: 'Bom estado',
       image: product2,
+      rating: 5,
     },
     {
       id: 3,
@@ -116,6 +118,7 @@ const ProfileHeader = () => {
       location: 'Camaragibe, PE',
       quality: 'Estilhaçado',
       image: product3,
+      rating: 5,
     },
     {
       id: 4,
@@ -126,6 +129,7 @@ const ProfileHeader = () => {
       location: 'Recife, PE',
       quality: 'Ótimo estado',
       image: product4,
+      rating: 5,
     },
     {
       id: 5,
@@ -136,6 +140,7 @@ const ProfileHeader = () => {
       location: 'Recife, PE',
       quality: 'Ótimo estado',
       image: product4,
+      rating: 5,
     },
 
   ];

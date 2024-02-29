@@ -83,6 +83,7 @@ import Sino from './sino.svg';
 import AdicionarProduto from './adicionarProduto.svg';
 import VideoIcon from './videoIcon.svg';
 import VassouraPet from './vassouraPet.jpg';
+import StarSvg from './starSvg.svg';
 
 export { 
   Test, 
@@ -121,5 +122,6 @@ export {
   Sino, 
   AdicionarProduto,
   VideoIcon,
-  VassouraPet
+  VassouraPet,
+  StarSvg
 };

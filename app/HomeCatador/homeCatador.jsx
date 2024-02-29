@@ -43,6 +43,7 @@ export default function Catador() {
       category: 'Vidro',
       image: product1,
       tipo: 'venda', // Produto para venda
+      rating: 5,
     },
     {
       id: 2,
@@ -54,6 +55,7 @@ export default function Catador() {
       category: 'Vidro',
       image: product2,
       tipo: 'venda', // Produto para venda
+      rating: 5,
     },
 
   ]);
@@ -69,6 +71,7 @@ export default function Catador() {
       category: 'Vidro',
       image: product3,
       tipo: 'coleta', // Solicitação de coleta
+      rating: 5,
     },
     {
       id: 4,
@@ -80,9 +83,9 @@ export default function Catador() {
       category: 'Vidro',
       image: product4,
       tipo: 'coleta', // Solicitação de coleta
+      rating: 5,
     },
   ];
-
   let [fontsLoaded] = useFonts({	
     Inter_400Regular,
     Inter_600SemiBold,
