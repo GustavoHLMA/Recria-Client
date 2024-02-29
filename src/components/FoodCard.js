@@ -3,6 +3,7 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons'; // Importe o componente FontAwesome corretamente
 import { useNavigation } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
+import { camIcon } from '../assets';
 
 export default function FoodCard({ item, index }) {
     const navigation = useNavigation();
@@ -82,14 +83,15 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(255, 255, 255, 0.2)',
     },
     image: {
-        height: 92,
-        width: 92,
+        height: 120,
+        width: 120,
         alignSelf: 'center',
+        borderRadius: 20,
     },
     content: {
         alignItems: 'center',
         paddingHorizontal: 20,
-        height: 200,
+        height: 180,
         width: 250,
     },
     title: {

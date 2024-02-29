@@ -6,7 +6,9 @@ import { categories, foodItems } from '../../src/constants';
 import * as Animatable from 'react-native-animatable';
 import FoodCard from '../../src/components/FoodCard';
 import { LinearGradient } from 'expo-linear-gradient';
-import { LocalizaSvg, ProfilePic,SearchIcon, chatIcon, product1, product2, product3, product4, EspacoRecriaTest } from '../../src/assets';
+import { LocalizaSvg, ProfilePic,SearchIcon, chatIcon, product1, product2, product3, product4, EspacoRecriaTest, camIcon
+
+} from '../../src/assets';
 import { Link, useNavigation } from 'expo-router';
 
 const DescarteMarket = () => {

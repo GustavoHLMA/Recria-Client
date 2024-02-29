@@ -404,11 +404,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     overflow: 'hidden',
     color: '#F5F5F5',
-    shadowColor: 'rgba(0, 0, 0, 0.1)',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
-    elevation: 20,
   },
   cardImage: {
     width: '30%',

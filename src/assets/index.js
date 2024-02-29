@@ -82,6 +82,7 @@ import Vassoura from './vassoura.jpg';
 import Sino from './sino.svg';
 import AdicionarProduto from './adicionarProduto.svg';
 import VideoIcon from './videoIcon.svg';
+import VassouraPet from './vassouraPet.jpg';
 
 export { 
   Test, 
@@ -119,5 +120,6 @@ export {
   Vassoura,
   Sino, 
   AdicionarProduto,
-  VideoIcon
+  VideoIcon,
+  VassouraPet
 };

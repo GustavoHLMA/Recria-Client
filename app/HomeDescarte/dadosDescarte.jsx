@@ -108,15 +108,6 @@ const ChartScreen = () => {
           />
         </View>
       </View>
-      <View style={styles.lineChartContainer}>
-        <Text style={styles.titleSegundoGrafico}>Quantidade de produtos {'\n'} comprados no espaço recria</Text>
-        <LineChart
-          style={{ height: 200, width: '90%' }}
-          data={lineChartData}
-          svg={{ stroke: 'rgb(134, 65, 244)' }}
-          contentInset={{ top: 20, bottom: 20 }}
-        />
-      </View>
     </SafeAreaView>
   );
 };
