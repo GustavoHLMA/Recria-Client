@@ -44,6 +44,7 @@ const ChartScreen = () => {
             <View style={[styles.categoryValueContainer, { backgroundColor: colors[index] }]}>
               <Text style={styles.categoryValueText}>
                 {data.reduce((acc, cur) => acc + cur[key], 0)}
+                kg
               </Text>
             </View>
           </View>
@@ -87,6 +88,7 @@ const ChartScreen = () => {
           contentInset={contentInset}
           spacingInner={0.2}
           formatLabel={(value, index) => data[index].month}
+          svg={{ fontSize: 15, fill: 'black', fontWeight: 'bold' }}
         />
         <View style={{ flex: 1 }}>
           <StackedBarChart
@@ -100,11 +102,11 @@ const ChartScreen = () => {
             renderDecorator={renderCustomBarLabel}
           />
           <XAxis
-            style={{ marginHorizontal: -10 }}
+            style={{ marginHorizontal: 5 }}
             data={data}
             formatLabel={(value, index) => keys.reduce((acc, cur) => acc + data[index][cur], 0)}
             contentInset={{ left: 10, right: 10 }}
-            svg={{ fontSize: 10, fill: 'black' }}
+            svg={{ fontSize: 15, fill: 'black', fontWeight: 'bold' }}
           />
         </View>
       </View>
