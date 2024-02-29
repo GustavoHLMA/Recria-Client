@@ -219,6 +219,11 @@ export default function Catador() {
               Bem-vindo ao nosso espaço de descarte de resíduos sólidos. Deseja solicitar uma coleta?
             </Text>
             <TouchableOpacity
+
+              onPress={
+                () => navigator.navigate('solicitacaoColeta')
+              }
+
               style={{  
                 width: 100,
                 height: 30,
@@ -227,8 +232,7 @@ export default function Catador() {
                 alignSelf: 'center',
                 justifyContent: 'center',
                 marginTop: 8,
-              }}
-            >
+              }}            >
               <Text
                 style={{
                   alignSelf: 'center',

@@ -101,6 +101,7 @@ export default function RootLayoutaa() {
         name="anuncioResiduo"
         options={{
           href:null,
+          headerShown: false,
         }}
       />
       

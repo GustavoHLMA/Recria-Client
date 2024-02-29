@@ -11,7 +11,7 @@ import {
   FlatList,
   Alert,
 } from 'react-native';
-
+import {useNavigation} from 'expo-router';
 import { LocalizaIcon, 
   ProfilePic, 
   SearchIcon, 
@@ -23,11 +23,14 @@ import { LocalizaIcon,
   product2,
   product3,
   product4,
+  AdicionarProduto
 } from '../../src/assets';
+
 
 export default function Catador() {
   const [searchText, setSearchText] = useState('');
   const [selectedTab, setSelectedTab] = useState('venda'); // Estado para controlar a aba selecionada
+  const navigation = useNavigation();
 
   const [productsForSale, setProductsForSale] = useState([
     {
@@ -52,6 +55,7 @@ export default function Catador() {
       image: product2,
       tipo: 'venda', // Produto para venda
     },
+
   ]);
 
   const collectionRequests = [
@@ -125,6 +129,7 @@ export default function Catador() {
           renderItem={renderItem}
           keyExtractor={keyExtractor}
           numColumns={1}
+          
         />
       );
     } else {
@@ -150,6 +155,7 @@ export default function Catador() {
               <Text style={styles.cardText}>{item.location}</Text>
               <Text style={styles.cardText}>{item.quality}</Text>
               <Text style={styles.cardText}>Categoria: {item.category}</Text>
+              
               {renderButtons( item )}
             </View>
           </View>
@@ -246,10 +252,30 @@ export default function Catador() {
           <Text style={[styles.tabButtonText, selectedTab === 'coleta' && styles.selectedTabButtonText]}>Solicitações de coleta</Text>
           {selectedTab === 'coleta' && <View style={styles.underline} />}
         </TouchableOpacity>
+        
       </View>
 
       {renderProducts()}
+
+      <TouchableOpacity 
+      onPress={
+        () => navigation.navigate('anuncioResiduo')
+      }
       
+      style={{
+        alignSelf: 'center',
+        justifyContent: 'center',
+        marginBottom: 20,
+        marginTop: 5,
+      }}>
+        <AdicionarProduto 
+          width={80}
+          height={80}
+          preserveAspectRatio="none"
+        />
+      </TouchableOpacity>
+
+    
     </SafeAreaView>
   );
 }

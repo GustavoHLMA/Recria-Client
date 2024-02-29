@@ -4,7 +4,7 @@ import { useForm, Controller } from 'react-hook-form';
 import * as ImagePicker from 'expo-image-picker';
 import { leftArrow, camIcon, VideoIcon } from '../../src/assets';
 
-const VenderResiduo = ({ navigation }) => {
+const SolicitarColeta = ({ navigation }) => {
   const { control, handleSubmit, formState } = useForm();
   const [selectedImages, setSelectedImages] = useState([]);
 
@@ -374,4 +374,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default VenderResiduo;
+export default SolicitarColeta;

@@ -80,6 +80,8 @@ import PublicarEspacoRecria from './publicarEspacoRecria.svg';
 import NegocioEspacoRecria from './negocioEspacoRecria.svg';
 import Vassoura from './vassoura.jpg';
 import Sino from './sino.svg';
+import AdicionarProduto from './adicionarProduto.svg';
+import VideoIcon from './videoIcon.svg';
 
 export { 
   Test, 
@@ -115,5 +117,7 @@ export {
   PublicarEspacoRecria,
   NegocioEspacoRecria,
   Vassoura,
-  Sino
+  Sino, 
+  AdicionarProduto,
+  VideoIcon
 };

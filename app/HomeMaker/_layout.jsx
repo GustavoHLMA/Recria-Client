@@ -83,6 +83,7 @@ export default function RootLayoutaa() {
         name="anuncioProduto"
         options={{
           href: null,
+          headerShown: false,
         }}
       />
 

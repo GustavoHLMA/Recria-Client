@@ -207,7 +207,7 @@ export default function EspacoRecria() {
               marginTop: 25,
             }}
             onPress={
-              () => navigator.navigate('publicarMaker')
+              () => navigator.navigate('anuncioProduto')
             }
 
           >

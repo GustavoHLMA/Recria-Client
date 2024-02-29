@@ -112,6 +112,14 @@ export default function RootLayoutaa() {
           headerShown: false
         }}
       />
+
+      <Tabs.Screen
+        name="solicitacaoColeta"
+        options={{
+          href: null,
+          headerShown: false
+        }}
+      />
     </Tabs>
   );
 }
