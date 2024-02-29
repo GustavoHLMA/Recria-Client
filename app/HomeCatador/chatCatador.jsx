@@ -177,23 +177,25 @@ export default function ChatCatador() {
 
     const renderItem = ({ item }) => {
       return (
-        <View style={{ marginLeft: 15, paddingRight: 0 }}>
-          <View style={styles.card}>
-            <Image source={item.image} style={styles.cardImage} />
-            <View style={styles.cardInfo}>
-              <Text style={styles.cardSeller}>{item.type}</Text>
-              <Text style={styles.cardText}>{item.quality}</Text>
-              {renderButtons( item )}
+        <TouchableOpacity>
+          <View style={{ marginLeft: 15, paddingRight: 0 }}>
+            <View style={styles.card}>
+              <Image source={item.image} style={styles.cardImage} />
+              <View style={styles.cardInfo}>
+                <Text style={styles.cardSeller}>{item.type}</Text>
+                <Text style={styles.cardText}>{item.quality}</Text>
+                {renderButtons( item )}
+              </View>
             </View>
+            <View 
+                  style={{
+                    width: '100%',
+                    height: 2,
+                    backgroundColor: 'rgba(206, 206, 206, 0.37)',
+                  }}
+                />
           </View>
-          <View 
-                style={{
-                  width: '100%',
-                  height: 2,
-                  backgroundColor: 'rgba(206, 206, 206, 0.37)',
-                }}
-              />
-        </View>
+        </TouchableOpacity>
       );
     };
 
