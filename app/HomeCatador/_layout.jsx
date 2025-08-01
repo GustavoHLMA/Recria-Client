@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { Tabs, useNavigation } from 'expo-router';
+import { Tabs, useRouter } from 'expo-router';
 import { HomeIcon, DadosIcon, ChatIcon, MarketplaceIcon, GameIcon} from '../../src/assets';
 
-export default function RootLayoutaa() {
-  const navigation = useNavigation();
+export default function HomeCatadorLayout() {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState("homeCatador");
 
   return (
@@ -33,7 +33,7 @@ export default function RootLayoutaa() {
           headerShown: false,
           tabBarIcon: () => (
             <TouchableOpacity style={[styles.tabIcon, activeTab === "homeCatador" && styles.activeTab]} onPress={
-              () => { setActiveTab("homeCatador"); navigation.navigate("homeCatador"); }}>
+              () => { setActiveTab("homeCatador"); router.push("/HomeCatador/homeCatador"); }}>
               <HomeIcon />
             </TouchableOpacity>
           ),
@@ -47,7 +47,7 @@ export default function RootLayoutaa() {
           headerShown: false,
           tabBarIcon: () => (
             <TouchableOpacity style={[styles.tabIcon, activeTab === "chatCatador" && styles.activeTab]} onPress={
-              () => { setActiveTab("chatCatador"); navigation.navigate("chatCatador"); }}>
+              () => { setActiveTab("chatCatador"); router.push("/HomeCatador/chatCatador"); }}>
               <ChatIcon />
             </TouchableOpacity>
           ),
@@ -60,7 +60,7 @@ export default function RootLayoutaa() {
           headerShown: false,
           tabBarIcon: () => (
             <TouchableOpacity style={[styles.tabIcon, activeTab === "dadosCatador" && styles.activeTab]} onPress={
-              () => { setActiveTab("dadosCatador"); navigation.navigate("dadosCatador"); }}>
+              () => { setActiveTab("dadosCatador"); router.push("/HomeCatador/dadosCatador"); }}>
               <DadosIcon />
             </TouchableOpacity>
           ),
@@ -74,7 +74,7 @@ export default function RootLayoutaa() {
           headerShown: false,
           tabBarIcon: () => (
             <TouchableOpacity style={[styles.tabIcon, activeTab === "marketplaceCatador" && styles.activeTab]} onPress={
-              () => { setActiveTab("marketplaceCatador"); navigation.navigate("marketplaceCatador"); }}>
+              () => { setActiveTab("marketplaceCatador"); router.push("/HomeCatador/marketplaceCatador"); }}>
               <MarketplaceIcon />
             </TouchableOpacity>
           ),
@@ -88,7 +88,7 @@ export default function RootLayoutaa() {
           headerShown: false,
           tabBarIcon: () => (
             <TouchableOpacity style={[styles.tabIcon, activeTab === "gamificacaoCatador" && styles.activeTab]} onPress={
-              () => { setActiveTab("gamificacaoCatador"); navigation.navigate("gamificacaoCatador"); }}>
+              () => { setActiveTab("gamificacaoCatador"); router.push("/HomeCatador/gamificacaoCatador"); }}>
               <GameIcon />
             </TouchableOpacity>
           ),

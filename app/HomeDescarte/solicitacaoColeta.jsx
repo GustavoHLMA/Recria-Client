@@ -3,15 +3,43 @@ import { View, Text, TouchableOpacity, Image, TextInput, StyleSheet, ScrollView 
 import { useForm, Controller } from 'react-hook-form';
 import * as ImagePicker from 'expo-image-picker';
 import { leftArrow, camIcon, VideoIcon } from '../../src/assets';
+import { apiService } from '../../src/services/api'; // Import apiService
 
 const VenderResiduo = ({ navigation }) => {
   const { control, handleSubmit, formState } = useForm();
   const [selectedImages, setSelectedImages] = useState([]);
 
-  const onSubmit = (data) => {
-    console.log(data);
-    console.log(selectedImages);
-    // Adicione aqui a lógica para enviar os dados do formulário e as imagens selecionadas
+  const onSubmit = async (data) => {
+    try {
+      // Send waste data to the backend
+      const wasteData = {
+        title: data.titulo,
+        contact: data.contato,
+        category: data.categoria,
+        address: data.endereco,
+        cep: data.cep,
+        uf: data.uf,
+        state: data.estado, // Assuming 'estado' is the state field
+        city: data.cidade, // Assuming 'cidade' is the city field
+        description: data.descricao, // Assuming 'descricao' is the description field
+        // Add other fields as needed based on your Waste model
+      };
+
+      const response = await apiService.post('/waste', wasteData);
+      console.log('Waste created successfully:', response);
+
+      // Upload images if any are selected
+      for (const imageUri of selectedImages) {
+        const filename = imageUri.split('/').pop(); // Extract filename from URI
+        await apiService.uploadImage(`/wastes/${response.waste.id}/upload-image`, imageUri, filename); // Pass URI and filename
+      }
+
+      Alert.alert('Sucesso', 'Solicitação de descarte enviada com sucesso!');
+      navigation.goBack();
+    } catch (error) {
+      console.error('Error submitting waste request:', error);
+      Alert.alert('Erro', 'Houve um erro ao enviar a solicitação de descarte. Tente novamente.');
+    }
   };
 
   const handleVoltarPress = () => {
@@ -20,10 +48,9 @@ const VenderResiduo = ({ navigation }) => {
 
   const openImagePicker = async () => {
     const options = {
-      mediaType: 'photo',
-      includeBase64: false,
-      maxHeight: 2000,
-      maxWidth: 2000,
+      mediaTypes: ImagePicker.MediaTypeOptions.Images, // Allow only images
+      allowsMultipleSelection: true, // Allow multiple image selection
+      quality: 1, // High quality
     };
 
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -35,12 +62,13 @@ const VenderResiduo = ({ navigation }) => {
 
     const response = await ImagePicker.launchImageLibraryAsync(options);
 
-    if (response.cancelled) {
+    if (response.canceled) { // Use 'canceled' instead of 'cancelled'
       console.log('Seleção cancelada');
     } else if (response.error) {
       console.error('Erro ao selecionar imagem:', response.error);
     } else {
-      setSelectedImages([...selectedImages, response.uri]);
+      // Add new selected images to the existing ones
+      setSelectedImages((prevImages) => [...prevImages, ...response.assets.map(asset => asset.uri)]);
     }
   };
 
@@ -48,6 +76,9 @@ const VenderResiduo = ({ navigation }) => {
     <ScrollView style={{ flex: 1, height: '100%', backgroundColor: 'white', marginBottom: 60}}>
       <View style={{ flexDirection: 'column' }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: 'white', padding: 16, marginRight: 10 }}>
+          <TouchableOpacity onPress={handleVoltarPress} style={{ padding: 10 }}>
+            <Image source={leftArrow} style={{ width: 24, height: 24 }} />
+          </TouchableOpacity>
         </View>
 
         <View style={{ alignItems: 'center', marginTop: 20, flexDirection: 'column' }}>
@@ -55,7 +86,7 @@ const VenderResiduo = ({ navigation }) => {
           <Text style={{ color: '#109946', fontSize: 26, fontWeight: '700' }}>sobre o resíduo</Text>
         </View>
 
-        <View style={{ 
+        <View style={{
           padding: 16,
           }}>
           <Controller
@@ -68,6 +99,8 @@ const VenderResiduo = ({ navigation }) => {
                     {...field}
                     style={styles.input}
                     placeholder="Escreva aqui o nome do tipo de resíduo"
+                    onChangeText={field.onChange}
+                    value={field.value}
                   />
                 </View>
               </View>
@@ -87,6 +120,9 @@ const VenderResiduo = ({ navigation }) => {
                       {...field}
                       style={styles.input}
                       placeholder="(XX) XXXXX-XXXX"
+                      onChangeText={field.onChange}
+                      value={field.value}
+                      keyboardType="phone-pad"
                     />
                   </View>
                 </View>
@@ -105,6 +141,8 @@ const VenderResiduo = ({ navigation }) => {
                       {...field}
                       style={styles.input}
                       placeholder="Selecionar"
+                      onChangeText={field.onChange}
+                      value={field.value}
                     />
                   </View>
                 </View>
@@ -124,6 +162,8 @@ const VenderResiduo = ({ navigation }) => {
                     {...field}
                     style={styles.input}
                     placeholder="XXXXXXXXXXX"
+                    onChangeText={field.onChange}
+                    value={field.value}
                   />
                 </View>
               </View>
@@ -143,6 +183,9 @@ const VenderResiduo = ({ navigation }) => {
                       {...field}
                       style={styles.input}
                       placeholder="xxxxx-xxx"
+                      onChangeText={field.onChange}
+                      value={field.value}
+                      keyboardType="numeric"
                     />
                   </View>
                 </View>
@@ -161,6 +204,9 @@ const VenderResiduo = ({ navigation }) => {
                       {...field}
                       style={styles.input}
                       placeholder="xx"
+                      onChangeText={field.onChange}
+                      value={field.value}
+                      maxLength={2}
                     />
                   </View>
                 </View>
@@ -181,11 +227,13 @@ const VenderResiduo = ({ navigation }) => {
                       {...field}
                       style={styles.input}
                       placeholder="xxxxxxxx"
+                      onChangeText={field.onChange}
+                      value={field.value}
                     />
                   </View>
                 </View>
               )}
-              name="cep"
+              name="estado" // Changed name from 'cep' to 'estado'
               rules={{ required: 'Campo obrigatório' }}
             />
 
@@ -198,12 +246,14 @@ const VenderResiduo = ({ navigation }) => {
                     <TextInput
                       {...field}
                       style={styles.input}
-                      placeholder="xxxxxx"
+                      placeholder="xxxxxxxx"
+                      onChangeText={field.onChange}
+                      value={field.value}
                     />
                   </View>
                 </View>
               )}
-              name="uf"
+              name="cidade"
               rules={{ required: 'Campo obrigatório' }}
             />
           </View>
@@ -212,53 +262,39 @@ const VenderResiduo = ({ navigation }) => {
             control={control}
             render={({ field }) => (
               <View style={styles.inputContainer}>
-                <Text style={styles.label}>Descrição do resíduo</Text>
+                <Text style={styles.label}>Descrição</Text>
                 <View style={styles.customInput}>
                   <TextInput
                     {...field}
-                    style={styles.input}
-                    placeholder="Quantidade, peso e estado de qualidade"
+                    style={[styles.input, { height: 100, textAlignVertical: 'top' }]}
+                    placeholder="Descreva o resíduo, quantidade, estado de conservação, etc."
+                    multiline={true}
+                    onChangeText={field.onChange}
+                    value={field.value}
                   />
                 </View>
               </View>
             )}
-            name="descricaoResiduo"
+            name="descricao"
             rules={{ required: 'Campo obrigatório' }}
           />
 
-          <View style={styles.imageLabelContainer}>
-            <Text style={styles.imageLabel}>Fotos</Text>
-            <Text style={styles.imageSubtitle}>Adicione até 5 fotos</Text>
-          </View>
-          <View style={{
-            flexDirection: 'row',
-          }}>
+          <Text style={styles.label}>Fotos do Resíduo</Text>
+          <View style={styles.imagePickerContainer}>
             <TouchableOpacity onPress={openImagePicker} style={styles.imagePickerButton}>
-              <Image source={camIcon} style={styles.camIcon} />
-              <Text style={styles.addPhotosText}>Adicionar fotos</Text>
+              <Image source={camIcon} style={{ width: 30, height: 30, tintColor: '#109946' }} />
+              <Text style={styles.imagePickerButtonText}>Adicionar Fotos</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={openImagePicker} style={styles.imagePickerButton}>
-              <VideoIcon width={24} height={24} />
-              <Text style={styles.addPhotosText}>Adicionar vídeos</Text>
-            </TouchableOpacity>
+            <View style={styles.selectedImagesContainer}>
+              {selectedImages.map((imageUri, index) => (
+                <Image key={index} source={{ uri: imageUri }} style={styles.selectedImage} />
+              ))}
+            </View>
           </View>
 
-
-          <View style={{ flexDirection: 'row', justifyContent: 'space-around', flexWrap: 'wrap' }}>
-            {selectedImages.map((uri, index) => (
-              <Image key={index} source={{ uri }} style={styles.selectedImage} />
-            ))}
-          </View>
-
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 20 }}>
-            <TouchableOpacity style={styles.button} onPress={handleSubmit(onSubmit)} disabled={formState.isSubmitting}>
-              <Text style={styles.buttonText}>Anunciar</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.verifyButton} onPress={() => console.log('Verificar selo de qualidade')}>
-              <Text style={styles.verifyButtonText}>Verificar selo{'\n'}de qualidade</Text>
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity onPress={handleSubmit(onSubmit)} style={styles.submitButton}>
+            <Text style={styles.submitButtonText}>Solicitar Descarte</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </ScrollView>
@@ -267,110 +303,65 @@ const VenderResiduo = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   inputContainer: {
-    marginBottom: 16,
+    marginBottom: 15,
   },
   label: {
-    fontSize: 18,
-    color: '#4D4D4D',
-    marginBottom: 8,
-    marginLeft: 13,
-    fontWeight: '400',
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 5,
+    color: '#333',
   },
   customInput: {
-    width: '100%',
-    height: 50,
-    backgroundColor: 'rgba(30, 30, 30, 0.1)',
-    borderRadius: 60,
-    justifyContent: 'center',
-    shadowColor: 'rgba(0, 0, 0, 0.1)',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
-    elevation: 20,
+    backgroundColor: '#f0f0f0',
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
   },
   input: {
     fontSize: 16,
-    marginLeft: 16,
+    color: '#333',
   },
-  button: {
-    backgroundColor: '#58C044',
-    padding: 12,
-    borderRadius: 60,
-    width: 150,
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 20,
-    marginLeft: 18,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  imageLabelContainer: {
-    alignItems: 'flex-start',
-    marginLeft: 16,
-  },
-  imageLabel: {
-    fontSize: 18,
-    color: '#4D4D4D',
-    marginBottom: 4,
-    fontWeight: '400',
-  },
-  imageSubtitle: {
-    fontSize: 14,
-    color: '#4D4D4D',
-    marginBottom: 8,
+  imagePickerContainer: {
+    marginBottom: 20,
   },
   imagePickerButton: {
-    flexDirection: 'column',
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'rgba(30, 30, 30, 0.1)',
+    backgroundColor: '#e0ffe0',
+    padding: 10,
     borderRadius: 8,
-    width: 146,
-    height: 121,
-    marginTop: 16,
-    marginLeft: 16,
+    justifyContent: 'center',
   },
-  camIcon: {
-    width: 24,
-    height: 24,
-    marginRight: 8,
-    alignItems: 'center',
-  },
-  addPhotosText: {
-    color: '#4D4D4D',
+  imagePickerButtonText: {
+    marginLeft: 10,
     fontSize: 16,
-    fontWeight: '600',
-    alignItems: 'center',
+    color: '#109946',
+    fontWeight: 'bold',
+  },
+  selectedImagesContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginTop: 10,
   },
   selectedImage: {
-    width: 100,
-    height: 100,
-    margin: 8,
+    width: 80,
+    height: 80,
     borderRadius: 8,
+    marginRight: 10,
+    marginBottom: 10,
+    resizeMode: 'cover',
   },
-  verifyButton: {
-    backgroundColor: 'white',
-    borderColor: '#58C044',
-    borderWidth: 2,
-    padding: 12,
-    borderRadius: 60,
-    width: 150,
-    height: 50,
+  submitButton: {
+    backgroundColor: '#109946',
+    padding: 15,
+    borderRadius: 10,
     alignItems: 'center',
-    justifyContent: 'center',
     marginTop: 20,
-    marginRight: 18,
   },
-  verifyButtonText: {
-    color: '#58C044',
-    fontSize: 16,
-    fontWeight: '600',
-    textAlign: 'center',
-    lineHeight: 20,
+  submitButtonText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });
 

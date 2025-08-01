@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import {  useFonts, Inter_900Black, Inter_600SemiBold, Inter_500Medium } from '@expo-google-fonts/inter';
-import { Container, TitleContainer, UserButton, NextButton, NextButtonText } from './style';
+import { useFonts, Inter_900Black, Inter_600SemiBold, Inter_500Medium } from '@expo-google-fonts/inter';
 import { PrevArrowPng } from '../../src/assets';
 import { NextArrowSvg } from '../../src/assets';
-import { Link } from 'expo-router'
+import { Link } from 'expo-router';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function Login() {
   let [fontsLoaded] = useFonts({
@@ -31,132 +31,132 @@ export default function Login() {
         break;
     }
   };
-  
+
   if (!fontsLoaded) {
-    return null; // Ou qualquer componente de carregamento
+    return null;
   }
 
-
   return (
-    <Container>
-      <TitleContainer style={{
-        marginTop: 44,
-        marginBottom: 30,
-        fontSize: 24,
-      }}>
-        Cadastre-se
-      </TitleContainer>    
-      <Text style={{
-        color: '#4D4D4D',
-        fontFamily: 'Inter_600SemiBold',
-        fontSize: 16,
-        marginBottom: 14,
-      }}>
-        Como podemos te ajudar?
-      </Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Cadastre-se</Text>
+      <Text style={styles.subtitle}>Como podemos te ajudar?</Text>
 
       <TouchableOpacity
-        style={{
-          backgroundColor: activeButtonIndex === 0 ? '#58C044' : '#fff',
-          borderRadius: 60,
-          borderWidth: 1,
-          borderColor: activeButtonIndex === 0 ? 'transparent' : '#4D4D4D',
-          paddingVertical: 7,
-          paddingHorizontal: 16,
-          marginBottom: 14,
-          width: 325,
-          height: 50,
-        }}
+        style={[styles.button, activeButtonIndex === 0 && styles.buttonActive]}
         onPress={() => handleButtonPress(0)}
       >
-        <Text style={{ 
-          color: activeButtonIndex === 0 ? '#fff' : '#4D4D4D',
-          fontFamily: 'Inter_500Medium',
-        }}>Sou <Text style={{
-          fontFamily: 'Inter_900Black',
-          color: activeButtonIndex === 0 ? '#fff' : '#58C044',
-        }}>Artesão</Text> e quero comprar resíduos sólidos</Text>
+        <Text style={[styles.buttonText, activeButtonIndex === 0 && styles.buttonTextActive]}>
+          Sou <Text style={[styles.boldText, activeButtonIndex === 0 && styles.boldTextActive]}>Artesão</Text> e quero comprar resíduos sólidos
+        </Text>
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={{
-          backgroundColor: activeButtonIndex === 1 ? '#58C044' : '#fff',
-          borderRadius: 60,
-          borderWidth: 1,
-          borderColor: activeButtonIndex === 1 ? 'transparent' : '#4D4D4D',
-          paddingVertical: 7,
-          paddingHorizontal: 16,
-          marginBottom: 14,
-          width: 325,
-          height: 50,
-        }}
+        style={[styles.button, activeButtonIndex === 1 && styles.buttonActive]}
         onPress={() => handleButtonPress(1)}
       >
-        <Text style={{ 
-          color: activeButtonIndex === 1 ? '#fff' : '#4D4D4D',
-          fontFamily: 'Inter_500Medium',
-        }}>Sou <Text style={{
-          fontFamily: 'Inter_900Black',
-          color: activeButtonIndex === 1 ? '#fff' : '#58C044',
-        }}>Catador</Text> e quero coletar/vender resíduos sólidos </Text>
+        <Text style={[styles.buttonText, activeButtonIndex === 1 && styles.buttonTextActive]}>
+          Sou <Text style={[styles.boldText, activeButtonIndex === 1 && styles.boldTextActive]}>Catador</Text> e quero coletar/vender resíduos sólidos
+        </Text>
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={{
-          backgroundColor: activeButtonIndex === 2 ? '#58C044' : '#fff',
-          borderRadius: 60,
-          borderWidth: 1,
-          borderColor: activeButtonIndex === 2 ? 'transparent' : '#4D4D4D',
-          paddingVertical: 7,
-          paddingHorizontal: 16,
-          marginBottom: 60,
-          width: 325,
-          height: 50,
-        }}
+        style={[styles.button, activeButtonIndex === 2 && styles.buttonActive]}
         onPress={() => handleButtonPress(2)}
       >
-        <Text style={{ 
-          color: activeButtonIndex === 2 ? '#fff' : '#4D4D4D',
-          fontFamily: 'Inter_500Medium',
-        }}>Quero <Text style ={{
-          fontFamily: 'Inter_900Black',
-          color: activeButtonIndex === 2 ? '#fff' : '#58C044',
-        }}>Descartar </Text>resíduos sólidos  </Text>
+        <Text style={[styles.buttonText, activeButtonIndex === 2 && styles.buttonTextActive]}>
+          Quero <Text style={[styles.boldText, activeButtonIndex === 2 && styles.boldTextActive]}>Descartar</Text> resíduos sólidos
+        </Text>
       </TouchableOpacity>
 
       {nextPage && (
         <Link href={nextPage} asChild>
-          <TouchableOpacity style={{
-            alignSelf: 'flex-end',
-            marginRight: 20,
-          }}>
-            <NextButton
+          <TouchableOpacity style={styles.nextButtonWrapper}>
+            <LinearGradient
               colors={['#58C044', '#7bc3d4']}
-              start={[0, 0]}
-              end={[1, 1]}
-              style={{
-                borderRadius: 60,
-                width: 124,
-                height: 40,
-                flexDirection: 'row',
-                alignItems: 'center',    
-              }}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={styles.nextButton}
             >
-              <NextButtonText style={{
-                fontFamily: 'Inter_600SemiBold',
-                fontSize: 14,
-                marginLeft: 20,
-              }}>
-                Próximo
-              </NextButtonText>
-              <NextArrowSvg style={{
-                marginRight: 18,
-                marginLeft: 6,
-              }} />
-            </NextButton>
+              <Text style={styles.nextButtonText}>Próximo</Text>
+              <NextArrowSvg style={styles.nextArrow} />
+            </LinearGradient>
           </TouchableOpacity>
         </Link>
       )}
-    </Container>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#fff',
+    alignItems: 'flex-start',
+    paddingLeft: 34,
+    height: '100%',
+  },
+  title: {
+    marginTop: 44,
+    marginBottom: 30,
+    fontSize: 24,
+    fontFamily: 'Inter_600SemiBold',
+    color: '#109946',
+  },
+  subtitle: {
+    color: '#4D4D4D',
+    fontFamily: 'Inter_600SemiBold',
+    fontSize: 16,
+    marginBottom: 14,
+  },
+  button: {
+    backgroundColor: '#fff',
+    borderRadius: 60,
+    borderWidth: 1,
+    borderColor: '#4D4D4D',
+    paddingVertical: 7,
+    paddingHorizontal: 16,
+    marginBottom: 14,
+    width: 325,
+    height: 50,
+    justifyContent: 'center',
+  },
+  buttonActive: {
+    backgroundColor: '#58C044',
+    borderColor: 'transparent',
+  },
+  buttonText: {
+    color: '#4D4D4D',
+    fontFamily: 'Inter_500Medium',
+  },
+  buttonTextActive: {
+    color: '#fff',
+  },
+  boldText: {
+    fontFamily: 'Inter_900Black',
+    color: '#58C044',
+  },
+  boldTextActive: {
+    color: '#fff',
+  },
+  nextButtonWrapper: {
+    alignSelf: 'flex-end',
+    marginRight: 20,
+  },
+  nextButton: {
+    borderRadius: 60,
+    width: 124,
+    height: 40,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  nextButtonText: {
+    fontFamily: 'Inter_600SemiBold',
+    fontSize: 14,
+    marginLeft: 20,
+    color: '#fff',
+  },
+  nextArrow: {
+    marginRight: 18,
+    marginLeft: 6,
+  },
+});

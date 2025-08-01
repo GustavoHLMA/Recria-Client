@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { Tabs, useNavigation } from 'expo-router';
+import { Tabs, useRouter } from 'expo-router';
 import { HomeIcon, DadosIcon, ChatIcon, MarketplaceIcon, GameIcon } from '../../src/assets';
 
-export default function RootLayoutaa() {
-  const navigation = useNavigation();
+export default function HomeDescarteLayout() {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState("homeDescarte");
 
   return (
@@ -34,7 +34,7 @@ export default function RootLayoutaa() {
           headerShown: false,
           tabBarIcon: () => (
             <TouchableOpacity style={[styles.tabIcon, activeTab === "homeDescarte" && styles.activeTab]} onPress={
-              () => { setActiveTab("homeDescarte"); navigation.navigate("homeDescarte"); }}>
+              () => { setActiveTab("homeDescarte"); router.push("/HomeDescarte/homeDescarte"); }}>
               <HomeIcon />
             </TouchableOpacity>
           ),
@@ -48,7 +48,7 @@ export default function RootLayoutaa() {
           headerShown: false,
           tabBarIcon: () => (
             <TouchableOpacity style={[styles.tabIcon, activeTab === "chatDescarte" && styles.activeTab]} onPress={
-              () => { setActiveTab("chatDescarte"); navigation.navigate("chatDescarte"); }}>
+              () => { setActiveTab("chatDescarte"); router.push("/HomeDescarte/chatDescarte"); }}>
               <ChatIcon />
             </TouchableOpacity>
           ),
@@ -61,7 +61,7 @@ export default function RootLayoutaa() {
           headerShown: false,
           tabBarIcon: () => (
             <TouchableOpacity style={[styles.tabIcon, activeTab === "dadosDescarte" && styles.activeTab]} onPress={
-              () => { setActiveTab("dadosDescarte"); navigation.navigate("dadosDescarte"); }}>
+              () => { setActiveTab("dadosDescarte"); router.push("/HomeDescarte/dadosDescarte"); }}>
               <DadosIcon />
             </TouchableOpacity>
           ),
@@ -75,7 +75,7 @@ export default function RootLayoutaa() {
           headerShown: false,
           tabBarIcon: () => (
             <TouchableOpacity style={[styles.tabIcon, activeTab === "marketplaceDescarte" && styles.activeTab]} onPress={
-              () => { setActiveTab("marketplaceDescarte"); navigation.navigate("marketplaceDescarte"); }}>
+              () => { setActiveTab("marketplaceDescarte"); router.push("/HomeDescarte/marketplaceDescarte"); }}>
               <MarketplaceIcon />
             </TouchableOpacity>
           ),
@@ -89,7 +89,7 @@ export default function RootLayoutaa() {
           headerShown: false,
           tabBarIcon: () => (
             <TouchableOpacity style={[styles.tabIcon, activeTab === "gamificacaoDescarte" && styles.activeTab]} onPress={
-              () => { setActiveTab("gamificacaoDescarte"); navigation.navigate("gamificacaoDescarte"); }}>
+              () => { setActiveTab("gamificacaoDescarte"); router.push("/HomeDescarte/gamificacaoDescarte"); }}>
               <GameIcon />
             </TouchableOpacity>
           ),

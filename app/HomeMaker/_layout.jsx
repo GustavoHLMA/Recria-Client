@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { Tabs, useNavigation } from 'expo-router';
+import { Tabs, useRouter } from 'expo-router';
 import { HomeIcon, DadosIcon, ChatIcon, MarketplaceIcon } from '../../src/assets';
 
-export default function RootLayoutaa() {
-  const navigation = useNavigation();
+export default function HomeMakerLayout() {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState("homeMaker");
 
   return (
@@ -30,7 +30,7 @@ export default function RootLayoutaa() {
           headerShown: false,
           tabBarIcon: () => (
             <TouchableOpacity style={[styles.tabIcon, activeTab === "homeMaker" && styles.activeTab]} onPress={
-              () => { setActiveTab("homeMaker"); navigation.navigate("homeMaker"); }}>
+              () => { setActiveTab("homeMaker"); router.push("/HomeMaker/homeMaker"); }}>
               <HomeIcon />
             </TouchableOpacity>
           ),
@@ -44,7 +44,7 @@ export default function RootLayoutaa() {
           headerShown: false,
           tabBarIcon: () => (
             <TouchableOpacity style={[styles.tabIcon, activeTab === "chatMaker" && styles.activeTab]} onPress={
-              () => { setActiveTab("chatMaker"); navigation.navigate("chatMaker"); }}>
+              () => { setActiveTab("chatMaker"); router.push("/HomeMaker/chatMaker"); }}>
               <ChatIcon />
             </TouchableOpacity>
           ),
@@ -57,7 +57,7 @@ export default function RootLayoutaa() {
           headerShown: false,
           tabBarIcon: () => (
             <TouchableOpacity style={[styles.tabIcon, activeTab === "dadosMaker" && styles.activeTab]} onPress={
-              () => { setActiveTab("dadosMaker"); navigation.navigate("dadosMaker"); }}>
+              () => { setActiveTab("dadosMaker"); router.push("/HomeMaker/dadosMaker"); }}>
               <DadosIcon />
             </TouchableOpacity>
           ),
@@ -71,7 +71,7 @@ export default function RootLayoutaa() {
           headerShown: false,
           tabBarIcon: () => (
             <TouchableOpacity style={[styles.tabIcon, activeTab === "marketplaceMaker" && styles.activeTab]} onPress={
-              () => { setActiveTab("marketplaceMaker"); navigation.navigate("marketplaceMaker"); }}>
+              () => { setActiveTab("marketplaceMaker"); router.push("/HomeMaker/marketplaceMaker"); }}>
               <MarketplaceIcon />
             </TouchableOpacity>
           ),
